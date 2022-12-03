@@ -1,0 +1,5 @@
+.sidepanel{
+    @apply w-[20%] fixed  bottom-0 outline-none border-black border-2 shadow-md rounded-tr-md ;
+height: calc(100vh - 57px);
+
+}
