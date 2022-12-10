@@ -1,5 +1,26 @@
 .snapshare{
-    @apply right-0 w-[79%] fixed  bottom-0 outline-none border-black border-2 shadow-md rounded-tr-md flex flex-row flex-wrap justify-center items-center gap-x-2 gap-y-1 overflow-y-auto ;
+    @apply  w-full outline-none mt-[200px] ml-auto mr-auto border-black border-2 shadow-md rounded-tr-md flex flex-row flex-wrap justify-center items-center gap-x-2 gap-y-1 overflow-y-auto ;
     height: calc(100vh - 57px);
 
 }
+
+@media screen and (min-width:375px) {
+    
+}
+
+
+@media screen and (min-width: 425px) {
+
+  }
+  
+  @media screen and (min-width: 648px) {
+
+  }
+  
+  @media screen and (min-width: 768px) {
+  
+  
+  }
+  
+  @media screen and (min-width: 900px) {}
+  
