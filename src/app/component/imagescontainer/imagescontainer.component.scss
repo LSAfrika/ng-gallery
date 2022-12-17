@@ -1,6 +1,6 @@
-.snapshare{
-    @apply  w-full outline-none mt-[200px] ml-auto mr-auto border-black border-2 shadow-md rounded-tr-md flex flex-row flex-wrap justify-center items-center gap-x-2 gap-y-1 overflow-y-auto ;
-    height: calc(100vh - 57px);
+.container{
+  @apply w-full  min-h-screen h-fit bg-slate-300 rounded-t-md flex items-start justify-center gap-4 flex-wrap pt-4
+
 
 }
 

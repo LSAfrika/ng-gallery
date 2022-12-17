@@ -7,6 +7,7 @@ import { SidenavComponent } from './component/sidenav/sidenav.component';
 import { ImagescontainerComponent } from './component/imagescontainer/imagescontainer.component';
 import { NavComponent } from './component/nav/nav.component';
 import { ImagecardComponent } from './component/imagecard/imagecard.component';
+import { HighlightsComponent } from './component/highlights/highlights.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { ImagecardComponent } from './component/imagecard/imagecard.component';
     SidenavComponent,
     ImagescontainerComponent,
     NavComponent,
-    ImagecardComponent
+    ImagecardComponent,
+    HighlightsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,13 @@
+.slider{
+    @apply w-full h-[90px] bg-slate-200  rounded-md mb-4 mt-[60px] flex justify-start items-center px-2 gap-3 overflow-scroll flex-nowrap ;
+    scrollbar-width: none;
+}
+
+.slider::-webkit-scrollbar {
+    display: none;
+  }
+
+.friend{
+    @apply min-w-[80px] h-[80px] rounded-full shadow-sm shadow-black bg-teal-500 ;
+    flex-grow: 1;
+}

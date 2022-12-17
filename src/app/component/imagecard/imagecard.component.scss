@@ -1,3 +1,63 @@
-.socialshare{
-    @apply min-w-[300px] min-h-[300px] p-2 box-border rounded-md shadow-black/30 bg-teal-500
+.card{
+    @apply rounded-md bg-teal-600 relative shadow-md shadow-black;
+ min-width: 250px;
+ max-width: 300px;
+//  min-height: 300px;
+  height: auto;
+//   background-color: teal;
+
+img{
+  width: 100%;
+  background-size: cover;
+  @apply rounded-md
 }
+
+}
+.postowner{
+  @apply w-32 h-[30px] py-2 flex flex-row justify-start items-center absolute top-2 rounded-full pr-3 backdrop-blur-sm left-1 text-white font-normal gap-2 bg-black/30  text-ellipsis overflow-hidden whitespace-nowrap;
+  img{
+    @apply w-[30px] h-[30px] bg-purple-600 rounded-full 
+  }
+
+  div{
+    @apply truncate
+  }
+
+}
+.likes{
+  @apply w-[80px] h-[30px] flex flex-row px-3 justify-center items-center absolute top-2 rounded-full backdrop-blur-sm right-4 text-white font-semibold bg-black/30 p-1;
+}
+
+.imagedetail{
+  min-height: 50px;
+  // background: red;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  @apply flex justify-start  items-center gap-4 w-full rounded-b-md    ;
+
+  svg{
+    // @apply w-[25px] h-[25px]
+  }
+}
+
+@media screen and (min-width:375px) {
+    
+}
+
+
+@media screen and (min-width: 425px) {
+
+  }
+  
+  @media screen and (min-width: 648px) {
+
+  }
+  
+  @media screen and (min-width: 768px) {
+  
+  
+  }
+  
+  @media screen and (min-width: 900px) {}
+  
