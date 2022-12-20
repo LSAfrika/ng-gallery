@@ -1,0 +1,25 @@
+.notifications{
+    @apply  w-full h-screen bg-gradient-to-b from-slate-200 to-slate-100 py-4 pb-[100px] box-border px-2 justify-start items-center flex flex-col gap-3 border-b-2 border-slate-400 overflow-scroll
+}
+
+.notification{
+    @apply flex justify-start items-center gap-2 w-full min-h-[80px]  rounded-sm shadow-black shadow-sm px-2 overflow-hidden bg-white
+}
+
+.avatar{
+    @apply min-w-[60px] min-h-[60px] rounded-full bg-pink-400
+}
+
+.message{
+    @apply h-full   flex flex-col justify-center items-start px-1 text-slate-800 gap-1 ;
+    //  width: calc(100%-80px);
+     min-width: 100%;
+
+   
+}
+
+.text{
+    @apply w-full overflow-hidden text-ellipsis whitespace-nowrap text-slate-900;
+     max-width: calc(100% - 80px);
+    
+}

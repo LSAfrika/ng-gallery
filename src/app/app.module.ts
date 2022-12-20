@@ -8,6 +8,9 @@ import { ImagescontainerComponent } from './component/imagescontainer/imagescont
 import { NavComponent } from './component/nav/nav.component';
 import { ImagecardComponent } from './component/imagecard/imagecard.component';
 import { HighlightsComponent } from './component/highlights/highlights.component';
+import { FabComponent } from './component/fab/fab.component';
+import { ImageuploadComponent } from './component/imageupload/imageupload.component';
+import { NotificationsComponent } from './component/notifications/notifications.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,10 @@ import { HighlightsComponent } from './component/highlights/highlights.component
     ImagescontainerComponent,
     NavComponent,
     ImagecardComponent,
-    HighlightsComponent
+    HighlightsComponent,
+    FabComponent,
+    ImageuploadComponent,
+    NotificationsComponent
   ],
   imports: [
     BrowserModule,
