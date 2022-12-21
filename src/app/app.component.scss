@@ -10,15 +10,20 @@
   }
 
   .app-notifications {
-    @apply w-full h-screen left-0 top-[-100vh] mt-[56px] absolute
+    @apply w-full h-screen left-0 top-[-100vh] mt-[56px] fixed
   }
 
-  .open {
+  .app-imageupload {
+
+    @apply fixed w-full h-screen top-[100vh]
+  }
+
+  .opennotification {
 
     animation: opennotification .75s ease-in-out forwards;
   }
 
-  .close {
+  .closenotification {
     animation: closenotification .75s ease-in forwards;
 
   }

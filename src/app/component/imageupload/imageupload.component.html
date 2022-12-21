@@ -1,1 +1,32 @@
-<p>imageupload works!</p>
+<div class="upload">
+
+
+  <div class="container">
+
+    <div class="closecontainer">
+      <svg style="width: 50px; height:50px;margin-left: auto;" fill="rgb(15 118 110)" stroke="rgb(255 255 255)"
+        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      </svg>
+
+    </div>
+    <input style="display: none;" multiple type="file" name="" #uploadfile>
+    <div class="imagechooser" (click)="uploadfile.click()">
+      <div class="plus">
+        <svg fill="rgb(15 118 110)" stroke="rgb(255 255 255)" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+            d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+      </div>
+      <div class="selectimage">select images</div>
+    </div>
+
+  </div>
+
+
+
+
+
+
+</div>

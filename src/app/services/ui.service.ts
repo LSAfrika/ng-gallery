@@ -6,14 +6,25 @@ import { Injectable } from '@angular/core';
 export class UiService {
 
   constructor() { }
-  open = 0
+  opennotificationspanel = 0
+  openimageuploader = 0
 
   togglenotifications() {
-    console.log('before', this.open);
-    if (this.open === 1) return this.open = 2
-    if (this.open === 2) return this.open = 1
-    if (this.open === 0) return this.open = 1;
-    console.log('after', this.open);
+    console.log('before', this.opennotificationspanel);
+    if (this.opennotificationspanel === 1) return this.opennotificationspanel = 2
+    if (this.opennotificationspanel === 2) return this.opennotificationspanel = 1
+    if (this.opennotificationspanel === 0) return this.opennotificationspanel = 1;
+    console.log('after', this.opennotificationspanel);
+
+
+  }
+
+  toggleimageuploader() {
+    console.log('before', this.openimageuploader);
+    if (this.openimageuploader === 1) return this.openimageuploader = 2
+    if (this.openimageuploader === 2) return this.openimageuploader = 1
+    if (this.openimageuploader === 0) return this.openimageuploader = 1;
+    console.log('after', this.openimageuploader);
 
 
   }
