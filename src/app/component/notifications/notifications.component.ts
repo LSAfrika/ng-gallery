@@ -1,3 +1,4 @@
+import { UiService } from 'src/app/services/ui.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NotificationsComponent implements OnInit {
 
-  constructor() { }
+  constructor(public ui: UiService) { }
 
   ngOnInit(): void {
   }

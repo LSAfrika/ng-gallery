@@ -1,9 +1,13 @@
 <div class="main">
-    <app-nav></app-nav>
-    <app-highlights></app-highlights>
-<!-- <app-sidenav></app-sidenav> -->
-<app-imagescontainer></app-imagescontainer>
+  <app-nav></app-nav>
+  <app-highlights></app-highlights>
+  <!-- <app-sidenav></app-sidenav> -->
+  <app-imagescontainer></app-imagescontainer>
 
-<app-fab></app-fab>
-<app-notifications [ngClass]="{'open': ui.open===1 ,'close':ui.open===2}"></app-notifications>
+  <app-fab></app-fab>
+  <!-- [ngClass]="{'app-notifications': ui.open===0,'open': ui.open===1 ,'close':ui.open===2}" -->
+  <app-notifications [ngClass]="{'app-notifications': ui.open===0,'open': ui.open===1 ,'close':ui.open===2}">
+  </app-notifications>
+
+
 </div>

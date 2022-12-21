@@ -11,6 +11,7 @@ import { HighlightsComponent } from './component/highlights/highlights.component
 import { FabComponent } from './component/fab/fab.component';
 import { ImageuploadComponent } from './component/imageupload/imageupload.component';
 import { NotificationsComponent } from './component/notifications/notifications.component';
+// import { UploadComponent } from './component/upload/upload.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { NotificationsComponent } from './component/notifications/notifications.
     HighlightsComponent,
     FabComponent,
     ImageuploadComponent,
-    NotificationsComponent
+    NotificationsComponent,
+    // UploadComponent
   ],
   imports: [
     BrowserModule,
