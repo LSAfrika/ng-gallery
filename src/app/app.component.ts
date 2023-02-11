@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
+import { ApiService } from './services/api.service';
 import { UiService } from './services/ui.service';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,6 +9,6 @@ import { UiService } from './services/ui.service';
 export class AppComponent {
   title = 'Lstudiosafrika';
 
-  constructor(public ui:UiService){}
+  constructor(public ui:UiService,private api:ApiService){}
 
 }
