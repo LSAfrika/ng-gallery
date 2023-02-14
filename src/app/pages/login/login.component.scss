@@ -1,0 +1,29 @@
+
+.fullscreen{
+    @apply w-full min-h-screen bg-teal-500 flex flex-col justify-center items-center  gap-5 ;
+
+}
+
+.logo{
+
+    @apply w-[90%] min-w-[100px] max-w-[500px] min-h-[100px] bg-blue-500;
+
+}
+
+.login{
+    @apply  text-white relative min-h-[50px] min-w-[80px] z-10 flex flex-col justify-center items-center text-2xl ;
+    .divider{
+        @apply min-w-[150px] min-h-[2px] bg-white rounded-full 
+    }
+    .dividershort{
+        @apply min-w-[125px] min-h-[2px] bg-white rounded-full mt-1
+    }
+}
+
+.loginbtn{
+
+    @apply bg-white px-5 py-1 cursor-pointer text-teal-400 font-medium text-2xl min-w-[170px] rounded-full shadow-black/50 shadow-sm 
+
+}
+
+

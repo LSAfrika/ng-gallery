@@ -4,8 +4,8 @@ import { io } from "socket.io-client";
   providedIn: 'root'
 })
 export class ApiService {
-  snapsharebackend='http://localhost:4555'
-socket=io(this.snapsharebackend)
+//   snapsharebackend='http://localhost:4555'
+// socket=io(this.snapsharebackend)
   constructor() {
 
     
