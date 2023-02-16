@@ -12,30 +12,32 @@ import { take, takeUntil } from 'rxjs/operators';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private router:Router,private auth:AuthService, private api:ApiService) { }
+  constructor(private router: Router, private auth: AuthService, private api: ApiService) { }
 
-  destroy:Subject<boolean>= new Subject<boolean>();
+  destroy: Subject<boolean> = new Subject<boolean>();
   ngOnInit(): void {
 
     // this.api.getallposts().subscribe(console.log)
     // this.auth.googlesignin()
   }
 
+  // tslint:disable-next-line: typedef
   loginwithfacebook(){
- this.router.navigateByUrl('/home')
+ this.router.navigateByUrl('/home');
   }
   loginwithgoogle(){
     // this.router.navigateByUrl('/home')
-    this.auth.googlesignin().pipe(takeUntil(this.destroy),take(1)).subscribe((result)=>{
+    this.auth.googlesignin().pipe(takeUntil(this.destroy), take(1)).subscribe((result) => {
       console.log(result);
-      this.router.navigateByUrl('/home')
+      this.router.navigateByUrl('/home');
 
-   })
+   });
      }
 
 
+     // tslint:disable-next-line: use-lifecycle-interface
      ngOnDestroy(){
-      this.destroy.next(true)
-      this.destroy.unsubscribe()
+      this.destroy.next(true);
+      this.destroy.unsubscribe();
      }
 }

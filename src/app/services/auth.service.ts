@@ -11,7 +11,7 @@ import {
   signInWithPopup,
 
 } from 'firebase/auth';
-import {BehaviorSubject, from,  Observable,Subject } from 'rxjs';
+import {BehaviorSubject, from,  Observable, Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -35,10 +35,10 @@ firebasetokenvalue = '';
    token = '';
    firebasetoken = '';
 
-   homerouteactivation=false
+   homerouteactivation = false;
    googleprovider = new GoogleAuthProvider();
    loginresult: Observable<any>;
-   guardactivation:Subject<boolean>=new Subject <boolean>()
+   guardactivation: Subject<boolean> = new Subject <boolean>();
 
   constructor(private api: ApiService) {
     console.log('auth service initialized');
@@ -73,10 +73,10 @@ return signingoogle .pipe(
 switchMap((token: string) => this.api.signinuser(token)),
 map((result: any) => {console.log(result);
                       this.logedinuser = result;
-                      this.storagetoken = result.token; localStorage.setItem('auth', this.storagetoken);this.homerouteactivation=true;
-                      this.guardactivation.next(true)
+                      this.storagetoken = result.token; localStorage.setItem('auth', this.storagetoken); this.homerouteactivation = true;
+                      this.guardactivation.next(true);
                       // console.log(this.homerouteactivation);
-                       return result; }));
+                      return result; }));
 // .subscribe();
 
 
