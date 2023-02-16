@@ -10,6 +10,8 @@ export class ApiService {
 // socket=io(this.snapsharebackend)
 
 ROOT_URL='http://localhost:4555/'
+
+
   constructor(private http:HttpClient) {
 
 
@@ -17,8 +19,9 @@ ROOT_URL='http://localhost:4555/'
 
    signinuser(token){
     // tslint:disable-next-line: max-line-length
-    console.log(token)
-    return this.http.post(`${this.ROOT_URL}user/authprovidersignin`,{},{ headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)})
+    // console.log(token)
+    return this.http.post(`${this.ROOT_URL}user/authprovidersignin`,{})
+    // ,{ headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)}
    }
 
    getallposts():Observable<{}>{

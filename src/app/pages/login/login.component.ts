@@ -2,6 +2,8 @@ import { ApiService } from './../../services/api.service';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { take, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -12,9 +14,11 @@ export class LoginComponent implements OnInit {
 
   constructor(private router:Router,private auth:AuthService, private api:ApiService) { }
 
+  destroy:Subject<boolean>= new Subject<boolean>();
   ngOnInit(): void {
 
-    this.api.getallposts().subscribe(console.log)
+    // this.api.getallposts().subscribe(console.log)
+    // this.auth.googlesignin()
   }
 
   loginwithfacebook(){
@@ -22,7 +26,16 @@ export class LoginComponent implements OnInit {
   }
   loginwithgoogle(){
     // this.router.navigateByUrl('/home')
-    this.auth.googlesignin()
+    this.auth.googlesignin().pipe(takeUntil(this.destroy),take(1)).subscribe((result)=>{
+      console.log(result);
+      this.router.navigateByUrl('/home')
+
+   })
      }
 
+
+     ngOnDestroy(){
+      this.destroy.next(true)
+      this.destroy.unsubscribe()
+     }
 }

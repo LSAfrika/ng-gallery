@@ -10,8 +10,8 @@ import {
  FacebookAuthProvider,
   signInWithPopup,
 
-} from 'firebase/auth'
-import { from } from 'rxjs';
+} from 'firebase/auth';
+import {BehaviorSubject, from,  Observable,Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -28,62 +28,59 @@ export class AuthService {
 
   // Initialize Firebase
    app = initializeApp(this.firebaseConfig);
-
-
+logedinuser: any = {};
+storagetoken = '';
+firebasetokenvalue = '';
    auth = getAuth();
    token = '';
    firebasetoken = '';
-   googleprovider = new GoogleAuthProvider();
 
-  constructor(private api:ApiService) {
+   homerouteactivation=false
+   googleprovider = new GoogleAuthProvider();
+   loginresult: Observable<any>;
+   guardactivation:Subject<boolean>=new Subject <boolean>()
+
+  constructor(private api: ApiService) {
     console.log('auth service initialized');
 
+
   }
 
-  async googlesignin() {
+//   async googlesignin() {
+//     // try {
+
+// const signingoogle = from(  signInWithPopup(this.auth, this.googleprovider));
+
+// signingoogle.subscribe(async (user) => {
+//   const token = await user.user.getIdToken();
+
+//   this.api.signinuser(token).subscribe(console.log);
+//   console.log('user token', token);
+
+// });
+
+//   }
+
+   googlesignin(): Observable<any>{
     // try {
 
 const signingoogle = from(  signInWithPopup(this.auth, this.googleprovider));
-
-signingoogle.subscribe(async (user) => {
-  const token = await user.user.getIdToken();
-
-  this.api.signinuser(token).subscribe(console.log)
-  console.log('user token', token);
-
-});
-      // const signinresult =
-      //  signInWithPopup(this.auth, this.googleprovider)
-      //   console.log('result form google sign in:', signinresult);
-      // const fbtoken = await signinresult.user.getIdToken()
-      // this.firebasetoken = fbtoken
-
-      //  localStorage.setItem('firebasetoken', this.firebasetoken)
-      // console.log('user body: ', fbtoken);
+return signingoogle .pipe(
+  map((result: any) => {
+  this.firebasetokenvalue = result.user.accessToken;
+  return result.user.accessToken ;
+}),
+switchMap((token: string) => this.api.signinuser(token)),
+map((result: any) => {console.log(result);
+                      this.logedinuser = result;
+                      this.storagetoken = result.token; localStorage.setItem('auth', this.storagetoken);this.homerouteactivation=true;
+                      this.guardactivation.next(true)
+                      // console.log(this.homerouteactivation);
+                       return result; }));
+// .subscribe();
 
 
-
-    // } catch (error: any) {
-
-      // console.log(error.message);
-
-
-
-
-
-    // }
-  }
-
-  async googlesigninobserve() {
-    // try {
-
-const signingoogle = from(  signInWithPopup(this.auth, this.googleprovider));
-
-signingoogle.pipe(map((result:any) => {
-  // console.log(result.user.accessToken);
-   return result.user.accessToken ;
-}),switchMap((token:string)=>this.api.signinuser(token))).subscribe();
-
+// return this.loginresult
 // console.log(backendtoken);
 
       // const signinresult =
