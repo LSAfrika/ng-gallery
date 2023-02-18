@@ -10,16 +10,24 @@ import { Observable, of } from 'rxjs';
 export class AuthGuard implements CanActivate {
 
 
-activate
+activate;
 
 
-  constructor(private auth:AuthService,private router:Router){}
-  canActivate( ): Observable<boolean> {
+  constructor(private auth: AuthService, private router: Router){}
+  canActivate( ): boolean {
 
 
-    console.log('boolean for activation: ',this.auth.homerouteactivation);
+    const token = localStorage.getItem('auth');
+    console.log('boolean for activation: ', token);
 
-    return this.auth.guardactivation.asObservable()
+    if (token){
+
+      return true;
+    }else{
+      this.router.navigate(['']);
+      return false;
+    }
+    // return this.auth.guardactivation.asObservable()
     // pipe(map(result=>{result?this.router.navigateByUrl('/home'):this.router.navigateByUrl('/');return result}))
 
     // if

@@ -72,9 +72,11 @@ return signingoogle .pipe(
 }),
 switchMap((token: string) => this.api.signinuser(token)),
 map((result: any) => {console.log(result);
-                      this.logedinuser = result;
-                      this.storagetoken = result.token; localStorage.setItem('auth', this.storagetoken); this.homerouteactivation = true;
-                      this.guardactivation.next(true);
+                      // this.logedinuser = result;
+                      // this.storagetoken = result.token;
+                      localStorage.setItem('auth', result.token);
+                      //  this.homerouteactivation = true;
+                      // this.guardactivation.next(true);
                       // console.log(this.homerouteactivation);
                       return result; }));
 // .subscribe();

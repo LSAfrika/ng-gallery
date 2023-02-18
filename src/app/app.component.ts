@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AuthService } from './services/auth.service';
 import { Component } from '@angular/core';
 
@@ -9,6 +10,10 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'Lstudiosafrika';
 
-  constructor(private auth:AuthService){}
+  constructor(private router:Router){
+
+    this.router.navigate(['/home'])
+
+  }
 
 }

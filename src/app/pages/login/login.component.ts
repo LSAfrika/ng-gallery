@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   destroy: Subject<boolean> = new Subject<boolean>();
   ngOnInit(): void {
 
+    this.router.navigate(['/home'])
     // this.api.getallposts().subscribe(console.log)
     // this.auth.googlesignin()
   }
