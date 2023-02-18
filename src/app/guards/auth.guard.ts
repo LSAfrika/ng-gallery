@@ -16,7 +16,7 @@ activate;
   constructor(private auth: AuthService, private router: Router){}
   canActivate( ): boolean {
 
-
+return true;
     const token = localStorage.getItem('auth');
     console.log('boolean for activation: ', token);
 

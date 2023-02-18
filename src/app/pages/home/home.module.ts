@@ -10,7 +10,7 @@ import { ImagecardComponent } from '../../component/imagecard/imagecard.componen
 import { HighlightsComponent } from '../../component/highlights/highlights.component';
 import { FabComponent } from '../../component/fab/fab.component';
 import { ImageuploadComponent } from '../../component/imageupload/imageupload.component';
-import { NotificationsComponent } from '../../component/notifications/notifications.component';
+// import { NotificationsComponent } from '../../component/notifications/notifications.component';
 
 
 @NgModule({
@@ -24,7 +24,7 @@ import { NotificationsComponent } from '../../component/notifications/notificati
     HighlightsComponent,
     FabComponent,
     ImageuploadComponent,
-    NotificationsComponent,
+    // NotificationsComponent,
   ],
   imports: [
     CommonModule,

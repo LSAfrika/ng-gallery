@@ -6,7 +6,7 @@
   }
 
   app-notifications {
-    @apply w-full h-screen left-0 top-0 mt-[56px] absolute
+    @apply w-full h-screen left-0 top-0 mt-[56px] fixed z-40
   }
 
   .app-notifications {
