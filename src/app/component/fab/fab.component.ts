@@ -1,3 +1,4 @@
+import { UiService } from './../../services/ui.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FabComponent implements OnInit {
 
-  constructor() { }
+  constructor(public ui:UiService) { }
 
   ngOnInit(): void {
   }
+
 
 }

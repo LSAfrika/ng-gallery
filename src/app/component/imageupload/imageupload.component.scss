@@ -1,14 +1,17 @@
 .upload {
-  @apply w-full h-fit bg-gradient-to-b from-slate-200 to-slate-100 py-4 pb-[100px] box-border px-4 justify-start items-center flex flex-col gap-3 border-b-2 border-slate-400 overflow-scroll fixed z-50 left-0
+  @apply w-full h-fit bg-gradient-to-b overflow-y-scroll from-slate-200 to-slate-100 py-4 pb-[100px] box-border px-4 justify-start items-center flex flex-col gap-3 border-b-2 border-slate-400 overflow-scroll left-0
 }
 
 .container {
-  @apply w-full bg-slate-300 rounded-md mb-2 relative flex flex-col justify-start pt-3 items-center overflow-scroll box-border;
-  min-height: calc(100vh - 10px);
+  @apply w-full bg-slate-300 rounded-md mb-2 relative flex flex-col justify-start pt-3 items-center overflow-scroll box-border max-h-[100vh];
+  min-height: 100vh;
 }
 
 .closecontainer {
   @apply w-full h-[50px] absolute top-0 left-0 flex items-center
+}
+.scrollrect{
+  @apply  min-w-[75%] overflow-y-scroll flex justify-start flex-col items-center mb-10
 }
 
 .imagechooser {
@@ -22,4 +25,29 @@
 
 .selectimage {
   @apply text-lg font-semibold
+}
+.imagelist{
+  @apply w-[70%] flex justify-start items-center mx-auto  text-teal-600  gap-4 my-2;
+  svg{
+    margin-left: auto;
+    width: 25px;
+    height: 25px;
+  }
+
+
+}
+
+.caption{
+  @apply mt-4  border-none border-teal-500 px-2 py-1 text-teal-600 border-b-2 outline-2 outline-teal-600 min-w-[240px]
+}
+
+.uploadbutton{
+  @apply rounded-md bg-teal-500 text-white font-normal text-lg mt-5 px-4 py-1 min-w-[240px] mb-4
+}
+textarea{
+  @apply min-h-[150px]
+}
+
+select{
+  @apply w-3/4 border-none border-b-teal-600 border-2 min-w-[220px] mt-5 w-fit bg-slate-300 text-teal-600 outline-teal-500
 }

@@ -1,13 +1,13 @@
 .main {
-  @apply w-full min-h-screen bg-slate-200 m-0 p-0 flex flex-col justify-start relative px-2;
+  @apply w-full min-h-screen bg-slate-200 m-0 p-0 flex flex-col justify-start relative ;
 
   app-fab {
     @apply fixed bottom-[20px] right-[20px]
   }
 
-  app-notifications {
-    @apply w-full h-screen left-0 top-0 mt-[56px] fixed z-40
-  }
+  // app-notifications {
+  //   @apply w-full h-screen left-0 top-0 mt-[56px] fixed z-40
+  // }
 
   .app-notifications {
     @apply w-full h-screen left-0 top-[-100vh] mt-[56px] fixed
@@ -15,7 +15,7 @@
 
   .app-imageupload {
 
-    @apply fixed w-full h-screen top-[100vh]
+    @apply fixed w-full h-screen top-[100vh] z-[60] left-0
   }
 
   .opennotification {
@@ -27,27 +27,72 @@
     animation: closenotification .3s ease-in-out forwards;
 
   }
+
+  .openmodal{
+
+    animation: openmodal .3s ease-in-out forwards;
+  }
+
+  .closemodal {
+    animation: closemodal .3s ease-in-out forwards;
+
+  }
 }
 
 
 @keyframes opennotification {
   0% {
     top: -100vh;
+    @apply w-full h-screen left-0  mt-[56px] fixed
   }
 
   100% {
     top: 0vh;
+    @apply w-full h-screen left-0  mt-[56px] fixed
   }
 }
 
 @keyframes closenotification {
   0% {
     top: 0vh;
+    @apply w-full h-screen left-0  mt-[56px] fixed
+
 
   }
 
   100% {
     top: -100vh;
+    @apply w-full h-screen left-0  mt-[56px] fixed
+
+
+  }
+}
+
+
+@keyframes openmodal {
+  0% {
+    top: 100vh;
+    @apply fixed w-full h-screen  z-[60] left-0
+
+  }
+
+  100% {
+    top: 0vh;
+    @apply fixed w-full h-screen  z-[60] left-0
+
+  }
+}
+
+@keyframes closemodal {
+  0% {
+    top: 0vh;
+    @apply fixed w-full h-screen  z-[60] left-0
+
+  }
+
+  100% {
+    top: 100vh;
+    @apply fixed w-full h-screen  z-[60] left-0
 
   }
 }

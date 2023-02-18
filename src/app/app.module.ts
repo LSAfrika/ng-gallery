@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // import { UploadComponent } from './component/upload/upload.component';
 
@@ -15,7 +16,7 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,HttpClientModule
+    AppRoutingModule,HttpClientModule,
   ],
   providers: [
     {provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor,multi:true}

@@ -10,6 +10,7 @@ import { ImagecardComponent } from '../../component/imagecard/imagecard.componen
 import { HighlightsComponent } from '../../component/highlights/highlights.component';
 import { FabComponent } from '../../component/fab/fab.component';
 import { ImageuploadComponent } from '../../component/imageupload/imageupload.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // import { NotificationsComponent } from '../../component/notifications/notifications.component';
 
 
@@ -29,7 +30,8 @@ import { ImageuploadComponent } from '../../component/imageupload/imageupload.co
   imports: [
     CommonModule,
     HomeRoutingModule,
-    SharedModule
+    SharedModule,
+    FormsModule,ReactiveFormsModule
   ]
 })
 export class HomeModule { }

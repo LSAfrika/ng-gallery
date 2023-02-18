@@ -1,3 +1,4 @@
+import { UiService } from 'src/app/services/ui.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
