@@ -79,32 +79,11 @@ map((result: any) => {console.log(result);
                       // this.guardactivation.next(true);
                       // console.log(this.homerouteactivation);
                       return result; }));
-// .subscribe();
 
+  }
 
-// return this.loginresult
-// console.log(backendtoken);
-
-      // const signinresult =
-      //  signInWithPopup(this.auth, this.googleprovider)
-      //   console.log('result form google sign in:', signinresult);
-      // const fbtoken = await signinresult.user.getIdToken()
-      // this.firebasetoken = fbtoken
-
-      //  localStorage.setItem('firebasetoken', this.firebasetoken)
-      // console.log('user body: ', fbtoken);
-
-
-
-    // } catch (error: any) {
-
-      // console.log(error.message);
-
-
-
-
-
-    // }
+  gettoken(){
+    return localStorage.getItem('auth')
   }
 
 

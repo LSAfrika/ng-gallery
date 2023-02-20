@@ -1,3 +1,4 @@
+import { PostComponent } from './../pages/post/post.component';
 import { Observable } from 'rxjs';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -27,4 +28,5 @@ ROOT_URL='http://localhost:4555/'
    getallposts():Observable<{}>{
     return this.http.get(this.ROOT_URL+'photos/allposts?pagination=1')
    }
+
 }

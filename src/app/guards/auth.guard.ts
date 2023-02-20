@@ -16,9 +16,9 @@ activate;
   constructor(private auth: AuthService, private router: Router){}
   canActivate( ): boolean {
 
-return true;
+// return true;
     const token = localStorage.getItem('auth');
-    console.log('boolean for activation: ', token);
+    // console.log('boolean for activation: ', token);
 
     if (token){
 
@@ -27,17 +27,7 @@ return true;
       this.router.navigate(['']);
       return false;
     }
-    // return this.auth.guardactivation.asObservable()
-    // pipe(map(result=>{result?this.router.navigateByUrl('/home'):this.router.navigateByUrl('/');return result}))
 
-    // if
-    // (this.auth.homerouteactivation ===true)
-    // {this.router.navigateByUrl('/home');}
-    // else{this.router.navigateByUrl('/');}
-
-    // return this.auth.homerouteactivation
-
-// return activate
   }
 
 }

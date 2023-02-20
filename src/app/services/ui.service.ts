@@ -7,7 +7,8 @@ export class UiService {
 
   constructor() { }
   opennotificationspanel = 0;
-  openimageuploader = 1;
+  openimageuploader = 0;
+  uploading=false
 
   togglenotifications() {
     console.log('before', this.opennotificationspanel);
@@ -28,4 +29,6 @@ export class UiService {
 
 
   }
+
+
 }

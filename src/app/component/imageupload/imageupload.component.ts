@@ -1,3 +1,5 @@
+import { map } from 'rxjs/operators';
+import { of } from 'rxjs';
 import { UploaderService } from './../../service/uploader.service';
 import { Component, OnInit } from '@angular/core';
 import { UiService } from 'src/app/services/ui.service';
@@ -12,25 +14,25 @@ export class ImageuploadComponent implements OnInit {
 
   filesarray: File[] = [];
 
+  postform:FormData
   captionform: FormGroup;
   namecategory = 'select category';
+  captiontext = '';
+  uploading=false
+  post = 'post';
+  // textobservable=of(this.captiontext)
   ngOnInit(): void {
   }
 
-  constructor(public ui: UiService, public imageuploader: UploaderService, private fb: FormBuilder) {
-    this.instantiatefrom();
+  constructor(public ui: UiService, private postuploader: UploaderService) {
+    // this.instantiatefrom();
+
+    // this.textobservable.subscribe(console.log)
+
    }
 
 
 
-  instantiatefrom(){
-    this.captionform = this.fb.group({
-      caption: ['', [Validators.required, Validators.minLength(10)]]
-    });
-  }
-  get _caption(){
-    return this.captionform.get('caption');
-  }
 
   fileattachment(event: any){
 
@@ -77,5 +79,45 @@ export class ImageuploadComponent implements OnInit {
     console.log(this.namecategory);
 
   }
+
+  uploadpost(){
+    this.postform = new FormData();
+
+    if (this.namecategory === 'namecategory') { return alert('category field can\'t be empty') }
+    if ( this.captiontext === '') {this.postform.append('caption', ''); }
+    if (this.captiontext !== '') {this.postform.append('caption', this.captiontext); }
+    this.postform.append('category', this.namecategory);
+    this.filesarray.forEach(image => {
+
+      this.postform.append('photo', image);
+    });
+
+    // console.log(this.postform)
+    // .pipe(map(res=>console.log(res)))
+
+    this.ui.uploading=true
+    this.post='uploading...'
+    this.postuploader.Poststatus(this.postform).subscribe(res => {
+  console.log(res);
+
+  this.successfulupload()
+
+}
+, err => {  console.log(err.message);  console.log(err); });
+
+}
+
+
+successfulupload(){
+  this.ui.uploading=false
+  this.post='post'
+  this.captiontext=''
+  this.postform=new FormData()
+  this.filesarray=[]
+  this.namecategory='select category'
+  alert('upload successful')
+  this.ui.openimageuploader=2
+
+}
 
 }

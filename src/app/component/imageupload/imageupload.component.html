@@ -12,7 +12,8 @@
 
     </div>
 
-    <form [formGroup]="captionform" class="scrollrect">
+    <!-- * [formGroup]="captionform" -->
+    <div class="scrollrect">
     <input (change)="fileattachment($event)" style="display: none;" multiple
      type="file" name="" #uploadfile>
     <div class="imagechooser" (click)="uploadfile.click()">
@@ -26,7 +27,7 @@
     </div>
 
     <div class="imagelist" *ngFor="let file of filesarray;let i=index">
-      <div>{{file.name}}</div>
+      <div class="filename"> {{file.name}}</div>
 
       <svg (click)="delete(i)" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
         <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -46,13 +47,14 @@
       </optgroup>
 
       </select>
-    <textarea formControlName="caption" rows="4" *ngIf="filesarray.length>0 && namecategory !=='select category'" class="caption" type="text" placeholder="caption..."></textarea>
-    <button [disabled]="captionform.invalid" *ngIf="filesarray.length>0" class="uploadbutton">upload post</button>
-  </form>
-
+      <!--* formControlName="caption"  [disabled]="captionform.invalid" -->
+    <textarea placeholder="caption..." [(ngModel)]="captiontext"  rows="4" *ngIf="filesarray.length>0 && namecategory !=='select category'" class="caption" type="text" placeholder="caption..."></textarea>
+    <button (click)="uploadpost()" *ngIf="namecategory !=='select category'"   class="uploadbutton" [ngClass]="{pulsing: ui.uploading===true}"> {{post}}</button>
+    </div>
 
 </div>
 
 
+<app-spinner></app-spinner>
 
 </div>

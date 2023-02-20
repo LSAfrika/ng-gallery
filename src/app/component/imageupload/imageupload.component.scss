@@ -15,7 +15,7 @@
 }
 
 .imagechooser {
-  @apply min-w-[180px] w-fit px-4 min-h-[50px] flex mt-10 justify-center items-center text-5xl text-teal-600 border-teal-700 border-[2px] border-dashed rounded-md;
+  @apply min-w-[180px] w-fit px-4 min-h-[50px] cursor-pointer flex mt-10 justify-center items-center text-5xl text-teal-600 border-teal-700 border-[2px] border-dashed rounded-md;
 
 }
 
@@ -28,6 +28,10 @@
 }
 .imagelist{
   @apply w-[70%] flex justify-start items-center mx-auto  text-teal-600  gap-4 my-2;
+
+  .filename{
+    @apply w-[70%]  truncate
+  }
   svg{
     margin-left: auto;
     width: 25px;
@@ -45,9 +49,27 @@
   @apply rounded-md bg-teal-500 text-white font-normal text-lg mt-5 px-4 py-1 min-w-[240px] mb-4
 }
 textarea{
-  @apply min-h-[150px]
+  @apply max-h-[50px];
+
 }
 
 select{
   @apply w-3/4 border-none border-b-teal-600 border-2 min-w-[220px] mt-5 w-fit bg-slate-300 text-teal-600 outline-teal-500
+}
+
+
+.pulsing{
+  animation: pulse 2s ease-in   infinite;
+}
+
+@keyframes pulse{
+  0%{
+    opacity: 1;
+  }
+  50%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
 }
