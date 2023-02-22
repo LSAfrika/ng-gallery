@@ -1,5 +1,6 @@
+import { Post } from '../../interface/post.interface';
 import { UiService } from 'src/app/services/ui.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-imagecard',
@@ -8,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ImagecardComponent implements OnInit {
 
+
+  @Input()post:Post
   constructor() { }
 
   ngOnInit(): void {
+
+     console.log(this.post.createdAt);
+
   }
 
 }

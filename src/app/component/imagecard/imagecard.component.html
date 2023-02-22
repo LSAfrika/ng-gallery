@@ -1,26 +1,29 @@
 <div class="card">
 
-    <img src="https://images.unsplash.com/photo-1670744373330-17715880b433?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1674&q=80" alt="upload image" srcset="">
+   <!-- {{post |json}} -->
+    <img [src]="post.imgurl[0]" alt="upload image"  srcset="">
 
     <div class="postowner">
 
-        <img src="https://images.unsplash.com/photo-1554747706-2e474e1ae0c6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80" alt="" srcset="">
+        <img [src]="post.user.imgurl" alt="" srcset="">
 
-        <div>Wilson chege kimonda mwenyewe</div>
+        <div>{{post.user.username}}</div>
 
     </div>
 <div class="likes">
+  <div>+{{post.likes.length}}</div>
     <svg clip-rule="evenodd" stroke="rgba(255, 255 ,255 ,0.6)" fill-rule="evenodd" fill="rgb(13 148 136)" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m12 5.72c-2.624-4.517-10-3.198-10 2.461 0 3.725 4.345 7.727 9.303 12.54.194.189.446.283.697.283s.503-.094.697-.283c4.977-4.831 9.303-8.814 9.303-12.54 0-5.678-7.396-6.944-10-2.461z" fill-rule="nonzero"/></svg>
-    <div>+2K</div>
 </div>
 
     <div class="imagedetail">
-        <!-- <div class="avatar"></div> -->
 
-        <svg clip-rule="evenodd" stroke="rgba(255, 255 ,255 ,0.6)" fill="rgb(13 148 136)" fill-rule="evenodd" width="40" height="40" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m14.123 19.336c-.468.453-.944.913-1.426 1.381-.194.189-.446.283-.697.283s-.503-.094-.697-.283c-4.958-4.813-9.303-8.815-9.303-12.54 0-5.659 7.376-6.978 10-2.461 2.604-4.483 10-3.217 10 2.461 0 .68-.144 1.369-.41 2.07-1.061-1.02-2.503-1.648-4.09-1.648-3.256 0-5.9 2.644-5.9 5.9 0 2 .998 3.77 2.523 4.837zm3.378-9.336c2.58 0 4.499 2.107 4.499 4.499 0 2.58-2.105 4.499-4.499 4.499-2.586 0-4.5-2.112-4.5-4.499 0-2.406 1.934-4.499 4.5-4.499zm.5 3.999v-1.5c0-.265-.235-.5-.5-.5-.266 0-.5.235-.5.5v1.5h-1.5c-.266 0-.5.235-.5.5s.234.5.5.5h1.5v1.5c0 .265.234.5.5.5.265 0 .5-.235.5-.5v-1.5h1.499c.266 0 .5-.235.5-.5s-.234-.5-.5-.5z" fill-rule="nonzero"/></svg>
 
-        <!-- <svg xmlns="http://www.w3.org/2000/svg"   stroke="rgb(255 255 255)" width="24" height="24" viewBox="0 0 24 24"><path d="M22 3v13h-11.643l-4.357 3.105v-3.105h-4v-13h20zm2-2h-24v16.981h4v5.019l7-5.019h13v-16.981zm-5 6h-14v-1h14v1zm0 2h-14v1h14v-1zm-6 3h-8v1h8v-1z"/></svg> -->
-    <svg xmlns="http://www.w3.org/2000/svg" fill="rgb(13 148 136)" stroke="rgba(255 ,255 ,255,0.6)" width="40" height="35" viewBox="0 0 24 24"><path d="M.054 23c.971-1.912 2.048-4.538 1.993-6.368-1.308-1.562-2.047-3.575-2.047-5.625 0-5.781 5.662-10.007 12-10.007 6.299 0 12 4.195 12 10.007 0 6.052-6.732 11.705-15.968 9.458-1.678 1.027-5.377 2.065-7.978 2.535z"/></svg>
-</div>
+        <svg clip-rule="evenodd" stroke="rgba(255, 255 ,255 ,0.6)" fill="rgb(13 148 136)" fill-rule="evenodd" width="30" height="30" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m14.123 19.336c-.468.453-.944.913-1.426 1.381-.194.189-.446.283-.697.283s-.503-.094-.697-.283c-4.958-4.813-9.303-8.815-9.303-12.54 0-5.659 7.376-6.978 10-2.461 2.604-4.483 10-3.217 10 2.461 0 .68-.144 1.369-.41 2.07-1.061-1.02-2.503-1.648-4.09-1.648-3.256 0-5.9 2.644-5.9 5.9 0 2 .998 3.77 2.523 4.837zm3.378-9.336c2.58 0 4.499 2.107 4.499 4.499 0 2.58-2.105 4.499-4.499 4.499-2.586 0-4.5-2.112-4.5-4.499 0-2.406 1.934-4.499 4.5-4.499zm.5 3.999v-1.5c0-.265-.235-.5-.5-.5-.266 0-.5.235-.5.5v1.5h-1.5c-.266 0-.5.235-.5.5s.234.5.5.5h1.5v1.5c0 .265.234.5.5.5.265 0 .5-.235.5-.5v-1.5h1.499c.266 0 .5-.235.5-.5s-.234-.5-.5-.5z" fill-rule="nonzero"/></svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" stroke="rgba(255, 255 ,255 ,0.6)" fill="rgb(13 148 136)" width="30" height="30" viewBox="0 0 24 24"><path d="M20 1.999H4c-1.103 0-2 .897-2 2v18l4-4h14c1.103 0 2-.897 2-2v-12c0-1.103-.897-2-2-2zm-6 11H7v-2h7v2zm3-4H7v-2h10v2z"></path></svg>
+    <div class="comments">{{post.comments.length}} comments</div>
+
+
+  </div>
 
 </div>

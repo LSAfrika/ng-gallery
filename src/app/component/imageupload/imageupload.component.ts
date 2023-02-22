@@ -1,6 +1,6 @@
 import { map } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { UploaderService } from './../../service/uploader.service';
+import { PostService } from '../../service/Post.service';
 import { Component, OnInit } from '@angular/core';
 import { UiService } from 'src/app/services/ui.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -24,7 +24,7 @@ export class ImageuploadComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  constructor(public ui: UiService, private postuploader: UploaderService) {
+  constructor(public ui: UiService, private postuploader: PostService) {
     // this.instantiatefrom();
 
     // this.textobservable.subscribe(console.log)

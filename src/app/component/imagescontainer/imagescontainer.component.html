@@ -1,5 +1,10 @@
 <div class="container">
 
-    <app-imagecard *ngFor="let item of [1,1,1,1,1,1,1,1,1,1,11,1,1,1,1,1,1]"></app-imagecard>
+    <app-imagecard *ngFor="let post of snapshares | async" [post]="post" ></app-imagecard>
 
+
+    <div style="width:100% ;display: flex; background-color: teal;justify-content: center;align-items: center;">
+
+      <button style="margin-top: 50px; background-color: red; display: block;" (click)="fetchnext()">fetch next</button>
+    </div>
 </div>
