@@ -1,0 +1,13 @@
+<div class="categoryholder">
+
+  <div class="category">
+
+    <div (click)="allposts(1)" [ngClass]="{pillActive: selected===1,pillinActive:selected!==1}">all</div>
+    <div (click)="choosecategory(2)" [ngClass]="{pillActive: selected===2,pillinActive:selected!==2}"  >nature</div>
+    <div (click)="choosecategory(3)" [ngClass]="{pillActive: selected===3,pillinActive:selected!==3}"  >wildlife</div>
+    <div (click)="choosecategory(4)" [ngClass]="{pillActive: selected===4,pillinActive:selected!==4}"  >foods</div>
+    <div (click)="choosecategory(5)" [ngClass]="{pillActive: selected===5,pillinActive:selected!==5}"  >sports</div>
+    <div (click)="choosecategory(6)" [ngClass]="{pillActive: selected===6,pillinActive:selected!==6}"  >landscapes</div>
+
+  </div>
+</div>

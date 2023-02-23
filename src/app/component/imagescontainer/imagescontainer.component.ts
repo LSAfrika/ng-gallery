@@ -1,3 +1,4 @@
+import { UiService } from 'src/app/services/ui.service';
 import { map } from 'rxjs/operators';
 import { Post } from './../../interface/post.interface';
 import { BehaviorSubject } from 'rxjs';
@@ -11,18 +12,11 @@ import { PostService } from 'src/app/service/Post.service';
 })
 export class ImagescontainerComponent implements OnInit {
 
-  constructor(public postservice: PostService) { }
+  constructor(public postservice: PostService,public ui:UiService) { }
 
-  snapshares: BehaviorSubject<Post[]> = new  BehaviorSubject<Post[]>([]);
-allposts: Post[] = [];
   ngOnInit(): void {
 
-    this.postservice.getpost().
-     pipe(map((posts) => { this.allposts = [...posts.allposts,...this.allposts ] ;
-                         this.snapshares.next(this.allposts);
-    }))
-    .subscribe();
-
+    this.postservice.getpost()
   // this.snapshares.subscribe(console.log)
   }
 
@@ -30,16 +24,11 @@ allposts: Post[] = [];
   fetchnext(){
     this.postservice.pagination++;
 
-    this.postservice.getpost().pipe(map((posts) => { this.allposts = [...posts.allposts,...this.allposts ] ;
-                                                   this.snapshares.next(this.allposts);
-   })
+    this.postservice.getpost()
+  }
 
-
-
-    ).subscribe();
-    // this.snapshares.subscribe(console.log)
-
-
+  fetchnextcategory(){
+    this.postservice.getcategorypostnext()
   }
 
 }

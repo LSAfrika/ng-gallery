@@ -10,6 +10,8 @@ export class UiService {
   openimageuploader = 0;
   uploading=false
 
+  categoryposts=false
+
   togglenotifications() {
     console.log('before', this.opennotificationspanel);
     if (this.opennotificationspanel === 1) { return this.opennotificationspanel = 2 }
@@ -30,5 +32,12 @@ export class UiService {
 
   }
 
+  categoriesactive(){
+    this.categoryposts=true
+  }
+
+  categoriesinactive(){
+    this.categoryposts=false
+  }
 
 }

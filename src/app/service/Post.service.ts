@@ -1,6 +1,8 @@
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Post } from '../interface/post.interface';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +12,13 @@ export class PostService {
   pagination=0
 POST_URL='http://localhost:4555/photos/post'
  fetchads='http://localhost:4555/photos/allposts?pagination='
+ categoryfetchads='http://localhost:4555/photos/allposts/category?category='
+ fixedcategories=''
+
+ snapshares: BehaviorSubject<Post[]> = new  BehaviorSubject<Post[]>([]);
+allposts: Post[] = [];
+
+
 
   constructor(private http:HttpClient) { }
 
@@ -27,6 +36,46 @@ POST_URL='http://localhost:4555/photos/post'
 // console.log(this.pagination);
 // console.log(this.fetchads+this.pagination);
 
-    return this.http.get<any>(this.fetchads+this.pagination)
+     this.http.get<any>(this.fetchads+this.pagination).
+     pipe(map((posts) => { this.allposts = [...this.allposts ,...posts.allposts] ;
+                           this.snapshares.next(this.allposts);
+    }))
+    .subscribe();
+
+   }
+
+   getcategorypost(category:string){
+    this.pagination=0
+    this.allposts=[]
+    this.snapshares.next(this.allposts)
+    this.fixedcategories=this.categoryfetchads+category+'&pagination='
+    const initialfetch=this.fixedcategories+this.pagination
+     // tslint:disable-next-line: align
+     return this.http.get(initialfetch).
+     pipe(map((posts:any) => { this.allposts = [...this.allposts ,...posts.categoryposts] ;
+                           this.snapshares.next(this.allposts);
+    }))
+    .subscribe();
+   }
+
+   getcategorypostnext(){
+
+    this.pagination++;
+    let fetchnextset=this.fixedcategories+this.pagination
+     // tslint:disable-next-line: align
+     console.log(fetchnextset);
+
+     return this.http.get(fetchnextset).
+     pipe(map((posts:any) => { this.allposts = [...this.allposts ,...posts.categoryposts] ;
+                           this.snapshares.next(this.allposts);
+    }))
+    .subscribe();
+   }
+
+   resetcategorypost(){
+
+    this.allposts=[]
+    this.snapshares.next(this.allposts)
+    this.getpost()
    }
 }

@@ -18,7 +18,7 @@ activate;
 
 // return true;
     const token = localStorage.getItem('auth');
-    // console.log('boolean for activation: ', token);
+    //  console.log('boolean for activation: ', token);
 
     if (token){
 

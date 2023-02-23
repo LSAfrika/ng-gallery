@@ -15,7 +15,7 @@ export class ImagecardComponent implements OnInit {
 
   ngOnInit(): void {
 
-     console.log(this.post.createdAt);
+     console.log(this.post.category);
 
   }
 
