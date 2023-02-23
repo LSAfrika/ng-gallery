@@ -11,8 +11,8 @@ export class PostService {
 
   pagination = 0;
 POST_URL = 'http://localhost:4555/photos/post';
- fetchads = 'http://localhost:4555/photos/allposts?pagination=';
- categoryfetchads = 'http://localhost:4555/photos/allposts/category?category=';
+ fetchposturl = 'http://localhost:4555/photos/allposts?pagination=';
+ categoriesurl = 'http://localhost:4555/photos/allposts/category?category=';
  fixedcategories = '';
 
  snapshares: BehaviorSubject<Post[]> = new  BehaviorSubject<Post[]>([]);
@@ -36,9 +36,9 @@ allposts: Post[] = [];
 
    getpost(){
 // console.log(this.pagination);
-// console.log(this.fetchads+this.pagination);
+// console.log(this.fetchposturl+this.pagination);
 
-     this.http.get<any>(this.fetchads + this.pagination).
+     this.http.get<any>(this.fetchposturl + this.pagination).
      pipe(map((posts) => { this.allposts = [...this.allposts , ...posts.allposts] ;
                            this.snapshares.next(this.allposts);
     }))
@@ -51,7 +51,7 @@ allposts: Post[] = [];
      this.allposts = [];
     // this.snapshares.next(this.allposts);
     this.snapshares.next([]);
-    this.fixedcategories = this.categoryfetchads + category + '&pagination=';
+    this.fixedcategories = this.categoriesurl + category + '&pagination=';
     const initialfetch = this.fixedcategories + this.pagination;
      // tslint:disable-next-line: align
      return this.http.get(initialfetch).
