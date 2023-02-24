@@ -12,19 +12,25 @@ import { PostService } from 'src/app/service/Post.service';
 })
 export class ImagescontainerComponent implements OnInit {
 
-  constructor(public postservice: PostService,public ui:UiService) { }
+  constructor(public postservice: PostService,public ui:UiService) {
+
+    if(this.postservice.allposts.length>0)this.postservice.allposts=[];this.postservice.fetchnextsnapshares.next(0)
+   }
 
   ngOnInit(): void {
 
     // this.postservice.getpost()
   // this.snapshares.subscribe(console.log)
+
+  console.log(this.postservice.fetchnextsnapshares.value);
+
   }
 
 
   fetchnext(){
-    this.postservice.pagination++;
+    this.postservice.fetchnextsnapshares.next( this.postservice.fetchnextsnapshares.value+1);
 
-    this.postservice.getpost()
+    // this.postservice.getpost()
   }
 
   fetchnextcategory(){

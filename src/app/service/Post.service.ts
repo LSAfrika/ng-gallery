@@ -2,7 +2,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Post } from '../interface/post.interface';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, delay, map, switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -13,15 +13,21 @@ export class PostService {
 POST_URL = 'http://localhost:4555/photos/post';
  fetchposturl = 'http://localhost:4555/photos/allposts?pagination=';
  categoriesurl = 'http://localhost:4555/photos/allposts/category?category=';
+
+ category=''
+//  snapshareview:Observable<Post[]>
  fixedcategories = '';
 
+ fetchnextsnapshares=new BehaviorSubject<number>(0)
  snapshares: BehaviorSubject<Post[]> = new  BehaviorSubject<Post[]>([]);
 allposts: Post[] = [];
 
 
-
+  snapshareview$=this.fetchnextsnapshares.pipe( switchMap((page)=>{console.log(page);
+   return this.getpost(page)}),map((result:any)=>{ console.log(result);
+    return this.allposts=[...this.allposts,...result.posts]}))
   constructor(private http: HttpClient) {
-    this.getpost()
+    // this.getpost()
    }
 
 
@@ -34,28 +40,22 @@ allposts: Post[] = [];
     return this.http.post<any>(this.POST_URL, post);
    }
 
-   getpost(){
-// console.log(this.pagination);
-// console.log(this.fetchposturl+this.pagination);
+   getpost(page): Observable<any>{
+   // tslint:disable-next-line: curly
+   if(this.category==='') return  this.http.get<any>(this.fetchposturl +page)
+   this.fixedcategories = this.categoriesurl + this.category + '&pagination=';
+   const initialcategoriesfetch = this.fixedcategories + this.fetchnextsnapshares.value;
 
-     this.http.get<any>(this.fetchposturl + this.pagination).
-     pipe(map((posts) => { this.allposts = [...this.allposts , ...posts.allposts] ;
-                           this.snapshares.next(this.allposts);
-    }))
-    .subscribe();
+   return this.http.get(initialcategoriesfetch)
 
    }
 
    getcategorypost(category: string){
-    this.pagination = 0;
-     this.allposts = [];
-    // this.snapshares.next(this.allposts);
-    this.snapshares.next([]);
-    this.fixedcategories = this.categoriesurl + category + '&pagination=';
-    const initialfetch = this.fixedcategories + this.pagination;
-     // tslint:disable-next-line: align
-     return this.http.get(initialfetch).
-     pipe(map((posts: any) => {  this.snapshares.next([...this.snapshares.value,...posts.categoryposts]);  })).subscribe();
+
+    this.category=category
+    this.allposts = [];
+    this.fetchnextsnapshares.next(0)
+
    }
 
    getcategorypostnext(){
@@ -72,7 +72,10 @@ allposts: Post[] = [];
    resetcategorypost(){
 
     this.allposts = [];
-    this.snapshares.next(this.allposts);
-    this.getpost();
+    this.category=''
+    // this.snapshares.next(this.allposts);
+    this.fetchnextsnapshares.next(0)
+
+    // this.getpost();
    }
 }
