@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ViewRoutingModule } from './view-routing.module';
 import { ViewComponent } from './view.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -12,7 +13,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
   ],
   imports: [
     CommonModule,
-    ViewRoutingModule,SharedModule
+    ViewRoutingModule,SharedModule,ReactiveFormsModule
   ]
 })
 export class ViewModule { }

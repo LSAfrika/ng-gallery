@@ -3,7 +3,7 @@ import { map } from 'rxjs/operators';
 import { Post } from './../../interface/post.interface';
 import { BehaviorSubject } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import { PostService } from 'src/app/service/Post.service';
+import { PostService } from 'src/app/services/Post.service';
 
 @Component({
   selector: 'app-imagescontainer',

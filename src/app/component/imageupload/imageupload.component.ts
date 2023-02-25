@@ -1,6 +1,6 @@
 import { map } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { PostService } from '../../service/Post.service';
+import { PostService } from '../../services/Post.service';
 import { Component, OnInit } from '@angular/core';
 import { UiService } from 'src/app/services/ui.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';

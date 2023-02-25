@@ -14,6 +14,8 @@ POST_URL = 'http://localhost:4555/photos/post';
  fetchposturl = 'http://localhost:4555/photos/allposts?pagination=';
  fetchsingleposturl = 'http://localhost:4555/photos/singlepost/';
  categoriesurl = 'http://localhost:4555/photos/allposts/category?category=';
+ commenturl='http://localhost:4555/comments/post/'
+ postid=''
 
  category=''
 //  snapshareview:Observable<Post[]>
@@ -81,5 +83,13 @@ allposts: Post[] = [];
     this.fetchnextsnapshares.next(0)
 
     // this.getpost();
+   }
+
+
+
+   postcomment(id,comment):Observable<any>{
+    const posturl= this.commenturl+id
+    this.postid=id
+     return this.http.post(posturl,comment)
    }
 }
