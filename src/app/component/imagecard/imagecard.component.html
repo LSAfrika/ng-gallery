@@ -11,23 +11,24 @@
 
     </div>
 <div class="likes">
-  <div>+{{post.likes.length}}</div>
+  <div><span *ngIf="post.likes.length>0">+</span>{{post.likes.length}}</div>
     <svg clip-rule="evenodd" stroke="rgba(255, 255 ,255 ,0.6)" fill-rule="evenodd" fill="rgb(13 148 136)" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m12 5.72c-2.624-4.517-10-3.198-10 2.461 0 3.725 4.345 7.727 9.303 12.54.194.189.446.283.697.283s.503-.094.697-.283c4.977-4.831 9.303-8.814 9.303-12.54 0-5.678-7.396-6.944-10-2.461z" fill-rule="nonzero"/></svg>
 </div>
 
-    <div class="imagedetail">
+    <!-- <div class="imagedetail">
 
       <div *ngIf="post.caption!==''" class="caption">{{post.caption}}</div>
 
         <svg clip-rule="evenodd" style="margin-left: 8px;" stroke="rgba(255, 255 ,255 ,0.6)" fill="rgb(13 148 136)" fill-rule="evenodd" width="30" height="30" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m14.123 19.336c-.468.453-.944.913-1.426 1.381-.194.189-.446.283-.697.283s-.503-.094-.697-.283c-4.958-4.813-9.303-8.815-9.303-12.54 0-5.659 7.376-6.978 10-2.461 2.604-4.483 10-3.217 10 2.461 0 .68-.144 1.369-.41 2.07-1.061-1.02-2.503-1.648-4.09-1.648-3.256 0-5.9 2.644-5.9 5.9 0 2 .998 3.77 2.523 4.837zm3.378-9.336c2.58 0 4.499 2.107 4.499 4.499 0 2.58-2.105 4.499-4.499 4.499-2.586 0-4.5-2.112-4.5-4.499 0-2.406 1.934-4.499 4.5-4.499zm.5 3.999v-1.5c0-.265-.235-.5-.5-.5-.266 0-.5.235-.5.5v1.5h-1.5c-.266 0-.5.235-.5.5s.234.5.5.5h1.5v1.5c0 .265.234.5.5.5.265 0 .5-.235.5-.5v-1.5h1.499c.266 0 .5-.235.5-.5s-.234-.5-.5-.5z" fill-rule="nonzero"/></svg>
 
-    <!-- <svg xmlns="http://www.w3.org/2000/svg" stroke="rgba(255, 255 ,255 ,0.6)" fill="rgb(13 148 136)" width="30" height="30" viewBox="0 0 24 24"><path d="M20 1.999H4c-1.103 0-2 .897-2 2v18l4-4h14c1.103 0 2-.897 2-2v-12c0-1.103-.897-2-2-2zm-6 11H7v-2h7v2zm3-4H7v-2h10v2z"></path></svg> -->
-    <!-- <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" stroke="rgba(255, 255 ,255 ,0.6)" viewBox="0 0 24 24" fill="rgb(13 148 136)"><path d="M20 2H4c-1.103 0-2 .894-2 1.992v12.017C2 17.106 2.897 18 4 18h3v4l6.351-4H20c1.103 0 2-.894 2-1.992V3.992A1.998 1.998 0 0 0 20 2zm-9 8a2 2 0 1 1-2-2c.086 0 .167.015.25.025.082-.014.164-.025.25-.025A1.5 1.5 0 0 1 11 9.5c0 .086-.012.168-.025.25.01.083.025.165.025.25zm4 2a2 2 0 0 1-2-2c0-.086.015-.167.025-.25A1.592 1.592 0 0 1 13 9.5 1.5 1.5 0 0 1 14.5 8c.086 0 .168.011.25.025.083-.01.164-.025.25-.025a2 2 0 0 1 0 4z"></path></svg> -->
-    <div class="comments">{{post.comments.length}} comments</div>
+  <div class="comments">{{post.comments.length}} comments</div>
 
 
-  </div>
+  </div> -->
 
+  <!-- <div class="caption">hello world
+
+  </div> -->
   <a [routerLink]="['/view',post._id]" routerLinkActive="router-link-active"  ></a>
 
 
