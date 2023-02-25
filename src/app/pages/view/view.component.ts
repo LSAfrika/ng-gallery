@@ -60,6 +60,7 @@ this.initializeform()
 
     this.snapshares.postcomment(id,this.commentform.value).pipe(takeUntil(this.destroy)).subscribe(res=>{
       console.log(res);
+      this.initializeform()
       this.snapid.next(this.active.snapshot.params.id)
       
     },err=>{ 
