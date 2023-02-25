@@ -62,7 +62,7 @@ this.initializeform()
       console.log(res);
       this.snapid.next(this.active.snapshot.params.id)
       
-    },err=>{
+    },err=>{ 
       console.log(err.message);
       
     })
