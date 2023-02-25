@@ -1,15 +1,19 @@
 .card{
     @apply rounded-md bg-teal-600 relative shadow-md shadow-black mt-12 relative;
- min-width: 275px;
+ min-width: 250px;
  max-width: 300px;
 //  min-height: 300px;
 opacity: 0;
-  height: auto;
+height: 
+  auto;
+  // overflow: hidden;
 //   background-color: teal;
 animation: view .3s ease-in forwards;
 img{
   width: 100%;
-  background-size: cover;
+  height: 100%;
+  max-height: 250px;
+  background-size: contain;
   @apply rounded-md
 }
 
