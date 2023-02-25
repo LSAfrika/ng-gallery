@@ -12,6 +12,7 @@ export class PostService {
   pagination = 0;
 POST_URL = 'http://localhost:4555/photos/post';
  fetchposturl = 'http://localhost:4555/photos/allposts?pagination=';
+ fetchsingleposturl = 'http://localhost:4555/photos/singlepost/';
  categoriesurl = 'http://localhost:4555/photos/allposts/category?category=';
 
  category=''
@@ -50,6 +51,9 @@ allposts: Post[] = [];
 
    }
 
+   getsinglepost(id):Observable<Post>{
+    return  this.http.get<Post>(this.fetchsingleposturl+id)
+   }
    getcategorypost(category: string){
 
     this.category=category

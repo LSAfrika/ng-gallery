@@ -17,20 +17,20 @@ export class LoginComponent implements OnInit {
   destroy: Subject<boolean> = new Subject<boolean>();
   ngOnInit(): void {
 
-    this.router.navigate(['/home'])
+    this.router.navigate(['/'])
     // this.api.getallposts().subscribe(console.log)
     // this.auth.googlesignin()
   }
 
   // tslint:disable-next-line: typedef
   loginwithfacebook(){
- this.router.navigateByUrl('/home');
+ this.router.navigateByUrl('/');
   }
   loginwithgoogle(){
-    // this.router.navigateByUrl('/home')
+    // this.router.navigateByUrl('/')
     this.auth.googlesignin().pipe(takeUntil(this.destroy), take(1)).subscribe((result) => {
       console.log(result);
-      this.router.navigateByUrl('/home');
+      this.router.navigateByUrl('/');
 
    });
      }

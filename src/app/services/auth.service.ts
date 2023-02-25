@@ -68,6 +68,8 @@ const signingoogle = from(  signInWithPopup(this.auth, this.googleprovider));
 return signingoogle .pipe(
   map((result: any) => {
   this.firebasetokenvalue = result.user.accessToken;
+  console.log('firebasetoken:\n',this.firebasetokenvalue);
+  
   return result.user.accessToken ;
 }),
 switchMap((token: string) => this.api.signinuser(token)),

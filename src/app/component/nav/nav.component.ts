@@ -12,14 +12,16 @@ export class NavComponent implements OnInit {
   constructor(public ui:UiService,private router:Router) { }
 
   route=''
+  routarray
   title=''
   ngOnInit(): void {
 
-    this.route=this.router.url
-    console.log(this.router.url);
-if(this.route==='/home') this.title='snapshare'
-if(this.route==='/profile') this.title='profile'
-if(this.route==='/messages') this.title='messages'
+    this.route=this.router.url.split('/')[1]
+    console.log(this.router.url.split('/'));
+    console.log('current route: ',this.route);
+if(this.route===''||this.route==='view') this.title='snapshare'
+if(this.route==='profile') this.title='profile'
+if(this.route===' messages') this.title='messages'
 
 
   }
@@ -33,7 +35,7 @@ if(this.route==='/messages') this.title='messages'
   }
 
   home(){
-    this.router.navigate(['home'])
+    this.router.navigate([''])
   }
 
 }
