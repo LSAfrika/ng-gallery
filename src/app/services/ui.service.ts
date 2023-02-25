@@ -1,3 +1,4 @@
+import { User } from './../interface/post.interface';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -9,7 +10,7 @@ export class UiService {
   opennotificationspanel = 0;
   openimageuploader = 0;
   uploading=false
-
+postowner:User
   categoryposts=false
 
   togglenotifications() {

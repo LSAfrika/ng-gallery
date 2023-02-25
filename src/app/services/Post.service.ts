@@ -15,6 +15,7 @@ POST_URL = 'http://localhost:4555/photos/post';
  fetchsingleposturl = 'http://localhost:4555/photos/singlepost/';
  categoriesurl = 'http://localhost:4555/photos/allposts/category?category=';
  commenturl='http://localhost:4555/comments/post/'
+ likeurl='http://localhost:4555/likes/post/'
  postid=''
 
  category=''
@@ -91,5 +92,12 @@ allposts: Post[] = [];
     const posturl= this.commenturl+id
     this.postid=id
      return this.http.post(posturl,comment)
+   }
+
+   likepost(id):Observable<any>{
+    this.postid=id
+
+    const posturl=this.likeurl+id
+    return this.http.post<any>(posturl,{})
    }
 }
