@@ -26,6 +26,7 @@ liked = false;
 this.snapid.next( this.active.snapshot.params.id);
 
 this.post = this.snapid.pipe(switchMap(id =>  this.snapshares.getsinglepost(id)), map((res: any) => res.singlepost),tap(result=>this.ui.postowner=result.user));
+console.log('post owner:',this.ui.postowner);
 
 this.initializeform();
 // this.post.pipe(takeUntil(this.destroy)).subscribe(res => {

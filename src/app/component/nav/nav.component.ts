@@ -1,3 +1,4 @@
+import { ViewComponent } from './../../pages/view/view.component';
 import {  User } from './../../interface/post.interface';
 import { Router } from '@angular/router';
 import { Component, Input, OnInit } from '@angular/core';
@@ -29,7 +30,7 @@ if(this.route==='view'){
    setTimeout(() => {
     console.log(this.ui.postowner);
     this.title=this.ui.postowner?.username
-   },100);
+   },500);
 }
 
 
@@ -37,6 +38,13 @@ if(this.route==='view'){
 
   profile(){
     this.router.navigate(['profile'])
+  }
+
+  viewprofile(){
+    console.log('post owner: ',this.ui.postowner);
+
+    this.router.navigate(['profile',this.ui.postowner._id])
+
   }
 
   messages(){
