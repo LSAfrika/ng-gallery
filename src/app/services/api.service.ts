@@ -11,6 +11,7 @@ export class ApiService {
 // socket=io(this.snapsharebackend)
 
 ROOT_URL='http://localhost:4555/'
+refreshurl='http://localhost:4555/user/refresh'
 
 
   constructor(private http:HttpClient) {
@@ -25,6 +26,12 @@ ROOT_URL='http://localhost:4555/'
     // ,{ headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)}
    }
 
+
+   refreshtoken(){
+    const token=localStorage.getItem('auth')
+    const refreshtoken=localStorage.getItem('refresh')
+    return this.http.post(this.refreshurl,{},{ headers: new HttpHeaders().set('Authorization', `Bearer ${token}`).set('refreshtoken',`bearer ${refreshtoken}`) })
+   }
    getallposts():Observable<{}>{
     return this.http.get(this.ROOT_URL+'photos/allposts?pagination=1')
    }

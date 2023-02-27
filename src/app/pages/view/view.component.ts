@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { map, switchMap, takeUntil } from 'rxjs/operators';
+import { map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { Post,User } from 'src/app/interface/post.interface';
 import { PostService } from 'src/app/services/Post.service';
 
@@ -25,17 +25,17 @@ liked = false;
   constructor(private active: ActivatedRoute, private snapshares: PostService, private formbuilder: FormBuilder,private ui:UiService) {
 this.snapid.next( this.active.snapshot.params.id);
 
-this.post = this.snapid.pipe(switchMap(id =>  this.snapshares.getsinglepost(id)), map((res: any) => res.singlepost));
+this.post = this.snapid.pipe(switchMap(id =>  this.snapshares.getsinglepost(id)), map((res: any) => res.singlepost),tap(result=>this.ui.postowner=result.user));
 
 this.initializeform();
-this.post.pipe(takeUntil(this.destroy)).subscribe(res => {
+// this.post.pipe(takeUntil(this.destroy)).subscribe(res => {
 
-  this.ui.postowner=res.user
-  // this.postowner=res.user
-  console.log(this.ui.postowner);
+//   this.ui.postowner=res.user
+//   // this.postowner=res.user
+//   console.log(this.ui.postowner);
 
-  this.checkifliked(res);
-});
+//   this.checkifliked(res);
+// });
 
    }
 

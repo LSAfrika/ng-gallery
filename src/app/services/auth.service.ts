@@ -69,7 +69,7 @@ return signingoogle .pipe(
   map((result: any) => {
   this.firebasetokenvalue = result.user.accessToken;
   console.log('firebasetoken:\n',this.firebasetokenvalue);
-  
+
   return result.user.accessToken ;
 }),
 switchMap((token: string) => this.api.signinuser(token)),
@@ -77,6 +77,7 @@ map((result: any) => {console.log(result);
                       // this.logedinuser = result;
                       // this.storagetoken = result.token;
                       localStorage.setItem('auth', result.token);
+                      localStorage.setItem('refresh', result.refreshtoken);
                       //  this.homerouteactivation = true;
                       // this.guardactivation.next(true);
                       // console.log(this.homerouteactivation);
@@ -88,5 +89,8 @@ map((result: any) => {console.log(result);
     return localStorage.getItem('auth')
   }
 
+  refreshtoken():Observable<any>{
+    return this.api.refreshtoken()
+  }
 
 }
