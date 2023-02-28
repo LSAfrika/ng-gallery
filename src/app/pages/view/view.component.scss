@@ -8,9 +8,9 @@
 }
 
 .hiddenview{
-    @apply w-full min-h-screen left-[100%] bg-black/70 box-border fixed top-0  right-0 bottom-0 z-50 flex justify-center items-center;
+    @apply w-full min-h-screen left-[100%] bg-black/70 box-border fixed flex-col top-0  right-0 bottom-0 z-50 flex justify-center items-center;
     .exitfullscreen{
-        @apply absolute top-0 right-0 mt-2 mr-2
+        @apply absolute top-0 right-0 mt-2 mr-2 z-50 bg-black/60 p-1 rounded-full
     }
     .img{
         @apply w-full min-h-[50%] bg-teal-500 relative;
@@ -20,11 +20,19 @@
             display: block;
             background-size: cover
         }
-        .close{
-
+     
+        .buttoncontainer{
+            @apply w-full h-fit flex justify-between absolute top-[50%] px-1 ;
+    
         }
     }
+
 }
+
+.viewbuttons{
+@apply   left-0 w-12 h-12 bg-black/60 rounded-full justify-center items-center flex;
+}
+
 
 
 .viewpicture{
@@ -52,7 +60,7 @@ object-fit: cover;
     @apply w-12 h-12 bg-black/40 rounded-full flex justify-center items-center   absolute top-[50%] px-2 left-0
 }
 .right{
-    @apply left-[100%] ;
+    // @apply left-[100%] ;
     left: calc(100% - 48px)
 }
 }
