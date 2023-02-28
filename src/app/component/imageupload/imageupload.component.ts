@@ -1,5 +1,5 @@
-import { map } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
+import { of, Subject } from 'rxjs';
 import { PostService } from '../../services/Post.service';
 import { Component, OnInit } from '@angular/core';
 import { UiService } from 'src/app/services/ui.service';
@@ -20,6 +20,8 @@ export class ImageuploadComponent implements OnInit {
   captiontext = '';
   uploading=false
   post = 'post';
+
+  destroy$:Subject<boolean>=new Subject()
   // textobservable=of(this.captiontext)
   ngOnInit(): void {
   }
@@ -30,7 +32,13 @@ export class ImageuploadComponent implements OnInit {
     // this.textobservable.subscribe(console.log)
 
    }
-
+ngOnDestroy(){
+  this.destroy$.next(true)
+  this.destroy$.complete()
+  this.destroy$.unsubscribe()
+  console.log('destroy uploader component');
+  
+}
 
 
 
@@ -97,7 +105,7 @@ export class ImageuploadComponent implements OnInit {
 
     this.ui.uploading=true
     this.post='uploading...'
-    this.postuploader.Poststatus(this.postform).subscribe(res => {
+    this.postuploader.Poststatus(this.postform).pipe(takeUntil(this.destroy$)).subscribe(res => {
   console.log(res);
 
   this.successfulupload()

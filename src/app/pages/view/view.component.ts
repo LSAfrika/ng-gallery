@@ -19,13 +19,17 @@ export class ViewComponent implements OnInit {
   post: Observable<Post>;
 commentform: FormGroup;
 destroy: Subject<boolean> = new Subject();
+disablepictureclick=false
+viewpic=0
+picture=0
 // postowner:User
-
+imagelength=0
 liked = false;
   constructor(private active: ActivatedRoute, private snapshares: PostService, private formbuilder: FormBuilder,private ui:UiService) {
 this.snapid.next( this.active.snapshot.params.id);
 
-this.post = this.snapid.pipe(switchMap(id =>  this.snapshares.getsinglepost(id)), map((res: any) => res.singlepost),tap(result=>this.ui.postowner=result.user));
+this.post = this.snapid.pipe(switchMap(id =>  this.snapshares.getsinglepost(id)), map((res: any) => res.singlepost),tap(
+  result=>{this.ui.postowner=result.user,this.checkifliked(result),this.imagelength=result.imgurl.length,console.log(result)}));
 console.log('post owner:',this.ui.postowner);
 
 this.initializeform();
@@ -51,8 +55,37 @@ this.initializeform();
     // Called once, before the instance is destroyed.
     // Add 'implements OnDestroy' to the class.
     this.destroy.next(true);
+    this.destroy.complete()
+    this.destroy.unsubscribe()
   }
 
+  viewpicture(){
+   this.viewpic=1
+   
+    
+  }
+  closepicture(){
+  
+   this.viewpic=2
+    
+  }
+
+
+  next(){
+
+    if(this.picture=== this.imagelength-1) return
+    this.picture++
+
+  }
+  previous(){
+    if(this.picture=== 0) return
+    this.picture--
+  }
+
+  disablepicture(bool:boolean):Boolean{
+
+    return this.disablepictureclick= bool
+  }
   initializeform(){
     this.commentform = this.formbuilder.group({
 

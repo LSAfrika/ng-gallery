@@ -6,13 +6,54 @@
     items-center gap-1 flex-col;
 
 }
+
+.hiddenview{
+    @apply w-full min-h-screen left-[100%] bg-black/70 box-border fixed top-0  right-0 bottom-0 z-50 flex justify-center items-center;
+    .exitfullscreen{
+        @apply absolute top-0 right-0 mt-2 mr-2
+    }
+    .img{
+        @apply w-full min-h-[50%] bg-teal-500 relative;
+        img{
+            width: 100%;
+            height: 100%;
+            display: block;
+            background-size: cover
+        }
+        .close{
+
+        }
+    }
+}
+
+
+.viewpicture{
+animation: viewpicture .3s ease-in forwards;
+}
+
+.closepicture{
+    animation: closepicture .3s ease-out forwards;
+
+}
 .imgcontainer{
-@apply w-full min-h-[200px]   overflow-hidden max-h-[350px];
+@apply w-full min-h-[200px]   overflow-hidden max-h-[350px] relative;
 img{
 width: 100%;
 height: 100%;
 object-fit: cover;
 
+}
+
+.expandpicture{
+    @apply w-12 h-12 bg-black/40 rounded-full flex justify-center items-center mt-2 ml-2  absolute top-0 px-2 left-0
+}
+
+.scrollbuttons{
+    @apply w-12 h-12 bg-black/40 rounded-full flex justify-center items-center   absolute top-[50%] px-2 left-0
+}
+.right{
+    @apply left-[100%] ;
+    left: calc(100% - 48px)
 }
 }
 .likescommentcontainer{
@@ -84,4 +125,26 @@ box-shadow:0 0 5px 4px rgba(0, 0, 0, 0.461);
         // outline: none;
     }
 
+}
+
+
+@keyframes viewpicture{
+    0%{
+        @apply left-[100%]
+
+    }
+    100%{
+@apply left-0
+    }
+}
+
+@keyframes closepicture{
+    0%{
+        @apply left-0
+
+    }
+    100%{
+        @apply left-[100%]
+        
+    }
 }
