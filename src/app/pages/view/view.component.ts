@@ -73,12 +73,12 @@ this.initializeform();
 
   next(){
 
-    if(this.picture=== this.imagelength-1) return
+    if(this.picture=== this.imagelength-1) this.picture=-1
     this.picture++
 
   }
   previous(){
-    if(this.picture=== 0) return
+    if(this.picture=== 0) this.picture=this.imagelength
     this.picture--
   }
 
