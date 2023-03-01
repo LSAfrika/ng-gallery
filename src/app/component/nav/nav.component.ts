@@ -43,6 +43,8 @@ if(this.route==='view'){
   viewprofile(){
     console.log('post owner: ',this.ui.postowner);
 
+
+    // remember to add logic for login user profile navigation
     this.router.navigate(['profile',this.ui.postowner._id])
 
   }
