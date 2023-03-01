@@ -22,6 +22,9 @@ postowner:User
 
 
   }
+  resetnotificationpanel(){
+    this.opennotificationspanel=0
+  }
 
   toggleimageuploader() {
     console.log('before modal', this.openimageuploader);

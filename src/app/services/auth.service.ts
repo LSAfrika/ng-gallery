@@ -11,7 +11,9 @@ import {
   signInWithPopup,
 
 } from 'firebase/auth';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import {BehaviorSubject, from,  Observable, Subject } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -34,32 +36,23 @@ firebasetokenvalue = '';
    auth = getAuth();
    token = '';
    firebasetoken = '';
+   refreshurl='http://localhost:4555/user/refresh'
+loginurl = 'http://localhost:4555/user/authprovidersignin';
+
 
    homerouteactivation = false;
    googleprovider = new GoogleAuthProvider();
    loginresult: Observable<any>;
    guardactivation: Subject<boolean> = new Subject <boolean>();
 
-  constructor(private api: ApiService) {
+  constructor(private http:HttpClient) {
     console.log('auth service initialized');
 
 
   }
 
-//   async googlesignin() {
-//     // try {
 
-// const signingoogle = from(  signInWithPopup(this.auth, this.googleprovider));
 
-// signingoogle.subscribe(async (user) => {
-//   const token = await user.user.getIdToken();
-
-//   this.api.signinuser(token).subscribe(console.log);
-//   console.log('user token', token);
-
-// });
-
-//   }
 
    googlesignin(): Observable<any>{
     // try {
@@ -68,11 +61,12 @@ const signingoogle = from(  signInWithPopup(this.auth, this.googleprovider));
 return signingoogle .pipe(
   map((result: any) => {
   this.firebasetokenvalue = result.user.accessToken;
-  console.log('firebasetoken:\n',this.firebasetokenvalue);
+  // console.log('firebasetoken:\n',this.firebasetokenvalue);
 
   return result.user.accessToken ;
 }),
-switchMap((token: string) => this.api.signinuser(token)),
+switchMap((token: string) => {console.log('received token\n',token);
+  return this.signinuser()}),
 map((result: any) => {console.log(result);
                       // this.logedinuser = result;
                       // this.storagetoken = result.token;
@@ -89,8 +83,18 @@ map((result: any) => {console.log(result);
     return localStorage.getItem('auth')
   }
 
-  refreshtoken():Observable<any>{
-    return this.api.refreshtoken()
+  signinuser(): Observable<any>{
+    // tslint:disable-next-line: max-line-length
+    // console.log(token)
+    return this.http.post(this.loginurl,{})
+    // ,{ headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)}
+   }
+
+  refreshtoken(){
+    const token=localStorage.getItem('auth')
+    const refreshtoken=localStorage.getItem('refresh')
+    return this.http.post(this.refreshurl,{},{ headers: new HttpHeaders().set('Authorization', `Bearer ${token}`).set('refreshtoken',`bearer ${refreshtoken}`) })
+
   }
 
 }

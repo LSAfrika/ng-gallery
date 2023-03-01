@@ -10,36 +10,84 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PostService } from './Post.service';
-import jwt_decode from 'jwt-decode'
+import jwt_decode from 'jwt-decode';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
   loginurl = 'http://localhost:4555/user/authprovidersignin';
+  refreshurl = 'http://localhost:4555/user/refresh';
   posturl = 'http://localhost:4555/photos/post';
-  commenturl='http://localhost:4555/comments/post/'
-  likesurl='http://localhost:4555/likes/post/'
+  commenturl = 'http://localhost:4555/comments/post/';
+  likesurl = 'http://localhost:4555/likes/post/';
   authrequest: HttpRequest<unknown>;
   postrequest: HttpRequest<unknown>;
   commentrequest: HttpRequest<unknown>;
   likerequest: HttpRequest<unknown>;
-  constructor(private auth: AuthService,private post:PostService) {}
+  constructor(private auth: AuthService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-   const commenposturl=this.commenturl+this.post.postid
-   const likeposturl=this.likesurl+this.post.postid
-     console.log(request.url);
-    //  this.refreshtoken(request,next)
-    if (request.url === this.loginurl) {return this.logininterceptor(request,next) }
-    if (request.url === this.posturl) {return this.postinterceptor(request,next) }
-    if (request.url === commenposturl && request.method==='POST') {return this.commentinterceptor(request,next) }
-    if (request.url === likeposturl && request.method==='POST') {return this.likesinterceptor(request,next) }
+  //  const commenposturl=this.commenturl+this.post.postid
+  //  const likeposturl=this.likesurl+this.post.postid
+  // console.log('global scope interceptor',request.url)
 
-  return next.handle(request);
+  if (request.url === this.loginurl) {console.log(request.url); return this.logininterceptor(request, next); }
+
+
+     return this.refreshtokeninterceptor(request, next);
 
 
 
+
+
+
+  }
+
+  refreshtokeninterceptor(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<any>>{
+    const token: any = localStorage.getItem('auth');
+    // const refresh=localStorage.getItem('refresh')
+
+    const tokenvalue: any = jwt_decode(token);
+    // console.log('in refresh interceptor',req.url)
+
+    if(req.url===this.refreshurl) return next.handle(req)
+
+    if (req.method === 'POST' && req.url != this.loginurl){
+
+      if (tokenvalue.exp * 1000 > Date.now() ) {
+
+        console.log();
+
+        const postrequest = req.clone({
+        setHeaders: {
+          Authorization: 'bearer ' + token
+        }
+       });
+        return next.handle(postrequest);
+
+      }
+
+      return  this.auth.refreshtoken().pipe(switchMap(
+      (tokens: any) => {
+        localStorage.setItem('auth', tokens.token);
+
+        const reqclone = req.clone({
+          setHeaders: {
+            Authorization: 'bearer ' + tokens.token
+          }
+        });
+        return next.handle(reqclone);
+      }
+
+
+
+    ));
+
+
+    }
+
+    return next.handle(req);
 
   }
 
@@ -47,7 +95,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
 
   postinterceptor(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log (request.url ,request.method );
+    console.log (request.url , request.method );
     const token = this.auth.gettoken();
     // console.log('token in auth interceptor', token);
     this.postrequest = request.clone({
@@ -56,29 +104,29 @@ export class AuthInterceptor implements HttpInterceptor {
         }
       });
 
-    return next.handle(this.postrequest).pipe(catchError((err:HttpErrorResponse)=>{
-      if(err.status===401){
-        return this.auth.refreshtoken().pipe(switchMap(tokens=>{
+    return next.handle(this.postrequest).pipe(catchError((err: HttpErrorResponse) => {
+      if (err.status === 401){
+        return this.auth.refreshtoken().pipe(switchMap((tokens: any) => {
 
-                  const newtoken=tokens.token;
-                  localStorage.setItem('auth',newtoken)
-                  const newrequest=request.clone({
+                  const newtoken = tokens.token;
+                  localStorage.setItem('auth', newtoken);
+                  const newrequest = request.clone({
                     setHeaders: {
                       Authorization: 'bearer ' + newtoken
                     }
-                  })
+                  });
 
-                  return next.handle(newrequest)
+                  return next.handle(newrequest);
 
         }
 
 
 
-        ))
+        ));
 
       }
     }));
-  ;
+
 
     }
 
@@ -87,13 +135,15 @@ export class AuthInterceptor implements HttpInterceptor {
 
 
       const token = this.auth.firebasetokenvalue;
-      // console.log('token in auth interceptor', token);
-      // console.log('post link', request.url);
+console.log('interceptor token\n',token);
+
       this.authrequest = request.clone({
         setHeaders: {
           Authorization: 'bearer ' + token
         }
       });
+      console.log('auth header',this.authrequest.headers.get('Authorization'));
+
 
       return next.handle(this.authrequest);
 
@@ -114,30 +164,30 @@ export class AuthInterceptor implements HttpInterceptor {
       }
     });
 
-    return next.handle(this.commentrequest).pipe(catchError((err:HttpErrorResponse)=>{
-      if(err.status===401){
-        return this.auth.refreshtoken().pipe(switchMap(tokens=>{
+    return next.handle(this.commentrequest).pipe(catchError((err: HttpErrorResponse) => {
+      if (err.status === 401){
+        return this.auth.refreshtoken().pipe(switchMap((tokens: any) => {
 
-                  const newtoken=tokens.token;
-                  localStorage.setItem('auth',newtoken)
+                  const newtoken = tokens.token;
+                  localStorage.setItem('auth', newtoken);
 
-                  const newrequest=request.clone({
+                  const newrequest = request.clone({
                     setHeaders: {
                       Authorization: 'bearer ' + newtoken
                     }
-                  })
+                  });
 
-                  return next.handle(newrequest)
+                  return next.handle(newrequest);
 
         }
 
 
 
-        ))
+        ));
 
       }
     }));
-  ;
+
 
 
 
@@ -157,26 +207,26 @@ likesinterceptor(request: HttpRequest<unknown>, next: HttpHandler): Observable<H
   });
 
   return next.handle(this.likerequest)
-  .pipe(catchError((err:HttpErrorResponse)=>{
-    if(err.status===401){
-      return this.auth.refreshtoken().pipe(switchMap(tokens=>{
+  .pipe(catchError((err: HttpErrorResponse) => {
+    if (err.status === 401){
+      return this.auth.refreshtoken().pipe(switchMap((tokens: any) => {
 
-                const newtoken=tokens.token;
-                localStorage.setItem('auth',newtoken)
+                const newtoken = tokens.token;
+                localStorage.setItem('auth', newtoken);
 
-                const newrequest=request.clone({
+                const newrequest = request.clone({
                   setHeaders: {
                     Authorization: 'bearer ' + newtoken
                   }
-                })
+                });
 
-                return next.handle(newrequest)
+                return next.handle(newrequest);
 
       }
 
 
 
-      ))
+      ));
 
     }
   }));
@@ -186,39 +236,5 @@ likesinterceptor(request: HttpRequest<unknown>, next: HttpHandler): Observable<H
 }
 
 
-
-// refreshtoken(request:HttpRequest<any>,next:HttpHandler): Observable<HttpEvent<any>>{
-
-//   const token=localStorage.getItem('auth')
-// const decodedtoken:any= jwt_decode(token)
-// console.log('tokendetails:\n',decodedtoken);
-
-//   if(decodedtoken.exp*1000<Date.now()){
-// console.log('token expired');
-
-// return this.auth.refreshtoken().pipe(map(tokens=>{
-//   console.log(tokens);
-//   localStorage.setItem('auth', tokens.token);
-//   localStorage.setItem('refresh', tokens.refreshtoken);
-//   return tokens.token
-// }),switchMap(token=>{
-//  const req= request.clone({
-//     setHeaders: {
-//       Authorization: 'bearer ' + token
-//     }
-//   });
-
-//   return next.handle(req);
-
-// }
-
-
-// ))
-
-//   }
-
-//   return next.handle(request)
-
-// }
 
 }

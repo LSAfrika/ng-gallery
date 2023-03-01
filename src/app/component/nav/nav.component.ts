@@ -27,8 +27,8 @@ if(this.route==='profile') this.title='profile'
 if(this.route===' messages') this.title='messages'
 if(this.route==='view'){
 
+  console.log(this.ui.postowner);
    setTimeout(() => {
-    console.log(this.ui.postowner);
     this.title=this.ui.postowner?.username
    },500);
 }
@@ -43,6 +43,7 @@ if(this.route==='view'){
   viewprofile(){
     console.log('post owner: ',this.ui.postowner);
 
+    this.ui.resetnotificationpanel()
 
     // remember to add logic for login user profile navigation
     this.router.navigate(['profile',this.ui.postowner._id])
@@ -51,9 +52,12 @@ if(this.route==='view'){
 
   messages(){
     this.router.navigate(['messages'])
+    this.ui.resetnotificationpanel()
+
   }
 
   home(){
+    this.ui.resetnotificationpanel()
     this.router.navigate([''])
   }
 

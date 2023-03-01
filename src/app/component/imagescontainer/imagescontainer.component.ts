@@ -14,7 +14,7 @@ export class ImagescontainerComponent implements OnInit {
 
   constructor(public postservice: PostService,public ui:UiService) {
 
-    if(this.postservice.allposts.length>0)this.postservice.allposts=[];this.postservice.fetchnextsnapshares.next(0)
+    // if(this.postservice.allposts.length>0)this.postservice.allposts=[];this.postservice.fetchnextsnapshares.next(0)
    }
 
   ngOnInit(): void {
@@ -28,7 +28,8 @@ export class ImagescontainerComponent implements OnInit {
 
 
   fetchnext(){
-    this.postservice.fetchnextsnapshares.next( this.postservice.fetchnextsnapshares.value+1);
+    // this.postservice.fetchnextsnapshares.next( this.postservice.fetchnextsnapshares.value+1);
+    this.postservice.fetchnextsetofposts()
 
     // this.postservice.getpost()
   }

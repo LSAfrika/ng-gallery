@@ -1,6 +1,6 @@
 <div class="container">
 
-    <app-imagecard *ngFor="let post of postservice.snapshareview$ | async" [post]="post" ></app-imagecard>
+    <app-imagecard *ngFor="let post of postservice.snapshares | async" [post]="post" ></app-imagecard>
 
 
     <div style="width:100% ;display: flex; background-color: teal;justify-content: center;align-items: center;">

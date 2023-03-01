@@ -2,7 +2,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Post } from '../interface/post.interface';
-import { catchError, delay, map, switchMap } from 'rxjs/operators';
+import { catchError, delay, map, switchMap, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -21,18 +21,26 @@ POST_URL = 'http://localhost:4555/photos/post';
  category=''
 //  snapshareview:Observable<Post[]>
  fixedcategories = '';
-
+paination=0
  fetchnextsnapshares=new BehaviorSubject<number>(0)
  snapshares: BehaviorSubject<Post[]> = new  BehaviorSubject<Post[]>([]);
-allposts: Post[] = [];
+// allposts: Post[] = [];
+initialload=false
 
-
-  snapshareview$=this.fetchnextsnapshares.pipe( switchMap((page)=>{console.log(page);
-   return this.getpost(page)}),map((result:any)=>{ console.log(result);
-    return this.allposts=[...this.allposts,...result.posts]}))
+  // snapshareview$=this.fetchnextsnapshares.pipe( switchMap((page)=>{console.log(page);
+  //  return this.getpost(page)}),map((result:any)=>{ console.log(result);
+  //   return this.allposts=[...this.allposts,...result.posts]}))
   constructor(private http: HttpClient) {
     // this.getpost()
+
+      if(this.initialload===false) this.fetchsubscriptionlogic()
    }
+
+
+
+
+
+
 
 
   Poststatus(post: FormData): Observable<any> {
@@ -42,6 +50,18 @@ allposts: Post[] = [];
 
     // ,{headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)}
     return this.http.post<any>(this.POST_URL, post);
+   }
+
+
+   fetchnextsetofposts(){
+    this.pagination++
+  this.fetchsubscriptionlogic()
+   }
+
+   fetchsubscriptionlogic(){
+    this.getpost(this.pagination)
+     .pipe(tap((res:any)=>{this.snapshares.next(res.posts as Post[]),this.initialload=true}))
+     .subscribe()
    }
 
    getpost(page): Observable<any>{
@@ -60,7 +80,7 @@ allposts: Post[] = [];
    getcategorypost(category: string){
 
     this.category=category
-    this.allposts = [];
+    // this.allposts = [];
     this.fetchnextsnapshares.next(0)
 
    }
@@ -78,7 +98,7 @@ allposts: Post[] = [];
 
    resetcategorypost(){
 
-    this.allposts = [];
+    // this.allposts = [];
     this.category=''
     // this.snapshares.next(this.allposts);
     this.fetchnextsnapshares.next(0)
