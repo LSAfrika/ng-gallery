@@ -60,7 +60,7 @@ initialload=false
 
    fetchsubscriptionlogic(){
     this.getpost(this.pagination)
-     .pipe(tap((res:any)=>{this.snapshares.next(res.posts as Post[]),this.initialload=true}))
+     .pipe(tap((res:any)=>{this.snapshares.next([...this.snapshares.value, ...res.posts as Post[]]),this.initialload=true}))
      .subscribe()
    }
 

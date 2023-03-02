@@ -1,3 +1,4 @@
+import { User } from './../interface/post.interface';
 import { ApiService } from './api.service';
 import { Injectable } from '@angular/core';
 import { async } from '@angular/core/testing';
@@ -30,7 +31,7 @@ export class AuthService {
 
   // Initialize Firebase
    app = initializeApp(this.firebaseConfig);
-logedinuser: any = {};
+
 storagetoken = '';
 firebasetokenvalue = '';
    auth = getAuth();
@@ -48,8 +49,8 @@ loginurl = 'http://localhost:4555/user/authprovidersignin';
   constructor(private http:HttpClient) {
     console.log('auth service initialized');
 
-
   }
+
 
 
 

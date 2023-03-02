@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { map, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { Post,User } from 'src/app/interface/post.interface';
 import { PostService } from 'src/app/services/Post.service';
 
@@ -23,14 +23,29 @@ disablepictureclick=false
 viewpic=0
 picture=0
 // postowner:User
+modal=false
 imagelength=0
 liked = false;
   constructor(private active: ActivatedRoute, private snapshares: PostService, private formbuilder: FormBuilder,private ui:UiService) {
 this.snapid.next( this.active.snapshot.params.id);
 
-this.post = this.snapid.pipe(switchMap(id =>  this.snapshares.getsinglepost(id)), map((res: any) => res.singlepost),tap(
-  result=>{this.ui.postowner=result.user,this.checkifliked(result),this.imagelength=result.imgurl.length,console.log(result)}));
-console.log('post owner:',this.ui.postowner);
+
+// if(this.snapshares.snapshares.value.length>0) {
+
+//   console.log('length of snapshares: ',this.snapshares.snapshares.value.length);
+
+//   this.post=this.snapshares.snapshares.pipe(map(snaps=>snaps.filter(snap=>{return snap._id=== this.active.snapshot.params.id})[0])) ;
+
+//   this.post.subscribe(res=>console.log('snap from subject: ',res))
+// }
+// else{
+
+
+
+  this.post = this.snapid.pipe(switchMap(id =>  this.snapshares.getsinglepost(id)), map((res: any) => res.singlepost),tap(
+    result=>{this.ui.postowner=result.user,this.checkifliked(result),this.imagelength=result.imgurl.length,console.log(result)}));
+  // }
+    console.log('post owner:',this.ui.postowner);
 
 this.initializeform();
 // this.post.pipe(takeUntil(this.destroy)).subscribe(res => {
@@ -51,6 +66,10 @@ this.initializeform();
 
   }
 
+  togglemodal(){
+    this.modal=!this.modal
+  }
+
   ngOnDestroy(): void {
     // Called once, before the instance is destroyed.
     // Add 'implements OnDestroy' to the class.
@@ -61,13 +80,13 @@ this.initializeform();
 
   viewpicture(){
    this.viewpic=1
-   
-    
+
+
   }
   closepicture(){
-  
+
    this.viewpic=2
-    
+
   }
 
 

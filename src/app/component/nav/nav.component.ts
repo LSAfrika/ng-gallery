@@ -31,6 +31,8 @@ if(this.route==='view'){
    setTimeout(() => {
     this.title=this.ui.postowner?.username
    },500);
+  console.log(this.ui.postowner);
+
 }
 
 

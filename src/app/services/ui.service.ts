@@ -6,13 +6,32 @@ import { Injectable } from '@angular/core';
 })
 export class UiService {
 
-  constructor() { }
+
   opennotificationspanel = 0;
   openimageuploader = 0;
   uploading=false
 postowner:User
   categoryposts=false
+  logedinuser: User = undefined;
 
+
+  constructor() {
+
+    this.user()
+
+       }
+
+  user(){
+    const token=localStorage.getItem('auth').split('.')[1]
+    if(token){
+
+
+      const uservalue:any= JSON.parse(atob(token))
+      this.logedinuser=uservalue
+      console.log('current user: ',uservalue);
+    }
+
+  }
   togglenotifications() {
     console.log('before', this.opennotificationspanel);
     if (this.opennotificationspanel === 1) { return this.opennotificationspanel = 2 }
