@@ -16,6 +16,7 @@ POST_URL = 'http://localhost:4555/photos/post';
  categoriesurl = 'http://localhost:4555/photos/allposts/category?category=';
  commenturl='http://localhost:4555/comments/post/'
  likeurl='http://localhost:4555/likes/post/'
+ commentdeleteurl='http://localhost:4555/comments/delete/'
  postid=''
 
  category=''
@@ -119,5 +120,10 @@ initialload=false
 
     const posturl=this.likeurl+id
     return this.http.post<any>(posturl,{})
+   }
+
+   deletecomment(id){
+
+   return this.http.delete(this.commentdeleteurl+id)
    }
 }

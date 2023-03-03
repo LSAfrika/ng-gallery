@@ -22,40 +22,33 @@ destroy: Subject<boolean> = new Subject();
 disablepictureclick=false
 viewpic=0
 picture=0
+deleting=false
 // postowner:User
+modalmessage='deleting...'
 modal=false
 imagelength=0
 liked = false;
+iddeletioncomment=''
+currentpost:Post
   constructor(private active: ActivatedRoute, private snapshares: PostService, private formbuilder: FormBuilder,private ui:UiService) {
 this.snapid.next( this.active.snapshot.params.id);
 
 
-// if(this.snapshares.snapshares.value.length>0) {
 
-//   console.log('length of snapshares: ',this.snapshares.snapshares.value.length);
-
-//   this.post=this.snapshares.snapshares.pipe(map(snaps=>snaps.filter(snap=>{return snap._id=== this.active.snapshot.params.id})[0])) ;
-
-//   this.post.subscribe(res=>console.log('snap from subject: ',res))
-// }
-// else{
 
 
 
   this.post = this.snapid.pipe(switchMap(id =>  this.snapshares.getsinglepost(id)), map((res: any) => res.singlepost),tap(
-    result=>{this.ui.postowner=result.user,this.checkifliked(result),this.imagelength=result.imgurl.length,console.log(result)}));
-  // }
+    result=>{this.ui.postowner=result.user,
+      this.checkifliked(result),
+      this.imagelength=result.imgurl.length,
+      this.currentpost=result,
+      console.log('current post:',this.currentpost)}));
+  
     console.log('post owner:',this.ui.postowner);
 
 this.initializeform();
-// this.post.pipe(takeUntil(this.destroy)).subscribe(res => {
 
-//   this.ui.postowner=res.user
-//   // this.postowner=res.user
-//   console.log(this.ui.postowner);
-
-//   this.checkifliked(res);
-// });
 
    }
 
@@ -66,7 +59,10 @@ this.initializeform();
 
   }
 
-  togglemodal(){
+  togglemodal(id?){
+    console.log(id);
+    
+    this.iddeletioncomment=id
     this.modal=!this.modal
   }
 
@@ -89,6 +85,35 @@ this.initializeform();
 
   }
 
+
+deletecomment(){
+  console.log(this.iddeletioncomment);
+  
+  this.deleting=true
+
+  this.snapshares.deletecomment(this.iddeletioncomment).pipe(takeUntil(this.destroy)).subscribe(res=>{
+    console.log(res);
+    this.modalmessage='deletion successful'
+    this.snapid.next( this.active.snapshot.params.id);
+
+    setTimeout(() => {
+      
+      this.deleting=false
+      this.modal=false
+      this.modalmessage='deleting...'
+    }, 2000);
+    },err=>{console.log(err.message);
+
+      this.modalmessage='deletion error'
+
+    setTimeout(() => {
+      
+      this.deleting=false
+      this.modal=false
+      this.modalmessage='deleting...'
+    }, 2000);
+  })
+}
 
   next(){
 

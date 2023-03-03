@@ -46,7 +46,7 @@
                 <div class="textcomment">{{comment.comment}}</div>
 
                 <svg
-                (click)="togglemodal()" *ngIf="comment.ownerid._id===ui.logedinuser._id" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                (click)="togglemodal(comment._id)" *ngIf="comment.ownerid._id===ui.logedinuser._id" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                   <path d="M6 7H5v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7H6zm4 12H8v-9h2v9zm6 0h-2v-9h2v9zm.618-15L15 2H9L7.382 4H3v2h18V4z"></path></svg>
             </div>
         </div>
@@ -92,11 +92,19 @@
     </div>
 
     <div *ngIf="modal" class="confirmationmodal">
-      <div class="modal">
-        <div>delete comment</div>
-        <div class="btns">
-          <button >yes</button><button (click)="togglemodal()">no</button>
-        </div>
+      <div class="modal">   
+
+    <div *ngIf="deleting;else delete">{{modalmessage}}</div>
+
+<ng-template #delete>
+
+    
+    <div >delete comment</div>
+    <div class="btns">
+        <button (click)="deletecomment()" >yes</button><button (click)="togglemodal()">no</button>
+        
+    </div>
+</ng-template>
       </div>
     </div>
 </div>
