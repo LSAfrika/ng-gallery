@@ -11,11 +11,23 @@ export class ImagecardComponent implements OnInit {
 
 
   @Input()post:Post
-  constructor() { }
 
+  backgroundimage=''
+  constructor() {
+
+
+   }
+
+
+   ngAfterViewInit(){
+
+
+  }
   ngOnInit(): void {
+    this.backgroundimage=`background-image:url(${this.post.imgurl[0]}); background-size: cover;background-repeat: no-repeat;`
 
-     console.log(this.post.category);
+    console.log(this.post.category);
+
 
   }
 

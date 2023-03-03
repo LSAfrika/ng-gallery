@@ -2,15 +2,15 @@
 @apply min-w-full min-h-[50px]  h-fit box-border  py-1
 }
 .category{
-  @apply w-[90%] h-12 mx-auto flex gap-3 pl-2 items-center justify-start overflow-x-scroll py-4 overflow-y-hidden
+  @apply w-[90%] h-12 mx-auto flex gap-3 pl-2 items-center justify-start  overflow-x-scroll py-4 overflow-y-hidden
 }
 
 .pillActive{
-  @apply  bg-teal-500 font-semibold text-center  py-1 px-4 text-white rounded-full shadow-sm shadow-black/40 w-fit
+  @apply  bg-teal-500 font-semibold text-center cursor-pointer  py-1 px-4 text-white rounded-full shadow-sm shadow-black/40 w-fit
 }
 
 .pillinActive{
-  @apply  bg-white font-semibold text-center  py-1 px-4 text-teal-500 rounded-full shadow-sm shadow-black/40 w-fit
+  @apply  bg-white font-semibold text-center cursor-pointer  py-1 px-4 text-teal-500 rounded-full shadow-sm shadow-black/40 w-fit
 }
 
 
