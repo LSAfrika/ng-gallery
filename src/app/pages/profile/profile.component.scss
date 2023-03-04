@@ -11,6 +11,9 @@
 }
 .avatar{
   @apply w-[100px] h-[100px] bg-white rounded-full shadow-sm overflow-hidden mt-auto ;
+  img{
+    border-radius: inherit
+  }
 
 }
 .name{

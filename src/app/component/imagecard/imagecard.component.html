@@ -3,7 +3,7 @@
    <!-- {{post |json}} -->
     <!-- <img [src]="post.imgurl[0]" alt="upload image"  srcset=""> -->
 
-    <div class="postowner">
+    <div *ngIf="diableprofilelink===false" class="postowner" (mouseenter)="disableanchortag()" (mouseleave)="enableanchortag()" (click)="navigatetoprofile(post.user._id)" >
 
         <img [src]="post.user.imgurl" alt="" srcset="">
 
@@ -11,7 +11,7 @@
 
     </div>
 <div class="likes">
-  <div><span *ngIf="post.likes.length>0">+</span>{{post.likes.length}}</div>
+  <div><span *ngIf="post.likes.length>0" >+</span>{{post.likes.length}}</div>
     <svg clip-rule="evenodd" stroke="rgba(255, 255 ,255 ,0.6)" fill-rule="evenodd" fill="rgb(13 148 136)" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m12 5.72c-2.624-4.517-10-3.198-10 2.461 0 3.725 4.345 7.727 9.303 12.54.194.189.446.283.697.283s.503-.094.697-.283c4.977-4.831 9.303-8.814 9.303-12.54 0-5.678-7.396-6.944-10-2.461z" fill-rule="nonzero"/></svg>
 </div>
 
@@ -29,7 +29,8 @@
   <!-- <div class="caption">hello world
 
   </div> -->
-  <a [routerLink]="['/snapshare',post._id]" (click)="setuser(post.user)" routerLinkActive="router-link-active"  ></a>
+  <!--  routerLinkActive="router-link-active" -->
+  <a *ngIf="disableanchor==false"  (click)="setuser(post.user)" [routerLink]="['/snapshare',post._id]"  ></a>
 
 
 </div>

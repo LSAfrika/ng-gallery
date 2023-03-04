@@ -1,6 +1,7 @@
 import { Post } from '../../interface/post.interface';
 import { UiService } from 'src/app/services/ui.service';
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-imagecard',
@@ -13,8 +14,15 @@ export class ImagecardComponent implements OnInit {
   @Input()post:Post
 
   backgroundimage=''
-  constructor(private ui:UiService) {
+  disableanchor=false
+  diableprofilelink=false
+  constructor(private ui:UiService,private router:Router) {
 
+    console.log();
+
+    if(this.router.url.split('/')[1]=='profile') this.diableprofilelink=true
+    if(this.router.url.split('/')[1]!=='profile') this.diableprofilelink=false
+    
 
    }
 
@@ -36,8 +44,31 @@ export class ImagecardComponent implements OnInit {
 
     console.log('current user',user);
 
+    this.router.navigateByUrl(`snapshare/${this.post._id}`)
 
 
+
+
+  }
+
+
+  navigatetoprofile(userid){
+    this.ui.postowner.next(userid)
+
+    console.log('current user id',userid);
+
+    this.router.navigateByUrl(`profile/${userid}`)
+
+  }
+
+  disableanchortag(){
+    this.disableanchor=true
+    console.log('tag value',this.disableanchor);
+    
+  }
+  enableanchortag(){
+    this.disableanchor=false
+    console.log('tag value',this.disableanchor);
 
   }
 

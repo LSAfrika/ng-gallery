@@ -55,7 +55,7 @@ this.checkfollowinguser()
 
   checkfollowinguser(){
     this.snapshare.checkiffollowinguser(this.userid).pipe(takeUntil(this.destroy$),
-    map((res:any)=>{this.following=res.following;console.log('initial check',res);this.initialcheckfollowing()})).subscribe()
+    map((res:any)=>{this.following=res.following;this.ui.postowner.next(res.user); console.log('initial check',res);this.initialcheckfollowing()})).subscribe()
 
   }
 
@@ -96,7 +96,8 @@ this.checkfollowinguser()
 
   
   this.snapshare.follow(this. userid).pipe(takeUntil(this.destroy$),
-  map(res=>{this.following=res.following;this.ui.postowner.next(res.user);this.initialcheckfollowing()})).subscribe()
+  map(res=>{this.following=res.following;this.ui.postowner.next(res.user);this.initialcheckfollowing();console.log('server following response',res);
+  })).subscribe()
 
    
   }

@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { AuthService } from './services/auth.service';
 import { Component } from '@angular/core';
 import { io } from "socket.io-client";
+import { UiService } from './services/ui.service';
 
 @Component({
   selector: 'app-root',
@@ -13,8 +14,8 @@ export class AppComponent {
 
     snapsharebackend='http://localhost:4555'
   socket=io(this.snapsharebackend)
-  constructor(private router:Router){
-
+  constructor(private router:Router,private ui:UiService){
+this.ui.user()
     // this.router.navigate(['/'])
 
   }
