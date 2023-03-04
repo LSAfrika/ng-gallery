@@ -3,7 +3,7 @@
     <app-imagecard *ngFor="let post of postservice.snapshares | async" [post]="post" ></app-imagecard>
 
 
-    <div style="position: absolute;bottom: 32px; width:100% ;display: flex; background-color: teal;justify-content: center;align-items: center;">
+    <div *ngIf="ui.fetchnextdisabled===false" style="position: absolute;bottom: 32px; width:100% ;display: flex; background-color: teal;justify-content: center;align-items: center;">
 
       <button style="background-color: red; display: block;" (click)="fetchnext()">fetch next</button>
       <!-- <button *ngIf="ui.categoryposts===true" style="margin-top: 50px; background-color: royalblue; display: block;" (click)="fetchnextcategory()">fetch next</button> -->

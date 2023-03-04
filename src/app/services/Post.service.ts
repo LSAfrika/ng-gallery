@@ -1,3 +1,4 @@
+import { UiService } from 'src/app/services/ui.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -31,7 +32,7 @@ initialload=false
   // snapshareview$=this.fetchnextsnapshares.pipe( switchMap((page)=>{console.log(page);
   //  return this.getpost(page)}),map((result:any)=>{ console.log(result);
   //   return this.allposts=[...this.allposts,...result.posts]}))
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private ui:UiService) {
     // this.getpost()
 
       if(this.initialload===false) this.fetchsubscriptionlogic()
@@ -61,7 +62,10 @@ initialload=false
 
    fetchsubscriptionlogic(){
     this.getpost(this.pagination)
-     .pipe(tap((res:any)=>{this.snapshares.next([...this.snapshares.value, ...res.posts as Post[]]),this.initialload=true}))
+     .pipe(tap((res:any)=>{
+     if(res.posts.length<1) this.ui.fetchnextdisabled=true
+
+      this.snapshares.next([...this.snapshares.value, ...res.posts ]),this.initialload=true}))
      .subscribe()
    }
 
@@ -79,31 +83,53 @@ initialload=false
     return  this.http.get<Post>(this.fetchsingleposturl+id)
    }
    getcategorypost(category: string){
-
+this.ui.fetchnextdisabled=false
     this.category=category
+    this.pagination=0
+
+    console.log('catgory fetch: ',this.category);
+
     // this.allposts = [];
+    this.fixedcategories=this.categoriesurl+this.category+'&pagination='+this.pagination
+
+    console.log(this.fixedcategories);
+
     this.fetchnextsnapshares.next(0)
+    this.snapshares.next([])
+    this.http.get(this.fixedcategories ).
+    pipe(map((posts: any) => {
+      if(posts.posts.length<1) this.ui.fetchnextdisabled=true
+      this.snapshares.next([...this.snapshares.value,...posts.posts]); }),
+
+    ).subscribe(res=>{},err=>{console.log(err.message);
+    });
 
    }
 
    getcategorypostnext(){
 
     this.pagination++;
-    const fetchnextset = this.fixedcategories + this.pagination;
-     // tslint:disable-next-line: align
-     console.log(fetchnextset);
+    // const fetchnextset = this.categoriesurl + this.pagination;
+    this.fixedcategories=this.categoriesurl+this.category+'&pagination='+this.pagination
 
-    return this.http.get(fetchnextset).
-     pipe(map((posts: any) => {   this.snapshares.next([...this.snapshares.value,...posts.categoryposts]); })).subscribe();
+     // tslint:disable-next-line: align
+     console.log(this.fixedcategories);
+
+    return this.http.get(this.fixedcategories).
+     pipe(map((posts: any) => {
+      if(posts.posts.length<1) this.ui.fetchnextdisabled=true
+
+      this.snapshares.next([...this.snapshares.value,...posts.posts]); })).subscribe();
    }
 
    resetcategorypost(){
 
     // this.allposts = [];
+    this.ui.fetchnextdisabled=false
     this.category=''
     // this.snapshares.next(this.allposts);
     this.fetchnextsnapshares.next(0)
-
+this.fetchsubscriptionlogic()
     // this.getpost();
    }
 

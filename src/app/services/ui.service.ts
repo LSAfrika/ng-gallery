@@ -8,6 +8,7 @@ export class UiService {
 
 
   opennotificationspanel = 0;
+  fetchnextdisabled=false
   openimageuploader = 0;
   uploading=false
 postowner:User

@@ -28,14 +28,12 @@ export class ImagescontainerComponent implements OnInit {
 
 
   fetchnext(){
-    // this.postservice.fetchnextsnapshares.next( this.postservice.fetchnextsnapshares.value+1);
-    this.postservice.fetchnextsetofposts()
+    if(this.postservice.category=='') this.postservice.fetchnextsetofposts()
+    if(this.postservice.category!='')this.postservice.getcategorypostnext()
 
     // this.postservice.getpost()
   }
 
-  fetchnextcategory(){
-    this.postservice.getcategorypostnext()
-  }
+
 
 }
