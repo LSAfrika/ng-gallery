@@ -3,6 +3,7 @@ import {  User } from './../../interface/post.interface';
 import { Router } from '@angular/router';
 import { Component, Input, OnInit } from '@angular/core';
 import { UiService } from 'src/app/services/ui.service';
+import { NotificationsComponent } from '../notifications/notifications.component';
 
 @Component({
   selector: 'app-nav',
@@ -11,7 +12,7 @@ import { UiService } from 'src/app/services/ui.service';
 })
 export class NavComponent implements OnInit {
 
-  constructor(public ui:UiService,private router:Router) { }
+  constructor(public ui:UiService,private router:Router,private notfier:NotificationsComponent) { }
 
   @Input()postowner:User
   route=''

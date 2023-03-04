@@ -1,4 +1,4 @@
-import { ApiService } from './../../services/api.service';
+// import { ApiService } from '../../services/notifications.service';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -12,7 +12,7 @@ import { take, takeUntil } from 'rxjs/operators';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private router: Router, private auth: AuthService, private api: ApiService) { }
+  constructor(private router: Router, private auth: AuthService) { }
 
   destroy: Subject<boolean> = new Subject<boolean>();
   ngOnInit(): void {

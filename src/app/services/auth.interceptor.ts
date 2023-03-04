@@ -53,7 +53,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
     if(req.url===this.refreshurl) return next.handle(req)
 
-    if (req.method === 'POST'||req.method==='DELETE' && req.url != this.loginurl){
+    if ( req.url != this.loginurl){
 
       if (tokenvalue.exp * 1000 > Date.now() ) {
 
