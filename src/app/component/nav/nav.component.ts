@@ -1,9 +1,9 @@
-import { ViewComponent } from './../../pages/view/view.component';
+import { NotificationsService } from './../../services/notifications.service';
 import {  User } from './../../interface/post.interface';
 import { Router } from '@angular/router';
 import { Component, Input, OnInit } from '@angular/core';
 import { UiService } from 'src/app/services/ui.service';
-import { NotificationsComponent } from '../notifications/notifications.component';
+
 
 @Component({
   selector: 'app-nav',
@@ -12,7 +12,7 @@ import { NotificationsComponent } from '../notifications/notifications.component
 })
 export class NavComponent implements OnInit {
 
-  constructor(public ui:UiService,private router:Router,private notfier:NotificationsComponent) { }
+  constructor(public ui:UiService,private router:Router,private notfier:NotificationsService) { }
 
   @Input()postowner:User
   route=''

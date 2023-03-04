@@ -7,7 +7,7 @@
 }
 
 .avatar {
-  @apply min-w-[60px] min-h-[60px] rounded-full bg-pink-400
+  @apply min-w-[40px] min-h-[40px] rounded-full  bg-cover overflow-hidden shadow-black/50 shadow-sm
 }
 
 .message {
@@ -22,4 +22,12 @@
   @apply w-full overflow-hidden text-ellipsis whitespace-nowrap text-slate-900;
   max-width: calc(100% - 80px);
 
+}
+
+.loadmore{
+  @apply min-w-[150px] py-1 px-2 mt-2 w-fit rounded-full shadow-sm shadow-black/40 bg-white
+   text-teal-500 text-base font-medium border-2 border-black/20
+}
+.nonotification{
+  @apply text-teal-500 mt-5 text-2xl font-normal
 }

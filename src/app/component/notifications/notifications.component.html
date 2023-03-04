@@ -1,13 +1,23 @@
-<div class="notifications">
-  <div class="notification" *ngFor="let item of [1,1,1,1,1,1,1,1,1,1,1,1];let i =index">
+<div class="notifications" *ngIf="notifications.notifications$|async as notifier;">
+  <div (click)="navigatetopost(notice.post)"   class="notification" *ngFor="let notice of notifier;let i=index">
+    <!-- {{notifications[i] | json}} -->
+    <!-- {{notice |json}} -->
+<!-- {{notice.notificationowner.imgurl}} -->
+<!-- [style]="{ 'background-image': 'url(' + notice.notificationowner.imgurl + ')' }" -->
+    <div class="avatar"  >
+      <img [src]="notice.notificationowner.imgurl" alt="" srcset="">
 
-    <div class="avatar"></div>
-    <div (click)="ui.togglenotifications()" class="message">
-      <div> 10:15pm - 10 dec ,2022</div>
-      <div class="text" *ngIf="i%2===0 && i%3!=0"><strong>mike armstrong</strong> liked you photo</div>
-      <div class="text" *ngIf="i%2===1 && i%3!=0"><strong>jena lang</strong> commented on your photo on the koala</div>
-      <div class="text" *ngIf="i%3===0"><strong>joy mukami</strong> posted a resent picture</div>
+    </div>
+    <div class="message">
+      <div> {{notice.createdAt|date:'hh:mm dd/MM'}}</div>
+      <div class="text" *ngIf="notice.notificationtype==1"><strong>{{notice.notificationowner.username}}</strong> commented "{{notice.commentid.comment}}" on your post from  you photo</div>
+      <div class="text" *ngIf="notice.notificationtype==3"><strong>{{notice.notificationowner.username}}</strong> liked your post</div>
+      <!-- <div class="text" *ngIf="i%3===0"><strong>joy mukami</strong> posted a resent picture</div> -->
     </div>
 
   </div>
+  <!-- *ngIf="notifications.disablenotificationbutton===false" -->
+
+  <button *ngIf="notifications.disablenotificationbutton===false" (click)="fetchnextnotifications()" class="loadmore">load more </button>
+  <div *ngIf="notifications.disablenotificationbutton===true" class="nonotification" >no  notifications</div>
 </div>
