@@ -13,7 +13,7 @@ export class ImagecardComponent implements OnInit {
   @Input()post:Post
 
   backgroundimage=''
-  constructor() {
+  constructor(private ui:UiService) {
 
 
    }
@@ -28,6 +28,11 @@ export class ImagecardComponent implements OnInit {
 
     // console.log(this.post.category);
 
+
+  }
+
+  setuser(user){
+    this.ui.postowner=user
 
   }
 

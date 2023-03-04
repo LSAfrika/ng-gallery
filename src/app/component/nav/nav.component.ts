@@ -21,35 +21,28 @@ export class NavComponent implements OnInit {
   ngOnInit(): void {
 
     this.route=this.router.url.split('/')[1]
-    console.log(this.router.url.split('/'));
-    console.log('current route: ',this.route);
+    // console.log(this.router.url.split('/'));
+    // console.log('current route: ',this.route);
 if(this.route==='') this.title='snapshare'
 if(this.route==='profile') this.title='profile'
 if(this.route===' messages') this.title='messages'
-if(this.route==='view'){
-
-  console.log(this.ui.postowner);
-   setTimeout(() => {
-    this.title=this.ui.postowner?.username
-   },500);
-  console.log(this.ui.postowner);
-
-}
+if(this.route==='snapshare'){
 
 
   }
+}
 
   profile(){
     this.router.navigate(['profile'])
   }
 
   viewprofile(){
-    console.log('post owner: ',this.ui.postowner);
+    console.log('post owner: ',this.ui.postowner.value);
 
     this.ui.resetnotificationpanel()
 
     // remember to add logic for login user profile navigation
-    this.router.navigate(['profile',this.ui.postowner._id])
+    this.router.navigate(['profile',this.ui.postowner.value._id])
 
   }
 

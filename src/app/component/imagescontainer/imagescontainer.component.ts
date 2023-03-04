@@ -20,11 +20,13 @@ export class ImagescontainerComponent implements OnInit {
   ngOnInit(): void {
 
     // this.postservice.getpost()
-  // this.snapshares.subscribe(console.log)
+   this.postservice.snapshares.subscribe(console.log)
 
   console.log(this.postservice.fetchnextsnapshares.value);
 
   }
+
+
 
 
   fetchnext(){

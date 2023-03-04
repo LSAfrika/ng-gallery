@@ -16,7 +16,7 @@ export class CategoryComponent implements OnInit {
   }
 
   allposts(){
-
+this.selected=1
     this.postservice.resetcategorypost()
     // this.ui.categoriesinactive()
   }

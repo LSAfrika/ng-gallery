@@ -39,13 +39,16 @@ this.snapid.next( this.active.snapshot.params.id);
 
 
   this.post = this.snapid.pipe(switchMap(id =>  this.snapshares.getsinglepost(id)), map((res: any) => res.singlepost),tap(
-    result=>{this.ui.postowner=result.user,
+    result=>{
+      this.ui.postowner.next(result.user),
       this.checkifliked(result),
       this.imagelength=result.imgurl.length,
-      this.currentpost=result,
-      console.log('current post:',this.currentpost)}));
-  
-    console.log('post owner:',this.ui.postowner);
+      this.currentpost=result
+      // console.log('current post:',this.currentpost)
+    }
+      ));
+
+    //  console.log('post owner:',this.ui.postowner);
 
 this.initializeform();
 
@@ -56,12 +59,13 @@ this.initializeform();
 
   ngOnInit(): void {
 
+console.log('current user: ',this.ui.postowner.value);
 
   }
 
   togglemodal(id?){
     console.log(id);
-    
+
     this.iddeletioncomment=id
     this.modal=!this.modal
   }
@@ -88,7 +92,7 @@ this.initializeform();
 
 deletecomment(){
   console.log(this.iddeletioncomment);
-  
+
   this.deleting=true
 
   this.snapshares.deletecomment(this.iddeletioncomment).pipe(takeUntil(this.destroy)).subscribe(res=>{
@@ -97,7 +101,7 @@ deletecomment(){
     this.snapid.next( this.active.snapshot.params.id);
 
     setTimeout(() => {
-      
+
       this.deleting=false
       this.modal=false
       this.modalmessage='deleting...'
@@ -107,7 +111,7 @@ deletecomment(){
       this.modalmessage='deletion error'
 
     setTimeout(() => {
-      
+
       this.deleting=false
       this.modal=false
       this.modalmessage='deleting...'

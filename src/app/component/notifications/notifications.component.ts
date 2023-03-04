@@ -17,7 +17,7 @@ export class NotificationsComponent implements OnInit {
 
   // console.log(this.notifications.notifications$.value);
   this.notifications.notifications$.subscribe(val=>console.log(val));
-console.log(this.notifications.disablenotificationbutton);
+// console.log(this.notifications.disablenotificationbutton);
 
 
 
@@ -28,7 +28,7 @@ console.log(this.notifications.disablenotificationbutton);
   navigatetopost(id){
 
     const url=`/snapshare/${id}`
-    console.log(url);
+    // console.log(url);
 
     this.ui.togglenotifications()
     this.router.navigateByUrl(url)

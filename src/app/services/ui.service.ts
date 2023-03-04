@@ -1,3 +1,4 @@
+import { BehaviorSubject } from 'rxjs';
 import { User } from './../interface/post.interface';
 import { Injectable } from '@angular/core';
 
@@ -11,7 +12,7 @@ export class UiService {
   fetchnextdisabled=false
   openimageuploader = 0;
   uploading=false
-postowner:User
+postowner=new BehaviorSubject<User>(undefined)
   categoryposts=false
   logedinuser: User = undefined;
 
@@ -29,7 +30,7 @@ postowner:User
 
       const uservalue:any= JSON.parse(atob(token))
       this.logedinuser=uservalue
-      console.log('current user: ',uservalue);
+      // console.log('current user: ',uservalue);
     }
 
   }

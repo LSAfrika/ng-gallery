@@ -98,7 +98,7 @@ this.ui.fetchnextdisabled=false
     this.snapshares.next([])
     this.http.get(this.fixedcategories ).
     pipe(map((posts: any) => {
-      if(posts.posts.length<1) this.ui.fetchnextdisabled=true
+      if(posts.posts.length<5) this.ui.fetchnextdisabled=true
       this.snapshares.next([...this.snapshares.value,...posts.posts]); }),
 
     ).subscribe(res=>{},err=>{console.log(err.message);
@@ -117,7 +117,7 @@ this.ui.fetchnextdisabled=false
 
     return this.http.get(this.fixedcategories).
      pipe(map((posts: any) => {
-      if(posts.posts.length<1) this.ui.fetchnextdisabled=true
+      if(posts.posts.length<5) this.ui.fetchnextdisabled=true
 
       this.snapshares.next([...this.snapshares.value,...posts.posts]); })).subscribe();
    }
@@ -127,7 +127,7 @@ this.ui.fetchnextdisabled=false
     // this.allposts = [];
     this.ui.fetchnextdisabled=false
     this.category=''
-    // this.snapshares.next(this.allposts);
+     this.snapshares.next([]);
     this.fetchnextsnapshares.next(0)
 this.fetchsubscriptionlogic()
     // this.getpost();

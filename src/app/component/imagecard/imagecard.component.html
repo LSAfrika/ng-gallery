@@ -29,7 +29,7 @@
   <!-- <div class="caption">hello world
 
   </div> -->
-  <a [routerLink]="['/snapshare',post._id]" routerLinkActive="router-link-active"  ></a>
+  <a [routerLink]="['/snapshare',post._id]" (click)="setuser(post.user)" routerLinkActive="router-link-active"  ></a>
 
 
 </div>
