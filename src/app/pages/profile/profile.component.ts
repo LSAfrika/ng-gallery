@@ -41,7 +41,7 @@ export class ProfileComponent implements OnInit {
 
 this.fetchuserfollowers()
 this.fetchuserfollowing()
-
+this.checkfollowinguser()
   }
 
 
@@ -51,6 +51,12 @@ this.fetchuserfollowing()
   }
   ngOnDestroy(){
     this.destroy$.next(true)
+  }
+
+  checkfollowinguser(){
+    this.snapshare.checkiffollowinguser(this.userid).pipe(takeUntil(this.destroy$),
+    map((res:any)=>{this.following=res.following;console.log('initial check',res);this.initialcheckfollowing()})).subscribe()
+
   }
 
   fetchuserfollowers(){
@@ -84,12 +90,23 @@ this.fetchuserfollowing()
   }
 
 
-  followset(){
+  followuser(){
 
-    console.log('follow set is clicked');
+    // console.log('follow set is clicked');
 
-    if(this.follow=='follow'){  this.follow='following';this.following=true;return}
-    if(this.follow=='following')  {this.follow='follow';this.following=false}
+  
+  this.snapshare.follow(this. userid).pipe(takeUntil(this.destroy$),
+  map(res=>{this.following=res.following;this.ui.postowner.next(res.user);this.initialcheckfollowing()})).subscribe()
+
+   
   }
+
+initialcheckfollowing(){
+  // console.log('check if following',this.following);
+  if(this.following==true) this.follow='following'
+  if(this.following==false)  this.follow='follow';
+}
+
+
 
 }

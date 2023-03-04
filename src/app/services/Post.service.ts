@@ -26,6 +26,9 @@ POST_URL = 'http://localhost:4555/photos/post';
  fetchprofile='http://localhost:4555/user/singleuser/'
  fetchfollowersurl='http://localhost:4555/user/followers/'
  fetchfollowingurl='http://localhost:4555/user/following/'
+ followurl='http://localhost:4555/user/follow/'
+
+ checkfollowingurl='http://localhost:4555/user/checkfollowing/'
  postid=''
  userpostpagination=0
  category=''
@@ -194,5 +197,14 @@ this.fetchsubscriptionlogic()
     this.paginationfollowing++
     let followersurl=this.fetchfollowingurl+id+'?pagination='+this.paginationfollowing
     return this.http.get(followersurl)
+   }
+
+
+   follow(id):Observable<any>{
+    return this.http.post<any>(this.followurl,{usertofollow:id})
+   }
+
+   checkiffollowinguser(id): Observable<boolean>{
+    return this.http.get<boolean>(this.checkfollowingurl+id)
    }
 }
