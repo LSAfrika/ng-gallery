@@ -8,9 +8,10 @@ import {
   HttpInterceptor,
   HttpErrorResponse
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { EMPTY, Observable } from 'rxjs';
 import { PostService } from './Post.service';
 import jwt_decode from 'jwt-decode';
+import { RouteConfigLoadEnd } from '@angular/router';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -51,7 +52,26 @@ export class AuthInterceptor implements HttpInterceptor {
     const tokenvalue: any = jwt_decode(token);
     // console.log('in refresh interceptor',req.url)
 
-    if(req.url===this.refreshurl) return next.handle(req)
+    if(req.url===this.refreshurl) return next.handle(req).pipe(catchError(((err:HttpErrorResponse)=>{
+
+      console.log('error area being triggered');
+      
+      let errmessage=err.error.message
+      console.log(errmessage)
+      if(errmessage==='refreshexpired'||errmessage==='tokenmismatch'){
+
+        console.log('area being hit by error');
+        
+        localStorage.clear()
+        this.auth.navigatehome()
+       return EMPTY
+        
+      }else{
+console.log(err);
+
+        return EMPTY
+      }
+    })))
 
     if ( req.url != this.loginurl){
 

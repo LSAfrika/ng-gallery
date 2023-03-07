@@ -6,10 +6,13 @@
   @apply w-full min-h-[200px] flex flex-col justify-center items-center
 }
 .avatar{
-  @apply w-[100px] h-[100px] bg-pink-600 rounded-full shadow-sm overflow-hidden mt-auto
+  @apply w-[100px] h-[100px] bg-white rounded-full shadow-sm overflow-hidden mt-auto
 }
 .name{
-  @apply font-medium text-2xl text-white
+  @apply font-medium text-lg text-teal-500 
+}
+.date{
+  @apply font-semibold text-sm  text-teal-500 mb-4
 }
 .detailsection{
   @apply w-full min-h-[50px] bg-white flex justify-center items-center mt-auto ;
@@ -22,7 +25,15 @@
 }
 
 .view{
-  @apply w-full min-h-[600px] h-auto box-border  rounded-md mt-2 shadow-xl border-2 border-teal-500/20 p-1
+  @apply w-full min-h-[600px] h-auto box-border  rounded-md mt-2 shadow-xl border-2 border-teal-500/20 p-1 ;
+
+  .viewcontainer{
+    @apply w-full  bg-red-400 flex justify-center items-start flex-wrap gap-3;
+    height: inherit;
+  }
+  button{
+    @apply w-fit px-4 py-1 bg-teal-500 text-white font-semibold text-sm mx-auto rounded-full
+  }
 }
 
 .viewcontacts{

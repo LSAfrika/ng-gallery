@@ -14,4 +14,6 @@ export interface User{
   username: string;
   imgurl: string;
   createdAt: string
+  following:number
+  followers:number 
 }

@@ -1,5 +1,5 @@
 import { BehaviorSubject } from 'rxjs';
-import { User } from './../interface/post.interface';
+import { Post, User } from './../interface/post.interface';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -13,6 +13,7 @@ export class UiService {
   openimageuploader = 0;
   uploading=false
 postowner=new BehaviorSubject<User>(undefined)
+postcounter=new BehaviorSubject(0)
   categoryposts=false
   logedinuser: User = undefined;
 

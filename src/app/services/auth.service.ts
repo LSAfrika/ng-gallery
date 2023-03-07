@@ -14,6 +14,7 @@ import {
 } from 'firebase/auth';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import {BehaviorSubject, from,  Observable, Subject } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -46,7 +47,7 @@ loginurl = 'http://localhost:4555/user/authprovidersignin';
    loginresult: Observable<any>;
    guardactivation: Subject<boolean> = new Subject <boolean>();
 
-  constructor(private http:HttpClient) {
+  constructor(private http:HttpClient,private router:Router) {
     console.log('auth service initialized');
 
   }
@@ -96,6 +97,10 @@ map((result: any) => {console.log(result);
     const refreshtoken=localStorage.getItem('refresh')
     return this.http.post(this.refreshurl,{},{ headers: new HttpHeaders().set('Authorization', `Bearer ${token}`).set('refreshtoken',`bearer ${refreshtoken}`) })
 
+  }
+
+  navigatehome(){
+    this.router.navigate(['login'])
   }
 
 }

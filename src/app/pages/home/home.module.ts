@@ -21,7 +21,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
     ImagescontainerComponent,
 
-    ImagecardComponent,
+    // ImagecardComponent,
     HighlightsComponent,
     FabComponent,
     ImageuploadComponent,

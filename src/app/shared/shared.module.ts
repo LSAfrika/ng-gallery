@@ -5,18 +5,24 @@ import { SidenavComponent } from '../component/sidenav/sidenav.component';
 import { NavComponent } from '../component/nav/nav.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { CategoryComponent } from '../component/category/category.component';
+import { ImagecardComponent } from '../component/imagecard/imagecard.component';
+import { RouterModule } from '@angular/router';
+
+
 
 
 
 @NgModule({
   declarations: [
-    SidenavComponent,NavComponent, SpinnerComponent,NotificationsComponent, CategoryComponent
+    SidenavComponent,NavComponent, SpinnerComponent,NotificationsComponent, CategoryComponent,ImagecardComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
+    // AppRoutingModule.forChild({})
   ],
   exports: [
-    SidenavComponent,NavComponent,SpinnerComponent,NotificationsComponent,CategoryComponent
+    SidenavComponent,NavComponent,SpinnerComponent,NotificationsComponent,CategoryComponent,ImagecardComponent
 
   ]
 

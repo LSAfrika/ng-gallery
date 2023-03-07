@@ -2,7 +2,7 @@ import { UiService } from 'src/app/services/ui.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Post } from '../interface/post.interface';
+import { Post, User } from '../interface/post.interface';
 import { catchError, delay, map, switchMap, tap } from 'rxjs/operators';
 
 @Injectable({
@@ -16,17 +16,23 @@ POST_URL = 'http://localhost:4555/photos/post';
  fetchsingleposturl = 'http://localhost:4555/photos/singlepost/';
  categoriesurl = 'http://localhost:4555/photos/allposts/category?category=';
  usersnapsharesurl = 'http://localhost:4555/photos/allposts/user?user=';
+ profileid=''
  commenturl='http://localhost:4555/comments/post/'
  likeurl='http://localhost:4555/likes/post/'
  commentdeleteurl='http://localhost:4555/comments/delete/'
+ fetchuserposturl='http://localhost:4555/photos/allposts/user/?user='
+ fetchprofile='http://localhost:4555/user/singleuser/'
  postid=''
-
+ userpostpagination=0
  category=''
+ usersnapsharefetch=''
 //  snapshareview:Observable<Post[]>
  fixedcategories = '';
 paination=0
  fetchnextsnapshares=new BehaviorSubject<number>(0)
  snapshares: BehaviorSubject<Post[]> = new  BehaviorSubject<Post[]>([]);
+postownersnapshares=new BehaviorSubject<Post[]>(undefined)
+
 // allposts: Post[] = [];
 initialload=false
 
@@ -79,6 +85,11 @@ initialload=false
    return this.http.get(initialcategoriesfetch)
 
    }
+
+
+//    getuserpost(id): Observable<Post>{
+// return
+//    }
 
    getsinglepost(id):Observable<Post>{
     return  this.http.get<Post>(this.fetchsingleposturl+id)
@@ -154,7 +165,18 @@ this.fetchsubscriptionlogic()
    return this.http.delete(this.commentdeleteurl+id)
    }
 
-   usersnapshares():Observable<any>{
-    return
+   usersnapshares(id):Observable<Post>{
+
+    this.profileid=id
+    this.usersnapsharefetch=this.fetchuserposturl+this.profileid+'&pagination='+this.userpostpagination
+    return this.http.get<Post>(this.usersnapsharefetch)
+   }
+
+ 
+
+   user(id){
+    let url=this.fetchprofile+id
+
+    return this.http.get(url)
    }
 }
