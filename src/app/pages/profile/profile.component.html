@@ -7,7 +7,7 @@
     <img [src]="profile.imgurl" alt="" srcset="">
   </div>
   <div class="name">{{profile.username}}</div>
-  <div class="date">member since {{profile.createdAt| date:'mediumDate'}}</div>
+  <div class="date">since {{profile.createdAt| date:'mediumDate'}}</div>
   <div class="detailsection">
     <div  (click)="ui.profileviewselector(1)" class="btn" [ngClass]="{bgactive: ui.profileview==1}">
       <div *ngIf="ui.postcounter |async as postcounter">{{postcounter}}</div>
@@ -33,7 +33,7 @@
 <app-imagecard *ngFor="let snap of snaps" [post]="snap" ></app-imagecard>
 
 <div style="width:100%;display: block; text-align: center; margin-top: 16px; margin-bottom: 16px;">
-  <button (click)="fetchnextset()">more snapshares</button>
+  <button *ngIf="disablebutton===false" (click)="fetchnextset()">more snapshares</button>
 </div>
 
  </div>

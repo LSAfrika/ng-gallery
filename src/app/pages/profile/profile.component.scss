@@ -25,10 +25,10 @@
 }
 
 .view{
-  @apply w-full min-h-[600px] h-auto box-border  rounded-md mt-2 shadow-xl border-2 border-teal-500/20 p-1 ;
+  @apply w-full min-h-[600px] h-auto box-border  rounded-md mt-2 shadow-xl  p-1 ;
 
   .viewcontainer{
-    @apply w-full  bg-red-400 flex justify-center items-start flex-wrap gap-3;
+    @apply w-full   flex justify-center items-start flex-wrap gap-3;
     height: inherit;
   }
   button{

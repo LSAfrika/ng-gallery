@@ -14,12 +14,13 @@ export class ProfileComponent implements OnInit {
 
   userid=''
   destroy$=new Subject<boolean>()
+  disablebutton=false
   constructor(private activeroute:ActivatedRoute,public ui:UiService,private snapshare:PostService) {
 
     this. userid=this.activeroute.snapshot.params.id
     console.log(this.userid);
 
-    // if(this.ui.postowner.value==undefined) {
+     if(this.snapshare.postownersnapshares.value==undefined) {
       this.snapshare.user(this.userid).
       pipe(
       map((response:any)=>{
@@ -32,7 +33,7 @@ export class ProfileComponent implements OnInit {
       map((res:any)=>{console.log(res.posts),
         this.snapshare.postownersnapshares.next(res.posts)}),
       takeUntil(this.destroy$)).subscribe()
-    
+      }
 
   }
 
@@ -43,13 +44,16 @@ export class ProfileComponent implements OnInit {
   fetchnextset(){
     this.snapshare.userpostpagination++
     this.snapshare.usersnapshares(this.userid).pipe(
-      map((res:any)=>this.snapshare.postownersnapshares.next([...this.snapshare.postownersnapshares.value,...res.posts])),
+      map((res:any)=>{
+      if(res.posts<5) this.disablebutton=true
+      
+      this.snapshare.postownersnapshares.next([...this.snapshare.postownersnapshares.value,...res.posts])}),
       takeUntil(this.destroy$)
     ).subscribe()
   }
   ngOnDestroy(){
 
-    this.snapshare.pagination=0
+    // this.snapshare.pagination=0
     this.destroy$.next(true)
   }
 
