@@ -1,1 +1,30 @@
 <app-nav></app-nav>
+
+<div class="container">
+<div class="bio">
+
+  <div class="avatar"></div>
+  <div class="name">hello world</div>
+  <div class="detailsection">
+    <div  (click)="ui.profileviewselector(1)" class="btn" [ngClass]="{bgactive: ui.profileview==1}">
+      <div>+100</div>
+      <div>snapshares</div>
+    </div>
+<div (click)="ui.profileviewselector(2)"  class="btn" [ngClass]="{bgactive: ui.profileview==2}">
+
+  <div>+500</div>
+  <div>followers</div>
+</div>
+<div (click)="ui.profileviewselector(3)" class="btn" [ngClass]="{bgactive: ui.profileview==3}">
+  <div style="margin-top:auto;">+230</div>
+  <div style="margin-bottom: auto;">following</div>
+</div>
+
+  </div>
+
+  <div *ngIf="ui.profileview==1" class="view">snapshares</div>
+  <div *ngIf="ui.profileview==2" class="view viewcontacts">followers </div>
+  <div *ngIf="ui.profileview==3"  class="view viewcontacts">following</div>
+</div>
+
+</div>

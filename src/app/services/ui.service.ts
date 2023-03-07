@@ -16,6 +16,7 @@ postowner=new BehaviorSubject<User>(undefined)
   categoryposts=false
   logedinuser: User = undefined;
 
+  profileview=1
 
   constructor() {
 
@@ -34,6 +35,12 @@ postowner=new BehaviorSubject<User>(undefined)
     }
 
   }
+
+profileviewselector(view){
+  this.profileview=view
+}
+
+
   togglenotifications() {
     console.log('before', this.opennotificationspanel);
     if (this.opennotificationspanel === 1) { return this.opennotificationspanel = 2 }

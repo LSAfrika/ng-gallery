@@ -15,6 +15,7 @@ POST_URL = 'http://localhost:4555/photos/post';
  fetchposturl = 'http://localhost:4555/photos/allposts?pagination=';
  fetchsingleposturl = 'http://localhost:4555/photos/singlepost/';
  categoriesurl = 'http://localhost:4555/photos/allposts/category?category=';
+ usersnapsharesurl = 'http://localhost:4555/photos/allposts/user?user=';
  commenturl='http://localhost:4555/comments/post/'
  likeurl='http://localhost:4555/likes/post/'
  commentdeleteurl='http://localhost:4555/comments/delete/'
@@ -151,5 +152,9 @@ this.fetchsubscriptionlogic()
    deletecomment(id){
 
    return this.http.delete(this.commentdeleteurl+id)
+   }
+
+   usersnapshares():Observable<any>{
+    return
    }
 }

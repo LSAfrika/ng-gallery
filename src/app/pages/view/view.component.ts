@@ -44,7 +44,7 @@ this.snapid.next( this.active.snapshot.params.id);
       this.checkifliked(result),
       this.imagelength=result.imgurl.length,
       this.currentpost=result
-      // console.log('current post:',this.currentpost)
+     console.log('current post:',this.currentpost)
     }
       ));
 
@@ -59,7 +59,7 @@ this.initializeform();
 
   ngOnInit(): void {
 
-console.log('current user: ',this.ui.postowner.value);
+// console.log('current user: ',this.ui.postowner.value);
 
   }
 

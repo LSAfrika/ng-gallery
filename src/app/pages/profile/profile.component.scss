@@ -1,0 +1,30 @@
+.container{
+  @apply w-full min-h-screen box-border px-2 flex flex-col justify-start items-center bg-white pt-[100px]
+}
+
+.bio{
+  @apply w-full min-h-[200px] flex flex-col justify-center items-center
+}
+.avatar{
+  @apply w-[100px] h-[100px] bg-pink-600 rounded-full shadow-sm overflow-hidden mt-auto
+}
+.name{
+  @apply font-medium text-2xl text-white
+}
+.detailsection{
+  @apply w-full min-h-[50px] bg-white flex justify-center items-center mt-auto ;
+  .btn{
+    @apply w-[33%] cursor-pointer  text-center bg-white text-teal-500 font-medium text-sm min-h-[50px] gap-0 flex flex-col justify-center items-center h-fit p-1 box-border
+  }
+.bgactive{
+  @apply bg-teal-500 text-white rounded-sm
+}
+}
+
+.view{
+  @apply w-full min-h-[600px] h-auto box-border  rounded-md mt-2 shadow-xl border-2 border-teal-500/20 p-1
+}
+
+.viewcontacts{
+  @apply flex flex-col justify-start items-center
+}

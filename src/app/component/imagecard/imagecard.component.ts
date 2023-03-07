@@ -32,7 +32,12 @@ export class ImagecardComponent implements OnInit {
   }
 
   setuser(user){
-    this.ui.postowner=user
+    this.ui.postowner.next(user)
+
+    console.log('current user',user);
+
+
+
 
   }
 
