@@ -13,6 +13,7 @@ import { Subject } from 'rxjs';
 export class ProfileComponent implements OnInit {
 
   userid=''
+  follow='follow'
   destroy$=new Subject<boolean>()
   disablebutton=false
   constructor(private activeroute:ActivatedRoute,public ui:UiService,private snapshare:PostService) {
@@ -39,7 +40,9 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  ngOnDestroy(){
+    this.destroy$.next(true)
+  }
 
   fetchnextset(){
     this.snapshare.userpostpagination++
@@ -51,10 +54,11 @@ export class ProfileComponent implements OnInit {
       takeUntil(this.destroy$)
     ).subscribe()
   }
-  ngOnDestroy(){
 
-    // this.snapshare.pagination=0
-    this.destroy$.next(true)
+
+  followset(){
+    if(this.follow=='follow') return this.follow='following'
+    if(this.follow=='following') return this.follow='follow'
   }
 
 }
