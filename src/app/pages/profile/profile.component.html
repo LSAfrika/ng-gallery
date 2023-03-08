@@ -58,7 +58,7 @@
   </div>
   <div *ngIf="ui.profileview==3"  class="view viewcontacts">following
 
-    <ng-container *ngIf="snapshare.userfolloweing|async as liker" >
+    <ng-container *ngIf="snapshare.userfollowing|async as liker" >
       <div style="margin-top: 10px;" *ngFor="let like of liker; let i=index">{{i+1}}-{{like}}</div>
 
           </ng-container>

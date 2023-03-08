@@ -67,8 +67,8 @@ this.fetchuserfollowing()
     map((res:any)=>{
       // console.log(res.splicedfollowers);
 
-      if(res.splicedfollowers.length<10)this.ui.disablefetchfollowing=true
-      this.snapshare.userfollowing.next([...this.snapshare.userfollowing.value,...res.splicedfollowers])})).subscribe()
+      if(res.splicedfollowing.length<10)this.ui.disablefetchfollowing=true
+      this.snapshare.userfollowing.next([...this.snapshare.userfollowing.value,...res.splicedfollowing])})).subscribe()
   }
 
   fetchnextset(){
