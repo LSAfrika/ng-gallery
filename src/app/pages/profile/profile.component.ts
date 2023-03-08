@@ -25,8 +25,10 @@ export class ProfileComponent implements OnInit {
       this.snapshare.user(this.userid).
       pipe(
       map((response:any)=>{
+        console.log('profile:\n',response.user);
+
         this.ui.postowner.next(response.user);
-        this.ui.postcounter.next(response.totaluserposts);
+        this.ui.postcounter.next(response.postcount);
         return this.userid
       }),
       switchMap(id=> {console.log(id);
@@ -36,7 +38,13 @@ export class ProfileComponent implements OnInit {
       takeUntil(this.destroy$)).subscribe()
       }
 
+this.fetchuserfollowers()
+this.fetchuserfollowing()
+
   }
+
+
+
 
   ngOnInit(): void {
   }
@@ -44,12 +52,31 @@ export class ProfileComponent implements OnInit {
     this.destroy$.next(true)
   }
 
+  fetchuserfollowers(){
+    this.snapshare.fetchfollowers(this.userid).pipe(takeUntil(this.destroy$),
+    map((res:any)=>{
+      // console.log(res.splicedfollowers);
+
+      if(res.splicedfollowers.length<10)this.ui.disablefetchfollowers=true
+
+      this.snapshare.userfollowers.next([...this.snapshare.userfollowers.value,...res.splicedfollowers])})).subscribe()
+  }
+
+  fetchuserfollowing(){
+    this.snapshare.fetchfollowing(this.userid).pipe(takeUntil(this.destroy$),
+    map((res:any)=>{
+      // console.log(res.splicedfollowers);
+
+      if(res.splicedfollowers.length<10)this.ui.disablefetchfollowing=true
+      this.snapshare.userfollowing.next([...this.snapshare.userfollowing.value,...res.splicedfollowers])})).subscribe()
+  }
+
   fetchnextset(){
     this.snapshare.userpostpagination++
     this.snapshare.usersnapshares(this.userid).pipe(
       map((res:any)=>{
       if(res.posts<5) this.disablebutton=true
-      
+
       this.snapshare.postownersnapshares.next([...this.snapshare.postownersnapshares.value,...res.posts])}),
       takeUntil(this.destroy$)
     ).subscribe()

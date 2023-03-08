@@ -96,7 +96,7 @@ map((result: any) => {console.log(result);
     const token=localStorage.getItem('auth')
     const refreshtoken=localStorage.getItem('refresh')
 
-    console.log('token to refresh',token)
+    // console.log('token to refresh',token)
     return this.http.post(this.refreshurl,{},{ headers: new HttpHeaders().set('Authorization', `Bearer ${token}`).set('refreshtoken',`bearer ${refreshtoken}`) })
 
   }

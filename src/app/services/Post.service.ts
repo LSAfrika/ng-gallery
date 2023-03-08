@@ -11,6 +11,8 @@ import { catchError, delay, map, switchMap, tap } from 'rxjs/operators';
 export class PostService {
 
   pagination = 0;
+  paginationfollowers=-1
+  paginationfollowing=-1
 POST_URL = 'http://localhost:4555/photos/post';
  fetchposturl = 'http://localhost:4555/photos/allposts?pagination=';
  fetchsingleposturl = 'http://localhost:4555/photos/singlepost/';
@@ -22,6 +24,8 @@ POST_URL = 'http://localhost:4555/photos/post';
  commentdeleteurl='http://localhost:4555/comments/delete/'
  fetchuserposturl='http://localhost:4555/photos/allposts/user/?user='
  fetchprofile='http://localhost:4555/user/singleuser/'
+ fetchfollowersurl='http://localhost:4555/user/followers/'
+ fetchfollowingurl='http://localhost:4555/user/following/'
  postid=''
  userpostpagination=0
  category=''
@@ -30,6 +34,8 @@ POST_URL = 'http://localhost:4555/photos/post';
  fixedcategories = '';
 paination=0
  fetchnextsnapshares=new BehaviorSubject<number>(0)
+ userfollowers=new BehaviorSubject([])
+ userfollowing=new BehaviorSubject([])
  snapshares: BehaviorSubject<Post[]> = new  BehaviorSubject<Post[]>([]);
 postownersnapshares=new BehaviorSubject<Post[]>(undefined)
 
@@ -86,10 +92,6 @@ initialload=false
 
    }
 
-
-//    getuserpost(id): Observable<Post>{
-// return
-//    }
 
    getsinglepost(id):Observable<Post>{
     return  this.http.get<Post>(this.fetchsingleposturl+id)
@@ -172,11 +174,25 @@ this.fetchsubscriptionlogic()
     return this.http.get<Post>(this.usersnapsharefetch)
    }
 
- 
+
 
    user(id){
     let url=this.fetchprofile+id
 
     return this.http.get(url)
+   }
+
+
+   fetchfollowers(id){
+    this.paginationfollowers++
+    let followersurl=this.fetchfollowersurl+id+'?pagination='+this.paginationfollowers
+    return this.http.get(followersurl)
+   }
+
+
+   fetchfollowing(id){
+    this.paginationfollowing++
+    let followersurl=this.fetchfollowingurl+id+'?pagination='+this.paginationfollowing
+    return this.http.get(followersurl)
    }
 }

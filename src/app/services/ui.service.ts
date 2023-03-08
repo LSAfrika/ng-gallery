@@ -9,6 +9,8 @@ export class UiService {
 
 
   opennotificationspanel = 0;
+  disablefetchfollowers= false
+  disablefetchfollowing= false
   fetchnextdisabled=false
   openimageuploader = 0;
   uploading=false

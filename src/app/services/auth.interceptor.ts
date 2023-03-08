@@ -48,26 +48,26 @@ export class AuthInterceptor implements HttpInterceptor {
   refreshtokeninterceptor(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<any>>{
     const token: any = localStorage.getItem('auth');
     //  const refresh=localStorage.getItem('refresh')
-    console.log('auth',token);
-    
+    // console.log('auth',token);
+
 
     const tokenvalue: any = jwt_decode(token);
     // console.log('in refresh interceptor',req.url)
 
     if(req.url===this.refreshurl) return next.handle(req).pipe(catchError(((err:HttpErrorResponse)=>{
 
-      console.log('error area being triggered');
-      
+      // console.log('error area being triggered');
+
       let errmessage=err.error.message
-      console.log(errmessage)
+      // console.log(errmessage)
       if(errmessage==='refreshexpired'||errmessage==='tokenmismatch'){
 
-        console.log('area being hit by error');
-        
+        // console.log('area being hit by error');
+
         localStorage.clear()
         this.auth.navigatehome()
        return EMPTY
-        
+
       }else{
 console.log(err);
 
@@ -92,8 +92,8 @@ console.log(err);
 
       return  this.auth.refreshtoken().pipe(switchMap(
       (tokens: any) => {
-        
-        console.log(tokens);
+
+        // console.log(tokens);
         localStorage.setItem('auth', tokens.token);
 
         const reqclone = req.clone({
