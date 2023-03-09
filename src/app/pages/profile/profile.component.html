@@ -24,11 +24,11 @@
     </div>
 <div (click)="ui.profileviewselector(2)"  class="btn" [ngClass]="{bgactive: ui.profileview==2}">
 
-  <div>{{profile.followers.length}}</div>
+  <div>{{profile.followerscounter}}</div>
   <div>followers</div>
 </div>
 <div (click)="ui.profileviewselector(3)" class="btn" [ngClass]="{bgactive: ui.profileview==3}">
-  <div style="margin-top:auto;">{{profile.following.length}}</div>
+  <div style="margin-top:auto;">{{profile.followingcounter}}</div>
   <div style="margin-bottom: auto;">following</div>
 </div>
 
