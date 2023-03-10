@@ -13,6 +13,7 @@ import { Subject } from 'rxjs';
 export class ProfileComponent implements OnInit {
 
   userid=''
+  following=false
   follow='follow'
   destroy$=new Subject<boolean>()
   disablebutton=false
@@ -84,8 +85,11 @@ this.fetchuserfollowing()
 
 
   followset(){
-    if(this.follow=='follow') return this.follow='following'
-    if(this.follow=='following') return this.follow='follow'
+
+    console.log('follow set is clicked');
+
+    if(this.follow=='follow'){  this.follow='following';this.following=true;return}
+    if(this.follow=='following')  {this.follow='follow';this.following=false}
   }
 
 }
