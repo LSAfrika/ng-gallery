@@ -22,6 +22,10 @@ export class ProfileComponent implements OnInit {
     this. userid=this.activeroute.snapshot.params.id
     console.log(this.userid);
 
+    console.log('profile user',this.ui.postowner.value);
+
+// if(this.ui.postowner.value!==undefined) return
+
      if(this.snapshare.postownersnapshares.value==undefined) {
       this.snapshare.user(this.userid).
       pipe(
@@ -29,6 +33,8 @@ export class ProfileComponent implements OnInit {
         console.log('profile:\n',response.user);
 
         this.ui.postowner.next(response.user);
+        console.log(this.ui.postowner.value);
+
         this.ui.postcounter.next(response.postcount);
         return this.userid
       }),
@@ -37,6 +43,7 @@ export class ProfileComponent implements OnInit {
       map((res:any)=>{console.log(res.posts),
         this.snapshare.postownersnapshares.next(res.posts)}),
       takeUntil(this.destroy$)).subscribe()
+      console.log('profile user after fetch',this.ui.postowner.value);
       }
 
 this.fetchuserfollowers()
@@ -113,7 +120,7 @@ textuser(){
 
     this.ui.directmessagepanel.next(3)
 
-    this.router.navigate(['messages'])
+    this.router.navigate(['messages'],{ queryParams: { user: `${this.ui.postowner.value._id}` } })
     console.log(this.ui.directmessagepanel.value)
 
 

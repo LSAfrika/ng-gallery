@@ -63,6 +63,9 @@ if(this.route==='messages') this.title='messages'
 
   home(){
     this.ui.resetnotificationpanel()
+    this.ui.postowner.next(undefined)
+    console.log('reset profile',this.ui.postowner.value);
+
     this.router.navigate([''])
   }
 

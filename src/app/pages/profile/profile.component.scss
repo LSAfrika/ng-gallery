@@ -35,7 +35,7 @@
   }
 }
 .detailsection{
-  @apply w-full min-h-[50px] bg-white flex justify-center items-center mt-auto ;
+  @apply w-full min-h-[50px] bg-white flex justify-center items-center mt-1 ;
   .btn{
     @apply w-[33%] cursor-pointer  text-center bg-white text-teal-500 font-medium text-sm min-h-[50px] gap-0 flex flex-col justify-center items-center h-fit p-1 box-border
   }

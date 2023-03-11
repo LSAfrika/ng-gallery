@@ -3,7 +3,7 @@
    <!-- {{post |json}} -->
     <!-- <img [src]="post.imgurl[0]" alt="upload image"  srcset=""> -->
 
-    <div *ngIf="diableprofilelink===false" class="postowner" (mouseenter)="disableanchortag()" (mouseleave)="enableanchortag()" (click)="navigatetoprofile(post.user._id)" >
+    <div *ngIf="diableprofilelink===false" class="postowner" (mouseenter)="disableanchortag()" (mouseleave)="enableanchortag()" (click)="navigatetoprofile(post.user)" >
 
         <img [src]="post.user.imgurl" alt="" srcset="">
 

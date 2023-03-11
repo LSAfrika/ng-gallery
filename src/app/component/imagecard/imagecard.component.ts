@@ -22,7 +22,7 @@ export class ImagecardComponent implements OnInit {
 
     if(this.router.url.split('/')[1]=='profile') this.diableprofilelink=true
     if(this.router.url.split('/')[1]!=='profile') this.diableprofilelink=false
-    
+
 
    }
 
@@ -53,18 +53,21 @@ export class ImagecardComponent implements OnInit {
 
 
   navigatetoprofile(userid){
+
+    console.log('user to view ',userid);
+
     this.ui.postowner.next(userid)
 
     console.log('current user id',userid);
 
-    this.router.navigateByUrl(`profile/${userid}`)
+    this.router.navigate([`profile/${userid._id}`])
 
   }
 
   disableanchortag(){
     this.disableanchor=true
     console.log('tag value',this.disableanchor);
-    
+
   }
   enableanchortag(){
     this.disableanchor=false

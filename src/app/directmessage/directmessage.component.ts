@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { UiService } from '../services/ui.service';
 
@@ -10,15 +11,18 @@ export class DirectmessageComponent implements OnInit {
 
   numberOfLineBreaks=0
 items=[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
-  constructor(public ui:UiService) { }
+  constructor(public ui:UiService,private router: Router) { }
 textareaheight=2
   ngOnInit(): void {
+    console.log(this.ui.postowner.value)
+
   }
 
   closemessage(){
     this.ui.directmessagepanel.next(2)
+    this.router.navigate(['messages'])
 
-    console.log(this.ui.directmessagepanel.value)
+
   }
 
   enterpressed(ev){
@@ -46,5 +50,9 @@ textareaheight=2
 
     // console.log(ev.key);
 
+  }
+
+  backtoprofile(){
+    this.router.navigateByUrl(`profile/${this.ui.postowner.value._id}`)
   }
 }
