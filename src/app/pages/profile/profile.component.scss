@@ -25,7 +25,14 @@
   }
 }
 .date{
-  @apply font-semibold text-sm  text-teal-500 mb-4
+  @apply font-semibold text-sm  text-teal-500
+}
+
+.messagesfollow{
+  @apply w-full min-h-[50px] flex justify-center items-center gap-5 text-teal-600 text-xs font-semibold ;
+  .elements{
+    @apply flex flex-col justify-center items-center
+  }
 }
 .detailsection{
   @apply w-full min-h-[50px] bg-white flex justify-center items-center mt-auto ;

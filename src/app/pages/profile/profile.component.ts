@@ -1,5 +1,5 @@
 import { UiService } from './../../services/ui.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { PostService } from 'src/app/services/Post.service';
 import { map, switchMap, takeUntil } from 'rxjs/operators';
@@ -17,7 +17,7 @@ export class ProfileComponent implements OnInit {
   follow='follow'
   destroy$=new Subject<boolean>()
   disablebutton=false
-  constructor(private activeroute:ActivatedRoute,public ui:UiService,private snapshare:PostService) {
+  constructor(private activeroute:ActivatedRoute,public ui:UiService,private snapshare:PostService,private router:Router) {
 
     this. userid=this.activeroute.snapshot.params.id
     console.log(this.userid);
@@ -94,12 +94,12 @@ this.checkfollowinguser()
 
     // console.log('follow set is clicked');
 
-  
+
   this.snapshare.follow(this. userid).pipe(takeUntil(this.destroy$),
   map(res=>{this.following=res.following;this.ui.postowner.next(res.user);this.initialcheckfollowing();console.log('server following response',res);
   })).subscribe()
 
-   
+
   }
 
 initialcheckfollowing(){
@@ -108,6 +108,16 @@ initialcheckfollowing(){
   if(this.following==false)  this.follow='follow';
 }
 
+
+textuser(){
+
+    this.ui.directmessagepanel.next(3)
+
+    this.router.navigate(['messages'])
+    console.log(this.ui.directmessagepanel.value)
+
+
+}
 
 
 }
