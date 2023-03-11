@@ -33,7 +33,7 @@ if(this.route==='snapshare'){
 }
 
   profile(){
-    this.router.navigate(['profile'])
+    this.router.navigate([`profile/${this.ui.logedinuser._id}`])
   }
 
   viewprofile(){
