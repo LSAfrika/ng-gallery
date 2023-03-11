@@ -21,18 +21,22 @@ export class NavComponent implements OnInit {
   ngOnInit(): void {
 
     this.route=this.router.url.split('/')[1]
-    // console.log(this.router.url.split('/'));
-    // console.log('current route: ',this.route);
+     console.log(this.router.url.split('/'));
+     console.log('current route: ',this.route);
 if(this.route==='') this.title='snapshare'
 if(this.route==='profile') this.title='profile'
-if(this.route===' messages') this.title='messages'
-if(this.route==='snapshare'){
+if(this.route==='messages') this.title='messages'
+// if(this.route==='snapshare'){
 
 
-  }
+//   }
+
+  console.log('current title',this.title);
+
 }
 
   profile(){
+    this.ui.user()
     this.router.navigate([`profile/${this.ui.logedinuser._id}`])
   }
 
@@ -46,6 +50,11 @@ if(this.route==='snapshare'){
 
   }
 
+
+  textuser(){
+    this.ui.directmessagepanel.next(3)
+    this.router.navigate(['messages'])
+  }
   messages(){
     this.router.navigate(['messages'])
     this.ui.resetnotificationpanel()

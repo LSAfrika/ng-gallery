@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'snapshare/:id', loadChildren: () => import('./pages/view/view.module').then(m => m.ViewModule),canActivate:[AuthGuard]  }];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,{ scrollPositionRestoration: 'enabled' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

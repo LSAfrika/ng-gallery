@@ -14,13 +14,13 @@ export class EditComponent implements OnInit {
 
   username='hello'
 
-  filename='choose file'
+  filename='choose profile image'
   uploaddata:FormData
   destroy$=new Subject<boolean>()
   constructor(public ui:UiService ,private snapshareservice:PostService) {
 
     console.log('edit user',this.ui.logedinuser);
-    
+
     this.username=this.ui.logedinuser.username
 
    }
@@ -41,13 +41,15 @@ export class EditComponent implements OnInit {
     this.filename=file.name
     this.uploaddata.append('profilepic',file)
     // console.log(this.uploaddata.get('profile'));
-    
+
   }
 
   updateprofile(){
     this.uploaddata.append('username',this.username)
 this.snapshareservice.updateuser(this.uploaddata).pipe(takeUntil(this.destroy$),
 map((res:any)=>{
+  console.log('update response',res);
+
 localStorage.setItem('auth',res.token),
 localStorage.setItem('refresh',res.token),
 this.ui.user()

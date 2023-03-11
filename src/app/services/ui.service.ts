@@ -1,6 +1,7 @@
 import { BehaviorSubject } from 'rxjs';
 import { Post, User } from './../interface/post.interface';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -17,12 +18,14 @@ export class UiService {
 postowner=new BehaviorSubject<User>(undefined)
 editprofileui=new BehaviorSubject<boolean>(false)
 postcounter=new BehaviorSubject(0)
+
+directmessagepanel=new BehaviorSubject(0)
   categoryposts=false
   logedinuser: User = undefined;
 
   profileview=1
 
-  constructor() {
+  constructor(private router:Router) {
 
     this.user()
 
@@ -30,36 +33,46 @@ postcounter=new BehaviorSubject(0)
 
   user(){
     const token=localStorage.getItem('auth')
-   
-    
+
+
+
+    if(token ==='undefined'){
+
+      console.log('token is undefined');
+
+      localStorage.clear()
+
+      this.router.navigate(['login'])
+      return
+        }
+
+
     if(token !==null ){
-      
+
 const storedtoken=token.split('.')[1]
 
       const uservalue:any= JSON.parse(atob(storedtoken))
       this.logedinuser=uservalue
-  
+
     }
-  if(token ==='undefined'){
-localStorage.clear()
-  }
+
 
   }
 
 
   updateuserprofile(){
     const token=localStorage.getItem('auth')
-   
-    
+
+
     if(token !==null ){
-      
+
 const storedtoken=token.split('.')[1]
 
       const uservalue:any= JSON.parse(atob(storedtoken))
       this.logedinuser=uservalue
   this.postowner.next(uservalue)
   console.log(uservalue);
-  
+
     }
   }
 

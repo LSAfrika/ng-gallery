@@ -1,0 +1,70 @@
+.messagecontainer{
+  @apply w-full h-screen  bg-slate-200 box-border flex flex-col justify-start items-center fixed pt-[60px] z-[60] overflow-scroll gap-3 px-2 top-0;
+  // height: calc(100vh - 75px);
+}
+.messagecontainerclosed{
+// @apply right-[-100%]
+@apply right-[-100%]
+}
+.messagecontaineropened{
+  // @apply right-[-100%]
+  @apply right-[0%]
+  }
+.backpanel{
+  @apply w-full min-h-[56px] bg-white shadow-md px-1 fixed top-0  shadow-black/40 flex justify-center items-center
+}
+
+.singlemessagecontainer{
+  @apply min-w-full flex justify-end  h-fit p-1   items-center
+}
+.friend{
+  @apply  flex justify-start
+}
+.messagebubble{
+  @apply max-w-[300px]  bg-teal-700 text-white rounded-lg shadow-md p-2 text-sm
+}
+
+.friendmessagebubble{
+  @apply bg-slate-700
+}
+
+.lastbubble{
+margin-bottom:80px;
+
+}
+
+.sender{
+  @apply min-h-[70px] min-w-full bg-slate-200 p-1 flex justify-center items-center  fixed bottom-0 gap-1;
+  textarea{
+    @apply min-w-[80%] border-teal-400 border-2 px-1 outline-teal-500 bg-white text-slate-900 rounded-[5px] min-h-[40px];
+    white-space: no-wrap;
+  }
+}
+
+
+
+
+
+.openmessagescomponent{
+  animation: openmessge .3s ease-in forwards ;
+}.closemessagecomponent{
+  animation: closemessge .3s ease-in forwards ;
+}
+
+@keyframes openmessge{
+  0%{
+    right: -100%;
+  }
+  100%{
+    right: 0%;
+  }
+}
+
+@keyframes closemessge{
+  0%{
+    right: 0%;
+  }
+  100%{
+    right: -100%;
+  }
+}
