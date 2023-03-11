@@ -15,6 +15,7 @@ export class UiService {
   openimageuploader = 0;
   uploading=false
 postowner=new BehaviorSubject<User>(undefined)
+editprofileui=new BehaviorSubject<boolean>(true)
 postcounter=new BehaviorSubject(0)
   categoryposts=false
   logedinuser: User = undefined;
@@ -28,15 +29,38 @@ postcounter=new BehaviorSubject(0)
        }
 
   user(){
-    const token=localStorage.getItem('auth').split('.')[1]
-    if(token){
+    const token=localStorage.getItem('auth')
+   
+    
+    if(token !==null ){
+      
+const storedtoken=token.split('.')[1]
 
-
-      const uservalue:any= JSON.parse(atob(token))
+      const uservalue:any= JSON.parse(atob(storedtoken))
       this.logedinuser=uservalue
-      // console.log('current user: ',uservalue);
+  
     }
+  if(token ==='undefined'){
+localStorage.clear()
+  }
 
+  }
+
+
+  updateuserprofile(){
+    const token=localStorage.getItem('auth')
+   
+    
+    if(token !==null ){
+      
+const storedtoken=token.split('.')[1]
+
+      const uservalue:any= JSON.parse(atob(storedtoken))
+      this.logedinuser=uservalue
+  this.postowner.next(uservalue)
+  console.log(uservalue);
+  
+    }
   }
 
 profileviewselector(view){
@@ -75,4 +99,9 @@ profileviewselector(view){
     this.categoryposts=false
   }
 
+
+  uiprofileedit(){
+    if(this.editprofileui.value==false) return this.editprofileui.next(true)
+    if(this.editprofileui.value==true) return this.editprofileui.next(false)
+  }
 }

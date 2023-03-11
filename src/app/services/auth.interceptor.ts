@@ -159,14 +159,14 @@ console.log(err);
 
 
       const token = this.auth.firebasetokenvalue;
-console.log('interceptor token\n',token);
+// console.log('interceptor token\n',token);
 
       this.authrequest = request.clone({
         setHeaders: {
           Authorization: 'bearer ' + token
         }
       });
-      console.log('auth header',this.authrequest.headers.get('Authorization'));
+      // console.log('auth header',this.authrequest.headers.get('Authorization'));
 
 
       return next.handle(this.authrequest);

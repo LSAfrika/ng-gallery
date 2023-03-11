@@ -27,7 +27,7 @@ POST_URL = 'http://localhost:4555/photos/post';
  fetchfollowersurl='http://localhost:4555/user/followers/'
  fetchfollowingurl='http://localhost:4555/user/following/'
  followurl='http://localhost:4555/user/follow/'
-
+updateprofileurl='http://localhost:4555/user/update'
  checkfollowingurl='http://localhost:4555/user/checkfollowing/'
  postid=''
  userpostpagination=0
@@ -184,7 +184,12 @@ this.fetchsubscriptionlogic()
 
     return this.http.get(url)
    }
+updateuser(form:FormData){
 
+// console.log(form.get('username'),form.get('profilepic'));
+
+   return this.http.patch(this.updateprofileurl,form)
+}
 
    fetchfollowers(id){
     this.paginationfollowers++

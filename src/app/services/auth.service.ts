@@ -67,7 +67,8 @@ return signingoogle .pipe(
 
   return result.user.accessToken ;
 }),
-switchMap((token: string) => {console.log('received token\n',token);
+switchMap((token: string) => {
+  // console.log('received token\n',token);
   return this.signinuser()}),
 map((result: any) => {console.log(result);
                       // this.logedinuser = result;
