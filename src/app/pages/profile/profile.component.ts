@@ -57,7 +57,13 @@ this.checkfollowinguser()
   ngOnInit(): void {
   }
   ngOnDestroy(){
+
+    this.snapshare.userfollowers.next([])
+    this.snapshare.userfollowing.next([])
+    this.snapshare. paginationfollowers=0
+    this.snapshare.paginationfollowing=0
     this.destroy$.next(true)
+
   }
 
   checkfollowinguser(){
