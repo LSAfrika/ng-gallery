@@ -36,7 +36,7 @@ margin-bottom:80px;
 .sender{
   @apply min-h-[70px] min-w-full bg-slate-200 p-1 flex justify-center items-center  fixed bottom-0 gap-1;
   textarea{
-    @apply min-w-[80%] border-teal-400 border-2 px-1 outline-teal-500 bg-white text-slate-900 rounded-[5px] min-h-[40px];
+    @apply min-w-[60%]  max-w-[400px] border-teal-400 border-2 px-1 outline-teal-500 bg-white text-slate-900 rounded-[5px] min-h-[40px] text-[16px] ;
     white-space: no-wrap;
   }
 }
