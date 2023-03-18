@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IOService } from 'src/app/services/io.service';
 // import { ApiService } from '../../services/notifications.service';
 import { UiService } from '../../services/ui.service';
 
@@ -9,9 +10,22 @@ import { UiService } from '../../services/ui.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(public ui:UiService){}
+  constructor(public ui:UiService,private io:IOService){
 
+    console.log('loggedin user ',this.ui.logedinuser);
+    
+  }
+  
   ngOnInit(): void {
+    if(this.ui.logedinuser!==undefined &&  this.io.socketsetup==false ) {
+
+      console.log('socket setup not done');
+      
+      this.io.setuid()
+    
+    this.io.socketsetup=true
+    }
+
   }
 
 }

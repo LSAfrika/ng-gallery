@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { PostService } from 'src/app/services/Post.service';
 import { map, switchMap, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { IOService } from 'src/app/services/io.service';
 
 @Component({
   selector: 'app-profile',
@@ -17,7 +18,14 @@ export class ProfileComponent implements OnInit {
   follow='follow'
   destroy$=new Subject<boolean>()
   disablebutton=false
-  constructor(private activeroute:ActivatedRoute,public ui:UiService,private snapshare:PostService,private router:Router) {
+  constructor(private activeroute:ActivatedRoute,public ui:UiService,private snapshare:PostService,private router:Router,private io:IOService) {
+
+
+    if(this.ui.logedinuser!==undefined &&  this.io.socketsetup==false ) {
+      this.io.setuid()
+    
+    this.io.socketsetup=true
+    }
 
     this. userid=this.activeroute.snapshot.params.id
     console.log(this.userid);
@@ -30,10 +38,10 @@ export class ProfileComponent implements OnInit {
       this.snapshare.user(this.userid).
       pipe(
       map((response:any)=>{
-        console.log('profile:\n',response.user);
+        // console.log('profile:\n',response.user);
 
         this.ui.postowner.next(response.user);
-        console.log(this.ui.postowner.value);
+        // console.log(this.ui.postowner.value);
 
         this.ui.postcounter.next(response.postcount);
         return this.userid

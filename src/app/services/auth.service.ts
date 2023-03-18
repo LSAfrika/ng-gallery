@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { async } from '@angular/core/testing';
 import { initializeApp } from 'firebase/app';
 import { map, switchMap } from 'rxjs/operators';
+import jwtDecode from 'jwt-decode';
 
 import {
   getAuth,
@@ -15,6 +16,7 @@ import {
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import {BehaviorSubject, from,  Observable, Subject } from 'rxjs';
 import { Router } from '@angular/router';
+import { UiService } from './ui.service';
 
 @Injectable({
   providedIn: 'root'
@@ -46,8 +48,7 @@ loginurl = 'http://localhost:4555/user/authprovidersignin';
    googleprovider = new GoogleAuthProvider();
    loginresult: Observable<any>;
    guardactivation: Subject<boolean> = new Subject <boolean>();
-
-  constructor(private http:HttpClient,private router:Router) {
+  constructor(private http:HttpClient,private router:Router,private ui:UiService) {
     console.log('auth service initialized');
 
   }
@@ -67,14 +68,19 @@ return signingoogle .pipe(
 
   return result.user.accessToken ;
 }),
-switchMap((token: string) => {
+switchMap(() => {
   // console.log('received token\n',token);
   return this.signinuser()}),
-map((result: any) => {console.log(result);
+map((result: any) => {console.log('result from server login',result);
                       // this.logedinuser = result;
                       // this.storagetoken = result.token;
                       localStorage.setItem('auth', result.token);
                       localStorage.setItem('refresh', result.refreshtoken);
+
+                      const loginvalue:any = jwtDecode(result.token)
+                      this.ui.logedinuser=loginvalue
+                      console.log('decoded token value', this.ui.logedinuser);
+                      
                       //  this.homerouteactivation = true;
                       // this.guardactivation.next(true);
                       // console.log(this.homerouteactivation);
@@ -104,6 +110,12 @@ map((result: any) => {console.log(result);
 
   navigatehome(){
     this.router.navigate(['login'])
+  }
+
+  setloginuser(){
+    const token=localStorage.getItem('auth')
+    if(token===undefined || token==='undefined') return
+    this.ui.logedinuser=jwtDecode(token)
   }
 
 }

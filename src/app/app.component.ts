@@ -1,8 +1,9 @@
-import { Router } from '@angular/router';
-import { AuthService } from './services/auth.service';
+
 import { Component } from '@angular/core';
-import { io } from "socket.io-client";
+import { AuthService } from './services/auth.service';
+import { IOService } from './services/io.service';
 import { UiService } from './services/ui.service';
+
 
 @Component({
   selector: 'app-root',
@@ -12,11 +13,21 @@ import { UiService } from './services/ui.service';
 export class AppComponent {
   title = 'Lstudiosafrika';
 
-    snapsharebackend='http://localhost:4555'
-  socket=io(this.snapsharebackend)
-  constructor(private router:Router,private ui:UiService){
+ 
+  constructor(private ui:UiService,private io:IOService,private auth:AuthService){
 this.ui.user()
     // this.router.navigate(['/'])
+    console.log('app comp bein called and logged in user is',this.ui.logedinuser);
+    
+    if(this.ui.logedinuser===undefined){
+      this.auth.setloginuser()
+
+    }
+     if(this.ui.logedinuser!==undefined &&  this.io.socketsetup==false ) {
+      this.io.setuid()
+    
+    this.io.socketsetup=true
+    }
 
   }
 

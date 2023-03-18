@@ -1,6 +1,9 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { UiService } from '../services/ui.service';
+import { IOService } from '../services/io.service';
+import { Subject } from 'rxjs';
+import { takeUntil, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-directmessage',
@@ -11,11 +14,22 @@ export class DirectmessageComponent implements OnInit {
 
   numberOfLineBreaks=0
 items=[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
-  constructor(public ui:UiService,private router: Router) { }
 textareaheight=2
-  ngOnInit(): void {
-    console.log(this.ui.postowner.value)
+destroy$=new Subject<boolean>()
+constructor(public ui:UiService,private router: Router,private io:IOService) { 
 
+this.io.getNewMessage().pipe(takeUntil(this.destroy$),tap(res=>console.log(res))).subscribe()
+
+}
+  ngOnInit(): void {
+    console.log('we are messaging',this.ui.postowner.value)
+
+  }
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.destroy$.next(true)
+    this.destroy$.unsubscribe()
   }
 
   closemessage(){
@@ -54,5 +68,9 @@ textareaheight=2
 
   backtoprofile(){
     this.router.navigateByUrl(`profile/${this.ui.postowner.value._id}`)
+  }
+
+  sendmessage(){
+    this.io.sendmessage()
   }
 }
