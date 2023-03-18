@@ -16,6 +16,7 @@ export class UiService {
   openimageuploader = 0;
   uploading=false
 postowner=new BehaviorSubject<User>(undefined)
+chatowner=new BehaviorSubject<User>(undefined)
 editprofileui=new BehaviorSubject<boolean>(false)
 postcounter=new BehaviorSubject(0)
 

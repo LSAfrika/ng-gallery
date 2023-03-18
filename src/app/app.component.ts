@@ -13,21 +13,21 @@ import { UiService } from './services/ui.service';
 export class AppComponent {
   title = 'Lstudiosafrika';
 
- 
+
   constructor(private ui:UiService,private io:IOService,private auth:AuthService){
 this.ui.user()
     // this.router.navigate(['/'])
     console.log('app comp bein called and logged in user is',this.ui.logedinuser);
-    
-    if(this.ui.logedinuser===undefined){
-      this.auth.setloginuser()
 
-    }
-     if(this.ui.logedinuser!==undefined &&  this.io.socketsetup==false ) {
-      this.io.setuid()
-    
-    this.io.socketsetup=true
-    }
+    // if(this.ui.logedinuser===undefined){
+    //   this.auth.setloginuser()
+
+    // }
+    //  if(this.ui.logedinuser!==undefined &&  this.io.socketsetup==false ) {
+    //   this.io.setuid()
+
+    // this.io.socketsetup=true
+    // }
 
   }
 

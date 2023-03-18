@@ -21,11 +21,11 @@ export class ProfileComponent implements OnInit {
   constructor(private activeroute:ActivatedRoute,public ui:UiService,private snapshare:PostService,private router:Router,private io:IOService) {
 
 
-    if(this.ui.logedinuser!==undefined &&  this.io.socketsetup==false ) {
-      this.io.setuid()
-    
-    this.io.socketsetup=true
-    }
+    // if(this.ui.logedinuser!==undefined &&  this.io.socketsetup==false ) {
+    //   this.io.setuid()
+
+    // this.io.socketsetup=true
+    // }
 
     this. userid=this.activeroute.snapshot.params.id
     console.log(this.userid);
@@ -132,9 +132,9 @@ initialcheckfollowing(){
 
 textuser(){
 
-    this.ui.directmessagepanel.next(3)
+    // this.ui.directmessagepanel.next(3)
 
-    this.router.navigate(['messages'],{ queryParams: { user: `${this.ui.postowner.value._id}` } })
+    this.router.navigate(['directmessage'+`/${this.ui.postowner.value._id}`])
     console.log(this.ui.directmessagepanel.value)
 
 

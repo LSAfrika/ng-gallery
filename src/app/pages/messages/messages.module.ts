@@ -4,13 +4,13 @@ import { CommonModule } from '@angular/common';
 
 import { MessagesRoutingModule } from './messages-routing.module';
 import { MessagesComponent } from './messages.component';
-import { DirectmessageComponent } from '../../directmessage/directmessage.component';
+import { DirectmessageComponent } from '../directmessage/directmessage.component';
 
 
 @NgModule({
   declarations: [
     MessagesComponent,
-    DirectmessageComponent
+    // DirectmessageComponent
   ],
   imports: [
     CommonModule,

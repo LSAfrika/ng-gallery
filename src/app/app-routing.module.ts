@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'post', loadChildren: () => import('./pages/post/post.module').then(m => m.PostModule) },
   { path: 'profile/:id', loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfileModule),canActivate:[AuthGuard] },
   { path: 'messages', loadChildren: () => import('./pages/messages/messages.module').then(m => m.MessagesModule) ,canActivate:[AuthGuard]},
+  { path: 'directmessage/:userid', loadChildren: () => import('./pages/directmessage/directmessage.module').then(m => m.DirectmessageModule) ,canActivate:[AuthGuard]},
   { path: 'snapshare/:id', loadChildren: () => import('./pages/view/view.module').then(m => m.ViewModule),canActivate:[AuthGuard]  }];
 
 @NgModule({

@@ -1,21 +1,27 @@
-<div class="messagecontainer "
+<app-nav></app-nav>
+
+<!--
  [ngClass]="{messagecontainerclosed: ui.directmessagepanel.value==0,
   openmessagescomponent:ui.directmessagepanel.value==1,
   closemessagecomponent:ui.directmessagepanel.value==2,
   messagecontaineropened:ui.directmessagepanel.value==3
-}">
-<div class="backpanel">
+}" -->
+
+<div class="messagecontainer "  #chatthread>
+
+<!-- <div class="backpanel">
   <div (click)="backtoprofile()" *ngIf="ui.postowner|async as currentuser">{{currentuser.username}}</div>
   <svg (click)="closemessage()" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="margin-left:auto;fill:rgb(20 184 166);width:25px ;height:25px;"><path d="M21 11H6.414l5.293-5.293-1.414-1.414L2.586 12l7.707 7.707 1.414-1.414L6.414 13H21z"></path></svg>
-</div>
+</div> -->
   <div class="singlemessagecontainer" *ngFor="let item of items;let i=index" [ngClass]="{friend: i%2==0}">
     <div class="messagebubble" [ngClass]="{friendmessagebubble: i%2==0,lastbubble: i+1===items.length}" >
      <span *ngIf="i%2==0">{{i}} Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, iure.</span>
      <span *ngIf="i%2==1"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus officia quam consectetur nostrum. Consectetur, dolores. </span>
     </div>
   </div>
+  {{message}}
 <div class="sender">
-<textarea name="" id=""  [rows]="textareaheight" cols="30" (keyup)="enterpressed($event)"></textarea>
+<span role="textbox" contenteditable  #messendtosend ></span>
   <svg (click)="sendmessage()" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
    style="fill: rgba(20 184 166);transform:rotate(-15deg) ;width: 30px;height: 30px;"><path d="m21.426 11.095-17-8A1 1 0 0 0 3.03 4.242l1.212 4.849L12 12l-7.758 2.909-1.212 4.849a.998.998 0 0 0 1.396 1.147l17-8a1 1 0 0 0 0-1.81z"></path></svg>
 </div>

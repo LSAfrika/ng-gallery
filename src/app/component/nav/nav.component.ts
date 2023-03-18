@@ -26,6 +26,7 @@ export class NavComponent implements OnInit {
 if(this.route==='') this.title='snapshare'
 if(this.route==='profile') this.title='profile'
 if(this.route==='messages') this.title='messages'
+if(this.route==='directmessage') this.title='messages'
 // if(this.route==='snapshare'){
 
 
@@ -47,6 +48,13 @@ if(this.route==='messages') this.title='messages'
 
     // remember to add logic for login user profile navigation
     this.router.navigate(['profile',this.ui.postowner.value._id])
+
+  }
+
+  viewprofilefromdm(){
+    this.ui.resetnotificationpanel()
+    this.router.navigate(['profile',this.ui.chatowner.value._id])
+
 
   }
 

@@ -13,18 +13,18 @@ export class HomeComponent implements OnInit {
   constructor(public ui:UiService,private io:IOService){
 
     console.log('loggedin user ',this.ui.logedinuser);
-    
-  }
-  
-  ngOnInit(): void {
-    if(this.ui.logedinuser!==undefined &&  this.io.socketsetup==false ) {
 
-      console.log('socket setup not done');
-      
-      this.io.setuid()
-    
-    this.io.socketsetup=true
-    }
+  }
+
+  ngOnInit(): void {
+    // if(this.ui.logedinuser!==undefined &&  this.io.socketsetup==false ) {
+
+    //   console.log('socket setup not done');
+
+    //   this.io.setuid()
+
+    // this.io.socketsetup=true
+    // }
 
   }
 
