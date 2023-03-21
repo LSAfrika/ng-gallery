@@ -1,5 +1,9 @@
+import { takeUntil, tap } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { MessagesService } from './../../services/messages.service';
 import { UiService } from 'src/app/services/ui.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-messages',
@@ -8,9 +12,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MessagesComponent implements OnInit {
 
-  constructor(private ui:UiService) { }
+  Destroy$=new Subject<boolean>()
+  constructor(private ui:UiService,public msgservice:MessagesService,private router:Router) {
+
+msgservice.fetchchatlist().pipe(takeUntil(this.Destroy$),
+tap((res:any)=>msgservice.userchatlist$.next(res))).subscribe(console.log)
+
+  }
 
   ngOnInit(): void {
+  }
+
+  ngOnDestroy(){
+
   }
 
   openmessage(){
@@ -18,5 +32,17 @@ export class MessagesComponent implements OnInit {
     console.log(this.ui.directmessagepanel.value)
 
   }
+
+
+
+  textuser(id){
+
+    // this.ui.directmessagepanel.next(3)
+
+    this.router.navigate(['directmessage'+`/${id}`])
+    console.log(this.ui.directmessagepanel.value)
+
+
+}
 
 }

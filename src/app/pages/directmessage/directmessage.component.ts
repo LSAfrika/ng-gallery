@@ -29,8 +29,15 @@ constructor(public ui: UiService, private router: Router, private io: IOService,
   this.userid = this.route.snapshot.params.userid;
   console.log('current user', this.userid);
 
-  if (this.ui.chatowner.value == undefined) { this.postservice.user(this.userid).pipe(takeUntil(this.destroy$),tap((res:any)=>this.ui.chatowner.next(res.user))).subscribe() }
-  if (this.ui.chatowner.value != undefined && this.ui.chatowner.value._id !== this.userid) { this.postservice.user(this.userid).pipe(takeUntil(this.destroy$),tap((res:any)=>this.ui.chatowner.next(res.user))).subscribe() }
+  if (this.ui.chatowner.value === undefined) { this.postservice.user(this.userid)
+    .pipe(
+      takeUntil(this.destroy$),
+      tap((res:any)=>this.ui.chatowner.next(res.user))).
+      subscribe() }
+
+
+      if (this.ui.chatowner.value != undefined && this.ui.chatowner.value._id !== this.userid) { this.postservice.user(this.userid).pipe(takeUntil(this.destroy$),tap((res:any)=>this.ui.chatowner.next(res.user))).subscribe() }
+
 
 // this.io.getNewMessage().pipe(takeUntil(this.destroy$),tap(res=>console.log(res))).subscribe()
   console.log('direct message component ');
