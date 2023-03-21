@@ -12,17 +12,25 @@ export class IOService {
 
   snapsharebackend = 'http://localhost:4555';
   // socket=io(this.snapsharebackend,{query:{uid:''}})
-  socket = io(this.snapsharebackend, {query: {uid: this.ui.logedinuser._id}});
+  socket:any
   public message$: BehaviorSubject<Message> = new BehaviorSubject(undefined);
 socketsetup = false;
 
   // socket=io(this.snapsharebackend)
   constructor(private ui: UiService) {
-     console.log('socket', this.socket);
+
+    if(this.ui.logedinuser !== undefined) 
+    {this.socket= io(this.snapsharebackend, {query: {uid: this.ui.logedinuser._id}});}
+     
+    console.log('socket', this.socket);
 // this.setuid()
 
   }
 
+  setsocketinstanceonlogin(){
+    this.socket= io(this.snapsharebackend, {query: {uid: this.ui.logedinuser._id}})
+
+  }
 
   setuid(){
 

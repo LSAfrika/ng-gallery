@@ -17,6 +17,7 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 import {BehaviorSubject, from,  Observable, Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { UiService } from './ui.service';
+import { IOService } from './io.service';
 
 @Injectable({
   providedIn: 'root'
@@ -48,7 +49,7 @@ loginurl = 'http://localhost:4555/user/authprovidersignin';
    googleprovider = new GoogleAuthProvider();
    loginresult: Observable<any>;
    guardactivation: Subject<boolean> = new Subject <boolean>();
-  constructor(private http:HttpClient,private router:Router,private ui:UiService) {
+  constructor(private http:HttpClient,private router:Router,private ui:UiService,private io:IOService) {
     console.log('auth service initialized');
 
   }
@@ -80,6 +81,7 @@ map((result: any) => {console.log('result from server login',result);
                       const loginvalue:any = jwtDecode(result.token)
                       this.ui.logedinuser=loginvalue
                       console.log('decoded token value', this.ui.logedinuser);
+                      this.io.setsocketinstanceonlogin()
                       
                       //  this.homerouteactivation = true;
                       // this.guardactivation.next(true);

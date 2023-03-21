@@ -83,7 +83,7 @@ this.checkfollowinguser()
   fetchuserfollowers(){
     this.snapshare.fetchfollowers(this.userid).pipe(takeUntil(this.destroy$),
     map((res:any)=>{
-      // console.log(res.splicedfollowers);
+       console.log(res);
 
       if(res.splicedfollowers.length<10)this.ui.disablefetchfollowers=true
 

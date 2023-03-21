@@ -17,8 +17,9 @@ export class AppComponent {
   constructor(private ui:UiService,private io:IOService,private auth:AuthService){
 this.ui.user()
     // this.router.navigate(['/'])
-    console.log('app comp bein called and logged in user is',this.ui.logedinuser);
-
+if(this.ui.logedinuser !=undefined)
+{console.log('app comp bein called and logged in user is',this.ui.logedinuser);
+  }
     // if(this.ui.logedinuser===undefined){
     //   this.auth.setloginuser()
 
