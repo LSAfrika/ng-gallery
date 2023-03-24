@@ -57,7 +57,8 @@ constructor(public ui: UiService, private router: Router,
 
 // this.io.getNewMessage().pipe(takeUntil(this.destroy$),tap(res=>console.log(res))).subscribe()
   this.io.offlinenewmessage().pipe(takeUntil(this.destroy$),tap((res:any)=>{  console.log(res);
-    // this.messageservice.userchat$.next([...this.messageservice.userchat,res])
+    const newmessagesareray:any=[...this.messageservice.userchat$.value,res]
+     this.messageservice.userchat$.next(newmessagesareray)
   })).subscribe()
 
   console.log('direct message component ');
