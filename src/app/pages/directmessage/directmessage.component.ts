@@ -1,10 +1,12 @@
+import { Usermessages } from './../../interface/messages.interface';
+import { MessagesService } from './../../services/messages.service';
 import { PostService } from './../../services/Post.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { UiService } from '../../services/ui.service';
 import { IOService } from '../../services/io.service';
-import { Subject } from 'rxjs';
-import { takeUntil, tap } from 'rxjs/operators';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { takeUntil, tap, switchMap, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-directmessage',
@@ -20,11 +22,16 @@ export class DirectmessageComponent implements OnInit {
   // destroy$=new Subject<boolean>()
   numberOfLineBreaks = 0;
 items = [1, 1, 1, 1, 1];
+
 textareaheight = 2;
 userid = '';
 message=''
 destroy$ = new Subject<boolean>();
-constructor(public ui: UiService, private router: Router, private io: IOService, private route: ActivatedRoute, private postservice: PostService) {
+constructor(public ui: UiService, private router: Router,
+   private io: IOService, private route: ActivatedRoute,
+    private postservice: PostService,
+    public messageservice:MessagesService
+    ) {
 
   this.userid = this.route.snapshot.params.userid;
   console.log('current user', this.userid);
@@ -32,14 +39,27 @@ constructor(public ui: UiService, private router: Router, private io: IOService,
   if (this.ui.chatowner.value === undefined) { this.postservice.user(this.userid)
     .pipe(
       takeUntil(this.destroy$),
-      tap((res:any)=>this.ui.chatowner.next(res.user))).
+      map((res:any)=>{this.ui.chatowner.next(res.user);return res.user._id}),
+      switchMap((userid:any)=>this.messageservice.fetchchat(userid)),
+      tap((chat:any)=>{this.messageservice.userchat$.next(chat.chat.reverse());console.log('fetched user chat',this.messageservice.userchat$.value);
+      })).
       subscribe() }
 
 
-      if (this.ui.chatowner.value != undefined && this.ui.chatowner.value._id !== this.userid) { this.postservice.user(this.userid).pipe(takeUntil(this.destroy$),tap((res:any)=>this.ui.chatowner.next(res.user))).subscribe() }
+      if (this.ui.chatowner.value != undefined && this.ui.chatowner.value._id !== this.userid) { this.postservice.user(this.userid)
+        .pipe(takeUntil(this.destroy$),
+        map((res:any)=>{this.ui.chatowner.next(res.user);return res.user._id}),
+        switchMap((userid:any)=>this.messageservice.fetchchat(userid)),
+        tap((chat:any)=>{this.messageservice.userchat$.next(chat.chat);console.log('fetched user chat',this.messageservice.userchat$.value)})
+
+        ).subscribe() }
 
 
 // this.io.getNewMessage().pipe(takeUntil(this.destroy$),tap(res=>console.log(res))).subscribe()
+  this.io.offlinenewmessage().pipe(takeUntil(this.destroy$),tap((res:any)=>{  console.log(res);
+    // this.messageservice.userchat$.next([...this.messageservice.userchat,res])
+  })).subscribe()
+
   console.log('direct message component ');
 
 
@@ -72,32 +92,7 @@ constructor(public ui: UiService, private router: Router, private io: IOService,
 
   }
 
-  enterpressed(ev){
-    // console.log(ev);
-    const value = ev.key;
-    const length = ev.target.value.split('\r');
-    console.log(length);
 
-    //  console.log(value);
-    if (value == 'Enter'){
-
-
-    if (this.textareaheight >= 3) {return }
-    this.textareaheight++;
-  }
-
-    // console.log(enter);
-
-//   let  enteredTextEncoded = encodeURI(value);
-// let linebreaks = enteredTextEncoded.match(/%0A/g);
-//  if(linebreaks==null) console.log(linebreaks);
-
-// (linebreaks != null) ? this.numberOfLineBreaks = linebreaks.length : this.numberOfLineBreaks = 0;
-
-
-    // console.log(ev.key);
-
-  }
 
   backtoprofile(){
     this.router.navigateByUrl(`profile/${this.ui.postowner.value._id}`);

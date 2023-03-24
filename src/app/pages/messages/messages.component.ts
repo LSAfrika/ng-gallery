@@ -23,6 +23,9 @@ export class MessagesComponent implements OnInit {
 msgservice.fetchchatlist().pipe(takeUntil(this.Destroy$),
 tap((res:any)=>{
 
+  console.log('user chat array',res);
+  if(res===null) return
+
   console.log(res.userchats.reverse());
 
   console.log('timestamp on message',res.userchats[0].timestamp+this.fulldayinmilliseconds);

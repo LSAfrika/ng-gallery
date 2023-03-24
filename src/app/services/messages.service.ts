@@ -12,6 +12,8 @@ export class MessagesService {
 
   userchatlist$=new BehaviorSubject<[]>([])
 
+  userchat$=new BehaviorSubject<[]>([])
+
   ROOTMESSAGEURL='http://localhost:4555/messages/'
   constructor(private http:HttpClient) { }
 

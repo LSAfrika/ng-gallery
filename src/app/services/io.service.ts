@@ -14,7 +14,9 @@ export class IOService {
   // socket=io(this.snapsharebackend,{query:{uid:''}})
   socket:any
   public message$: BehaviorSubject<Message> = new BehaviorSubject(undefined);
+  public offlinemessage$: BehaviorSubject<any> = new BehaviorSubject(undefined);
 socketsetup = false;
+
 
   // socket=io(this.snapsharebackend)
   constructor(private ui: UiService) {
@@ -56,14 +58,22 @@ socketsetup = false;
     this.socket.emit('message-sent', messagepayload);
    }
 
-  //  public getNewMessage () {
-  //   this.socket.on('receive-message', (message) =>{
-  //     this.message$.next(message);
-  //   });
+   public getNewMessage () {
+    this.socket.on('receive-message', (message) =>{
+      this.message$.next(message);
+    });
 
-  //   return this.message$.asObservable();
-  // }
+    return this.message$.asObservable();
+  }
+offlinenewmessage(){
 
+  this.socket.on('receive-offline-message', (message) =>{
+    this.offlinemessage$.next(message);
+  });
+
+  return this.offlinemessage$.asObservable();
+
+}
 
 
 }
