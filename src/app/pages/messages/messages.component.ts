@@ -13,10 +13,25 @@ import { Router } from '@angular/router';
 export class MessagesComponent implements OnInit {
 
   Destroy$=new Subject<boolean>()
+  currentdate=Date.now()
+  fulldayinmilliseconds=86400000
   constructor(private ui:UiService,public msgservice:MessagesService,private router:Router) {
 
+
+
+
 msgservice.fetchchatlist().pipe(takeUntil(this.Destroy$),
-tap((res:any)=>msgservice.userchatlist$.next(res))).subscribe(console.log)
+tap((res:any)=>{
+
+  console.log(res.userchats.reverse());
+
+  console.log('timestamp on message',res.userchats[0].timestamp+this.fulldayinmilliseconds);
+  console.log('current time',this.currentdate);
+
+
+  msgservice.userchatlist$.next(res)}
+
+  )).subscribe()
 
   }
 

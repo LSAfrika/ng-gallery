@@ -10,6 +10,9 @@
   <div class="messagesection">
     <div class="name">{{userchat.chatingwith.username}}</div>
     <div class="lastmessage">{{userchat.lastmessage}}</div>
+    <div *ngIf="userchat.timestamp+fulldayinmilliseconds>currentdate" class="lastmessage time">{{userchat.timestamp| date:'shortTime'}}</div>
+    <div *ngIf=" currentdate>userchat.timestamp+fulldayinmilliseconds"  class="lastmessage time">{{userchat.timestamp| date:'shortTime'}}, {{userchat.timestamp | date: 'mediumDate' }}</div>
+
   </div>
 
 

@@ -19,9 +19,9 @@ socketsetup = false;
   // socket=io(this.snapsharebackend)
   constructor(private ui: UiService) {
 
-    if(this.ui.logedinuser !== undefined) 
+    if(this.ui.logedinuser !== undefined)
     {this.socket= io(this.snapsharebackend, {query: {uid: this.ui.logedinuser._id}});}
-     
+
     console.log('socket', this.socket);
 // this.setuid()
 
@@ -29,6 +29,9 @@ socketsetup = false;
 
   setsocketinstanceonlogin(){
     this.socket= io(this.snapsharebackend, {query: {uid: this.ui.logedinuser._id}})
+
+    console.log('socket on login:',this.socket);
+
 
   }
 

@@ -3,10 +3,10 @@
 }
 
 .chatlist{
-  @apply w-full flex justify-start items-center px-1 box-border  min-h-[60px] rounded-md shadow-black/40 shadow-md bg-white gap-3
+  @apply w-full flex justify-start items-center px-1 box-border  min-h-[60px] rounded-md shadow-black/40 shadow-md bg-white gap-3 mt-2
 }
 .avatar{
-  @apply w-[40px] h-[40px] rounded-full bg-cover overflow-hidden bg-white
+  @apply w-[50px] h-[50px] rounded-full bg-cover overflow-hidden bg-white
 }
 .messagesection{
   @apply flex flex-col justify-start items-start w-full truncate  pl-1
@@ -16,4 +16,8 @@
 }
 .lastmessage{
   @apply w-3/4  truncate
+}
+
+.time{
+  @apply text-sm ml-auto w-full text-right pr-2 mb-1
 }
