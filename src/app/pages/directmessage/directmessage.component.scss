@@ -1,5 +1,5 @@
 .messagecontainer{
-  @apply w-full h-screen  bg-slate-200 box-border flex flex-col justify-start items-center fixed pt-[70px] z-[40] overflow-scroll gap-3 px-2 top-0;
+  @apply w-full h-screen  bg-slate-200 pb-[70px] box-border flex flex-col justify-start items-center fixed pt-[70px] z-[40] overflow-scroll gap-3 px-2 top-0;
   // height: calc(100vh - 75px);
 }
 .messagecontainerclosed{
@@ -25,7 +25,7 @@
 }
 
 .friendmessagebubble{
-  @apply bg-slate-700
+  @apply bg-slate-700 mr-auto
 }
 
 .lastbubble{

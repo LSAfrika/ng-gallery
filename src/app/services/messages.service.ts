@@ -12,7 +12,7 @@ export class MessagesService {
 
   userchatlist$=new BehaviorSubject<[]>([])
 
-  userchat$=new BehaviorSubject<[]>([])
+  userchat$=new BehaviorSubject<any>([])
 
   ROOTMESSAGEURL='http://localhost:4555/messages/'
   constructor(private http:HttpClient) { }

@@ -45,8 +45,8 @@ socketsetup = false;
    }
 
    sendmessage(message){
-    console.log('from', this.ui.logedinuser);
-    console.log('to', this.ui.chatowner.value);
+    // console.log('from', this.ui.logedinuser);
+    // console.log('to', this.ui.chatowner.value);
 
     const messagepayload = {
      from: this.ui.logedinuser._id,
@@ -58,10 +58,14 @@ socketsetup = false;
     this.socket.emit('message-sent', messagepayload);
    }
 
-   public getNewMessage () {
-    this.socket.on('receive-message', (message) =>{
+    getNewMessage () {
+
+      console.log('received online message being hit');
+    this.socket.on('online-message', (message) =>{
+
       this.message$.next(message);
     });
+console.log('currentmessage online chat: ',this.message$.value);
 
     return this.message$.asObservable();
   }

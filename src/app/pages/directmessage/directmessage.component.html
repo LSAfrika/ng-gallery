@@ -1,24 +1,23 @@
 <app-nav></app-nav>
 
-<!--
- [ngClass]="{messagecontainerclosed: ui.directmessagepanel.value==0,
-  openmessagescomponent:ui.directmessagepanel.value==1,
-  closemessagecomponent:ui.directmessagepanel.value==2,
-  messagecontaineropened:ui.directmessagepanel.value==3
-}" -->
 
-<div class="messagecontainer "  #chatthread>
+
+<div class="messagecontainer "  #chatview>
 
 <!-- <div class="backpanel">
   <div (click)="backtoprofile()" *ngIf="ui.postowner|async as currentuser">{{currentuser.username}}</div>
   <svg (click)="closemessage()" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="margin-left:auto;fill:rgb(20 184 166);width:25px ;height:25px;"><path d="M21 11H6.414l5.293-5.293-1.414-1.414L2.586 12l7.707 7.707 1.414-1.414L6.414 13H21z"></path></svg>
 </div> -->
-<ng-container *ngIf="messageservice.userchat$|async as messages">
-  <div class="singlemessagecontainer" *ngFor="let message of messages;let i=index" [ngClass]="{friend: message.from === this.userid }">
-    <div class="messagebubble" [ngClass]="{friendmessagebubble: message.from === this.userid ,lastbubble: i+1===items.length}" >
+<ng-container *ngIf="messageservice.userchat$|async as chatmessages">
+  <!--  [ngClass]="{friend: message.from === this.userid }" -->
+  {{messages}}
+  <div class="singlemessagecontainer" *ngFor="let chatmessage of chatmessages;let i=index">
+    <!-- friendmessagebubble: message.from === this.userid , -->
+    <div class="messagebubble"
+     [ngClass]="{friendmessagebubble: chatmessage?.from === this.userid, friend: chatmessage?.from !== this.userid}" >
 
-      <span></span>
-     <span >{{message.message}}</span>
+
+     <span >{{chatmessage?.message}}</span>
      <!-- <span *ngIf=""> {{message.message}} </span> -->
     </div>
   </div>
