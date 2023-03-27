@@ -59,7 +59,9 @@ constructor(public ui: UiService, private router: Router,
   this.io.offlinenewmessage().pipe(takeUntil(this.destroy$), tap((res: any) => {
     console.log('offline response:',res);
     if(res===undefined) return
-    if (this.messageservice.userchat$.value.length>0&&this.messageservice.userchat$.value[this.messageservice.userchat$.value.length - 1].message === res.message){ return}
+    console.log('offline vaue on reset',this.messageservice.userchat$.value);
+
+    if (this.messageservice.userchat$.value[0]!==undefined&&this.messageservice.userchat$.value.length>0&&this.messageservice.userchat$.value[this.messageservice.userchat$.value.length - 1].message === res.message){ return}
     const newmessagesareray: any = [...this.messageservice.userchat$.value, res];
     console.log('messages array:', newmessagesareray);
 
@@ -77,13 +79,10 @@ constructor(public ui: UiService, private router: Router,
   }
 
   ngAfterViewInit(){
-    // console.log(this.thread);
-    // console.log(this.messagetosend.nativeElement.innerHTML);
-    // this.thread.scrollToBottom(300)
+
   }
   ngOnDestroy(): void {
-    // Called once, before the instance is destroyed.
-    // Add 'implements OnDestroy' to the class.
+
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
   }
@@ -93,11 +92,12 @@ constructor(public ui: UiService, private router: Router,
     this.scrollToBottom();
 }
   chatownerchangefetchmessages(){
+    this.messageservice.userchat$.next([])
     this.postservice.user(this.userid)
         .pipe(takeUntil(this.destroy$),
         map((res: any) => {this.ui.chatowner.next(res.user); return res.user._id;}),
         switchMap((userid: any) => this.messageservice.fetchchat(userid)),
-        tap((chat: any) => {this.messageservice.userchat$.next(chat.chat); console.log('fetched user chat', this.messageservice.userchat$.value);})
+        tap((chat: any) => {;this.messageservice.userchat$.next(chat.chat.reverse()); console.log('fetched user chat', this.messageservice.userchat$.value);})
 
         ).subscribe();
 

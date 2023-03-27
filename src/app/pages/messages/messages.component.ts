@@ -26,7 +26,7 @@ tap((res:any)=>{
   console.log('user chat array',res);
   if(res===null) return
 
-  console.log(res.userchats.reverse());
+  console.log('user conversations',res.userchats.reverse());
 
   console.log('timestamp on message',res.userchats[0].timestamp+this.fulldayinmilliseconds);
   console.log('current time',this.currentdate);
