@@ -39,12 +39,19 @@ constructor(public ui: UiService, private router: Router,
   this.userid = this.route.snapshot.params.userid;
   console.log('current user', this.userid);
 
+  console.log('chat owner ',this.ui.chatowner.value );
+
   if (this.ui.chatowner.value === undefined) { this.fetchchatmessagesinitial(); }
 
 
   if (this.ui.chatowner.value != undefined && this.ui.chatowner.value._id !== this.userid) { this.chatownerchangefetchmessages(); }
 
- this.io.getNewMessage().pipe(takeUntil(this.destroy$),tap(res=>console.log(res))).subscribe()
+ this.io.getNewMessage().pipe(takeUntil(this.destroy$),
+ tap(res=>{console.log(res);
+ this.messageservice.userchat$.next([...this.messageservice.userchat$.value,res])
+
+}))
+ .subscribe()
 
 
 
@@ -100,7 +107,7 @@ constructor(public ui: UiService, private router: Router,
     this.postservice.user(this.userid)
     .pipe(
       takeUntil(this.destroy$),
-      map((res: any) => {this.ui.chatowner.next(res.user); return res.user._id;}),
+      map((res: any) => {console.log('chating with: ',res);this.ui.chatowner.next(res.user); return res.user._id;}),
       switchMap((userid: any) => this.messageservice.fetchchat(userid)),
       tap((chat: any) => {this.messageservice.userchat$.next(chat.chat.reverse()); console.log('fetched user chat', this.messageservice.userchat$.value);
       })).

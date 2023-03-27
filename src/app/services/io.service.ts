@@ -1,3 +1,4 @@
+import { MessagesService } from './messages.service';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { io } from 'socket.io-client';
@@ -19,7 +20,7 @@ socketsetup = false;
 
 
   // socket=io(this.snapsharebackend)
-  constructor(private ui: UiService) {
+  constructor(private ui: UiService,private messageservice:MessagesService) {
 
     if(this.ui.logedinuser !== undefined)
     {this.socket= io(this.snapsharebackend, {query: {uid: this.ui.logedinuser._id}});}
@@ -51,11 +52,16 @@ socketsetup = false;
     const messagepayload = {
      from: this.ui.logedinuser._id,
      to: this.ui.chatowner.value._id,
-     chatuid: `${this.ui.logedinuser._id}:${this.ui.chatowner.value._id}`,
+     chatid: `${this.ui.logedinuser._id}:${this.ui.chatowner.value._id}`,
      viewed: false,
       message
     };
-    this.socket.emit('message-sent', messagepayload);
+    this.socket.emit('message-sent', messagepayload,(response)=>{
+
+      if(response.sent==true)  this.messageservice.userchat$.next([...this.messageservice.userchat$.value,messagepayload])
+      console.log('callback from message sent',response);
+
+    });
    }
 
     getNewMessage () {
