@@ -1,6 +1,7 @@
+import { PostService } from './Post.service';
 import { User } from './../interface/post.interface';
 // import { ApiService } from './notifications.service';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { async } from '@angular/core/testing';
 import { initializeApp } from 'firebase/app';
 import { map, switchMap } from 'rxjs/operators';
@@ -49,6 +50,7 @@ loginurl = 'http://localhost:4555/user/authprovidersignin';
    googleprovider = new GoogleAuthProvider();
    loginresult: Observable<any>;
    guardactivation: Subject<boolean> = new Subject <boolean>();
+   snapshare=Inject(PostService)
   constructor(private http:HttpClient,private router:Router,private ui:UiService,private io:IOService) {
     console.log('auth service initialized');
 
@@ -82,7 +84,8 @@ map((result: any) => {console.log('result from server login',result);
                       this.ui.logedinuser=loginvalue
                       console.log('decoded token value', this.ui.logedinuser);
                       this.io.setsocketinstanceonlogin()
-                      
+
+                      // this.snapshare.fetchsubscriptionlogic()
                       //  this.homerouteactivation = true;
                       // this.guardactivation.next(true);
                       // console.log(this.homerouteactivation);
