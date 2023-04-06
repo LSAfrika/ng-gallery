@@ -6,6 +6,11 @@
     <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(255 255 255);width:30px;height:30px;"><path d="m4.431 12.822 13 9A1 1 0 0 0 19 21V3a1 1 0 0 0-1.569-.823l-13 9a1.003 1.003 0 0 0 0 1.645z"></path></svg> -->
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(255 255 255);width:30px;height:30px;"><path d="m21 15.344-2.121 2.121-3.172-3.172-1.414 1.414 3.172 3.172L15.344 21H21zM3 8.656l2.121-2.121 3.172 3.172 1.414-1.414-3.172-3.172L8.656 3H3zM21 3h-5.656l2.121 2.121-3.172 3.172 1.414 1.414 3.172-3.172L21 8.656zM3 21h5.656l-2.121-2.121 3.172-3.172-1.414-1.414-3.172 3.172L3 15.344z"></path></svg>
 </div>
+
+<div *ngIf="snapshare.user._id===ui.logedinuser._id" (click)="togglemodelpost()" class=" deletepost">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(255 255 255);width:30px;height:30px;"><path d="M6 7H5v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7H6zm4 12H8v-9h2v9zm6 0h-2v-9h2v9zm.618-15L15 2H9L7.382 4H3v2h18V4z"></path></svg>
+</div>
+
         <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;"><path d="m4.431 12.822 13 9A1 1 0 0 0 19 21V3a1 1 0 0 0-1.569-.823l-13 9a1.003 1.003 0 0 0 0 1.645z"></path></svg> -->
 
         <div (click)="previous()" *ngIf="snapshare.imgurl.length>1" class="scrollbuttons">
@@ -46,7 +51,7 @@
                 <div class="textcomment">{{comment.comment}}</div>
 
                 <svg
-                (click)="togglemodal(comment._id)" *ngIf="comment.ownerid._id===ui.logedinuser._id" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                (click)="togglemodalcomment(comment._id)" *ngIf="comment.ownerid._id===ui.logedinuser._id" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                   <path d="M6 7H5v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7H6zm4 12H8v-9h2v9zm6 0h-2v-9h2v9zm.618-15L15 2H9L7.382 4H3v2h18V4z"></path></svg>
             </div>
         </div>
@@ -92,17 +97,20 @@
     </div>
 
     <div *ngIf="modal" class="confirmationmodal">
-      <div class="modal">   
+      <div class="modal">
 
     <div *ngIf="deleting;else delete">{{modalmessage}}</div>
 
 <ng-template #delete>
 
-    
-    <div >delete comment</div>
+
+    <div >delete {{commentorpost}}</div>
     <div class="btns">
-        <button (click)="deletecomment()" >yes</button><button (click)="togglemodal()">no</button>
-        
+        <button *ngIf="commentorpost=='comment'" (click)="deletecomment()" >yes</button>
+        <button *ngIf="commentorpost=='post'" (click)="deletepost()" >yes</button>
+
+        <button (click)="closemodal()">no</button>
+
     </div>
 </ng-template>
       </div>

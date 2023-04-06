@@ -28,7 +28,7 @@ POST_URL = 'http://localhost:4555/photos/post';
  fetchfollowingurl='http://localhost:4555/user/following/'
  followurl='http://localhost:4555/user/follow/'
 updateprofileurl='http://localhost:4555/user/update'
- checkfollowingurl='http://localhost:4555/user/checkfollowing/' 
+ checkfollowingurl='http://localhost:4555/user/checkfollowing/'
  postid=''
  userpostpagination=0
  category=''
@@ -211,5 +211,12 @@ updateuser(form:FormData){
 
    checkiffollowinguser(id): Observable<boolean>{
     return this.http.get<boolean>(this.checkfollowingurl+id)
+   }
+
+
+
+
+   deletepost(postid){
+   return this.http.delete(`http://localhost:4555/photos/delete/${postid}`)
    }
 }

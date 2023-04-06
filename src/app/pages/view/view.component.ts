@@ -1,11 +1,12 @@
 import { UiService } from './../../services/ui.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { Post,User } from 'src/app/interface/post.interface';
 import { PostService } from 'src/app/services/Post.service';
+import { Location } from '@angular/common'
 
 @Component({
   selector: 'app-view',
@@ -29,8 +30,14 @@ modal=false
 imagelength=0
 liked = false;
 iddeletioncomment=''
+commentorpost=''
 currentpost:Post
-  constructor(private active: ActivatedRoute, private snapshares: PostService, private formbuilder: FormBuilder,private ui:UiService) {
+  constructor(private router:Router,
+    private active: ActivatedRoute,
+     private snapshares: PostService,
+     private formbuilder: FormBuilder,public ui:UiService,
+     private location: Location
+     ) {
 this.snapid.next( this.active.snapshot.params.id);
 
 
@@ -38,8 +45,13 @@ this.snapid.next( this.active.snapshot.params.id);
 
 
 
-  this.post = this.snapid.pipe(switchMap(id =>  this.snapshares.getsinglepost(id)), map((res: any) => res.singlepost),tap(
-    result=>{
+  this.post = this.snapid.pipe(switchMap(id =>  this.snapshares.getsinglepost(id)), map((res: any) =>
+  {
+    if(res.errormessage=='missing document')return this.router.navigateByUrl('/')
+    console.log(res);return res.singlepost}),tap(
+    (result:any)=>{
+      console.log('fetched ad result',result);
+
       this.ui.postowner.next(result.user),
       this.checkifliked(result),
       this.imagelength=result.imgurl.length,
@@ -62,14 +74,6 @@ this.initializeform();
 // console.log('current user: ',this.ui.postowner.value);
 
   }
-
-  togglemodal(id?){
-    console.log(id);
-
-    this.iddeletioncomment=id
-    this.modal=!this.modal
-  }
-
   ngOnDestroy(): void {
     // Called once, before the instance is destroyed.
     // Add 'implements OnDestroy' to the class.
@@ -77,6 +81,15 @@ this.initializeform();
     this.destroy.complete()
     this.destroy.unsubscribe()
   }
+
+  togglemodalcomment(id?){
+    console.log(id);
+this.commentorpost='comment'
+    this.iddeletioncomment=id
+    this.modal=!this.modal
+  }
+
+
 
   viewpicture(){
    this.viewpic=1
@@ -94,6 +107,8 @@ deletecomment(){
   console.log(this.iddeletioncomment);
 
   this.deleting=true
+
+  // return alert('comment to be deleted')
 
   this.snapshares.deletecomment(this.iddeletioncomment).pipe(takeUntil(this.destroy)).subscribe(res=>{
     console.log(res);
@@ -117,6 +132,51 @@ deletecomment(){
       this.modalmessage='deleting...'
     }, 2000);
   })
+}
+
+deletepost(){
+
+  this.deleting=true
+
+this.snapshares.deletepost(this.snapid.value).pipe(takeUntil(this.destroy),switchMap((res:any)=>{
+  // if(res.message=='post deleted') alert('post succesfully deleted')\\\\\\\/
+ return this.snapshares.usersnapshares(this.ui.logedinuser._id)
+
+
+}),map((res:any)=>{console.log('fetched profile posts:',res.posts),
+this.snapshares.postownersnapshares.next(res.posts)})
+).subscribe(()=>{
+  this.modalmessage='deletion successful'
+
+  setTimeout(() => {
+
+    this.deleting=false
+    this.modal=false
+    this.modalmessage='deleting...'
+this.back()
+
+  }, 2000);
+
+},err=>{
+  console.log(err.message);
+  alert(err.message)
+
+})
+
+
+}
+closemodal(){
+  this.modal=false
+}
+
+back() {
+  this.location.back()
+}
+
+togglemodelpost(){
+this.commentorpost='post'
+
+  this.modal=!this.modal
 }
 
   next(){
