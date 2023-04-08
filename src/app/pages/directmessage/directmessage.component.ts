@@ -47,7 +47,8 @@ constructor(public ui: UiService, private router: Router,
   if (this.ui.chatowner.value != undefined && this.ui.chatowner.value._id !== this.userid) { this.chatownerchangefetchmessages(); }
 
  this.io.getNewMessage().pipe(takeUntil(this.destroy$),
- tap(res=>{console.log(res);
+ tap(res=>{console.log('offline socket',res);
+ if(res===undefined)return
  this.messageservice.userchat$.next([...this.messageservice.userchat$.value,res])
 
 }))
