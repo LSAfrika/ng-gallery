@@ -93,6 +93,28 @@ map((result: any) => {console.log('result from server login',result);
 
   }
 
+
+  testsignin(){
+  const  cred={
+      email:'test1@test.com',
+      password:'123456'
+    }
+
+    return this.http.post('http://localhost:4555/user/signin',cred).pipe(map((result:any         )=>{
+
+      console.log('result from server login',result);
+      // this.logedinuser = result;
+      // this.storagetoken = result.token;
+      localStorage.setItem('auth', result.token);
+      localStorage.setItem('refresh', result.refreshtoken);
+
+      const loginvalue:any = jwtDecode(result.token)
+      this.ui.logedinuser=loginvalue
+      console.log('decoded token value', this.ui.logedinuser);
+      this.io.setsocketinstanceonlogin()
+      return result
+    }))
+  }
   gettoken(){
     return localStorage.getItem('auth')
   }

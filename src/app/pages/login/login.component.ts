@@ -1,3 +1,4 @@
+import { Message } from './../../interface/messages.interface';
 // import { ApiService } from '../../services/notifications.service';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -34,6 +35,18 @@ export class LoginComponent implements OnInit {
 
    });
      }
+
+     logintest(){
+      this.auth.testsignin().subscribe(res=>{
+        alert(res)
+        this.router.navigateByUrl('/')
+
+      },err=>{
+        console.log(err.message);
+alert(err )
+      })
+     }
+
 
 
      // tslint:disable-next-line: use-lifecycle-interface
