@@ -1,0 +1,38 @@
+.firendlistcontainer{
+  @apply w-full h-screen fixed pt-[60px] z-[100] bg-slate-200 top-[100vh] overflow-y-scroll
+}
+.closecontainer {
+  @apply w-full h-[50px] absolute top-0 left-0 flex items-center
+}
+
+.list{
+  @apply max-w-[500px] w-[80%] justify-start items-center gap-2 border-b-2 border-teal-500/40 flex mx-auto my-2
+}
+
+
+.open{
+animation: openlist .3s ease-in forwards;
+}
+ .close{
+animation: closelist .3s ease-out forwards;
+
+ }
+
+@keyframes openlist{
+  0%{
+    top: 100vh;
+  }
+  100%{
+    top: 0;
+  }
+}
+
+
+@keyframes closelist{
+  0%{
+    top: 0;
+  }
+  100%{
+    top: 100vh;
+  }
+}

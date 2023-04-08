@@ -1,4 +1,4 @@
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject,Subject } from 'rxjs';
 import { Post, User } from './../interface/post.interface';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -17,6 +17,8 @@ export class UiService {
   uploading=false
 postowner=new BehaviorSubject<User>(undefined)
 chatowner=new BehaviorSubject<User>(undefined)
+userlist$=new BehaviorSubject<any>([])
+
 editprofileui=new BehaviorSubject<boolean>(false)
 postcounter=new BehaviorSubject(0)
 
@@ -25,6 +27,12 @@ directmessagepanel=new BehaviorSubject(0)
   logedinuser: User = undefined;
 
   profileview=1
+
+openmessagelist=0
+
+
+
+
 
   constructor(private router:Router) {
 

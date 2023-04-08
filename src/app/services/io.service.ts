@@ -68,6 +68,7 @@ socketsetup = false;
 
       console.log('received online message being hit');
     this.socket.on('online-message', (message) =>{
+console.log('socket get new message: ',message);
 
       this.message$.next(message);
     });
