@@ -4,7 +4,7 @@
 
        <img *ngIf="route==='snapshare' && ui.postowner|async as user" style="width:30px ;height:30px;border-radius:999px"  [src]="user?.imgurl" alt="">
         <div (click)="viewprofile()" style="font-weight: 500;"   *ngIf="route=='snapshare'  && ui.postowner|async as user ">{{user?.username}}</div>
-        <svg xmlns="http://www.w3.org/2000/svg" *ngIf="route=='snapshare'" viewBox="0 0 24 24" style="fill: rgba(20 184 166);transform: rotate(0deg); width:25px;height:25px;"><path d="M10.061 19.061 17.121 12l-7.06-7.061-2.122 2.122L12.879 12l-4.94 4.939z"></path></svg>
+        <!-- <svg xmlns="http://www.w3.org/2000/svg" *ngIf="route=='snapshare'" viewBox="0 0 24 24" style="fill: rgba(20 184 166);transform: rotate(0deg); width:25px;height:25px;"><path d="M10.061 19.061 17.121 12l-7.06-7.061-2.122 2.122L12.879 12l-4.94 4.939z"></path></svg> -->
 
 
         <!-- * direct message route -->

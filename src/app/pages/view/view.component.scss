@@ -110,18 +110,28 @@ object-fit: cover;
   }
 
 }
+.caption{
+  @apply text-teal-600 bg-white font-semibold truncate max-w-full z-50;
+  width: 100%;
+  // min-height: 50px;
+  // background-color: purple;
+  display: flex;
+  position: relative;
+  margin-bottom: auto;
+  transform: translateY(-55px);
+}
 .nocomment{
-    @apply text-teal-500 text-lg font-semibold
+    @apply text-teal-500 text-lg font-semibold text-center
 }
 .commentscontainer{
     @apply rounded-md px-1 pt-8 pb-10 bg-slate-200 flex flex-col justify-start items-center gap-3;
     min-height: calc(100vh - 60px - 55px );
-    transform: translateY(-56px);
+    transform: translateY(-80px);
     // transform: rotate();
     position: relative;
     z-index: 0;
     width: 100%;
-box-shadow:0 0 5px 4px rgba(0, 0, 0, 0.461);
+// box-shadow:0 0 5px 4px rgba(0, 0, 0, 0.461);
     // background-color: white;
     overflow:clip;
 
