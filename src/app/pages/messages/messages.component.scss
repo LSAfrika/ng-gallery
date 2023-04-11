@@ -12,7 +12,7 @@
   @apply flex flex-col justify-start items-start w-full truncate  pl-1
 }
 .name{
-  @apply text-sm font-semibold text-teal-600
+  @apply text-sm font-semibold text-teal-600  ; width:100%;display:flex;justify-content:space-between
 }
 .lastmessage{
   @apply w-3/4  truncate

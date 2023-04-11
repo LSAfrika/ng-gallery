@@ -7,6 +7,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { CategoryComponent } from '../component/category/category.component';
 import { ImagecardComponent } from '../component/imagecard/imagecard.component';
 import { RouterModule } from '@angular/router';
+import { GenericmodalComponent } from './genericmodal/genericmodal.component';
 
 
 
@@ -14,7 +15,7 @@ import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
-    SidenavComponent,NavComponent, SpinnerComponent,NotificationsComponent, CategoryComponent,ImagecardComponent
+    SidenavComponent,NavComponent, SpinnerComponent,NotificationsComponent, CategoryComponent,ImagecardComponent, GenericmodalComponent
   ],
   imports: [
     CommonModule,
@@ -22,7 +23,7 @@ import { RouterModule } from '@angular/router';
     // AppRoutingModule.forChild({})
   ],
   exports: [
-    SidenavComponent,NavComponent,SpinnerComponent,NotificationsComponent,CategoryComponent,ImagecardComponent
+    SidenavComponent,NavComponent,SpinnerComponent,NotificationsComponent,CategoryComponent,ImagecardComponent,GenericmodalComponent
 
   ]
 

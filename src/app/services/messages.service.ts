@@ -34,5 +34,10 @@ export class MessagesService {
 
   }
 
+  deletechat(chatid){
+console.log('chat id to delete ',chatid);
+
+  }
+
 
 }

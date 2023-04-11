@@ -15,6 +15,7 @@ export class UiService {
   fetchnextdisabled=false
   openimageuploader = 0;
   uploading=false
+  openmodal=new BehaviorSubject(false)
 postowner=new BehaviorSubject<User>(undefined)
 chatowner=new BehaviorSubject<User>(undefined)
 userlist$=new BehaviorSubject<any>([])

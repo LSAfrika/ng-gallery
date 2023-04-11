@@ -19,6 +19,10 @@ export class MessagesComponent implements OnInit {
   fulldayinmilliseconds=86400000
    following$:Observable<any>
    followers$:Observable<any>
+
+   donotnavigate=false
+    user: any;
+    chatid:any
   constructor(public ui:UiService,
     public msgservice:MessagesService,
     private router:Router,
@@ -94,6 +98,21 @@ return unique;
     this.Destroy$.complete()
 
   }
+  deletemodal(username,chatid){
+    this.user=username
+    this.chatid=chatid
+    this.ui.openmodal.next(true)
+    console.log('modal opened',this.user);
+
+  }
+  disablenavigation(){
+    this.donotnavigate=true
+
+  }
+  enablenavigation(){
+    this.donotnavigate=false
+
+  }
 
   openuserlist(){
     this.ui.openmessagelist=1
@@ -111,6 +130,7 @@ return unique;
 
   textuser(id){
 
+    if(this.donotnavigate==true)return
     // this.ui.directmessagepanel.next(3)
 
     this.router.navigate(['directmessage'+`/${id}`])
