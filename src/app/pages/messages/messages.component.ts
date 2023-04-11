@@ -98,7 +98,9 @@ return unique;
     this.Destroy$.complete()
 
   }
-  deletemodal(username,chatid){
+  deletemodal(username,chatid,index){
+
+    this.msgservice.indexdelete=index
     this.user=username
     this.chatid=chatid
     this.ui.openmodal.next(true)
