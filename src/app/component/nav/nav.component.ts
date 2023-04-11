@@ -18,6 +18,9 @@ export class NavComponent implements OnInit {
   route=''
   routarray
   title=''
+  fulldayinmilliseconds=86400000
+  currentdate=Date.now()
+
   ngOnInit(): void {
 
     this.route=this.router.url.split('/')[1]

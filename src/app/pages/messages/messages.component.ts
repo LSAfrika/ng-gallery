@@ -26,14 +26,14 @@ export class MessagesComponent implements OnInit {
     private auth:AuthService) {
 
 
-console.log('current logged in user ', this.ui.logedinuser);
+// console.log('current logged in user ', this.ui.logedinuser);
 console.log('user messaging list before', this.ui.userlist$.value);
 
 
 msgservice.fetchchatlist().pipe(takeUntil(this.Destroy$),
 tap((res:any)=>{
 
-  // console.log('user chat array',res);
+  console.log('user chat list',res);
   if(res===null) return
    res.userchats.reverse()
   // console.log('user conversations',res.userchats.reverse());

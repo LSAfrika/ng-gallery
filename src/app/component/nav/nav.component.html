@@ -10,8 +10,18 @@
         <!-- * direct message route -->
 
        <img *ngIf="route==='directmessage' && ui.chatowner|async as user" style="width:30px ;height:30px;border-radius:999px"  [src]="user?.imgurl" alt="">
-       <div (click)="viewprofilefromdm()" style="font-weight: 500;margin-right: auto;"   *ngIf="route==='directmessage' && ui.chatowner|async as user">{{user?.username}}</div>
+       <div (click)="viewprofilefromdm()" style="font-weight: 500;margin-right: auto;"   *ngIf="route==='directmessage' && ui.chatowner|async as user">
+        <div>{{user?.username}}</div>
 
+        <ng-container *ngIf="route==='directmessage'&& ui.chatowner|async as user">
+          <div *ngIf="user.online===true;else lastseen" class="onlinestatus">online</div>
+         <ng-template #lastseen >
+          <!-- <div class="lastseen">last seen: {{user.}}</div> -->
+          <div *ngIf="user.lastseen+fulldayinmilliseconds>currentdate" class="onlinestatus">{{user.lastseen| date:'shortTime'}} {{user.lastseen| date:'EEEE'}}</div>
+          <div *ngIf=" currentdate>user.lastseen+fulldayinmilliseconds"  class="onlinestatus">{{user.lastseen| date:'shortTime'}}, {{user.lastseen | date: 'mediumDate' }}</div>
+         </ng-template>
+        </ng-container>
+      </div>
 
 
 
@@ -21,11 +31,11 @@
         <div *ngIf="route!='snapshare'&& route!=='directmessage' ">{{title}}</div>
     </div>
 
-
       <svg *ngIf="route=='directmessage'" [routerLink]="['/messages']" routerLinkActive="router-link-active"  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="margin-left:auto; transform: rotate(0deg); fill:rgb(20 184 166);width:25px ;height:25px;"><path d="M21 11H6.414l5.293-5.293-1.414-1.414L2.586 12l7.707 7.707 1.414-1.414L6.414 13H21z"></path></svg>
 
 
  <div class="back" *ngIf="route !==''&& route!=='directmessage'" (click)="home()">
+  <!-- <div style="display: block;width:100%;background-color:pink;height: 10px;"></div> -->
 
 
    <!-- <svg fill="rgb(0, 128, 128)" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">

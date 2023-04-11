@@ -6,6 +6,7 @@ width: 100vw;
 background-color: white;
    display: flex;
    justify-content: flex-start;
+   flex-wrap: wrap;
    align-items: center;
    padding: 4px;
    min-height: 48px;
@@ -38,6 +39,10 @@ svg{
     transform: rotate(-15deg);
     stroke: teal;
 }
+}
+
+.onlinestatus{
+  @apply text-xs text-teal-600 font-semibold
 }
 
 .menu{
