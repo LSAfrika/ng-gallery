@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Post, User } from '../interface/post.interface';
 import { catchError, delay, map, switchMap, tap } from 'rxjs/operators';
-
+import{environment} from '../../environments/environment'
 @Injectable({
   providedIn: 'root'
 })
@@ -13,22 +13,22 @@ export class PostService {
   pagination = 0;
   paginationfollowers=-1
   paginationfollowing=-1
-POST_URL = 'http://localhost:4555/photos/post';
- fetchposturl = 'http://localhost:4555/photos/allposts?pagination=';
- fetchsingleposturl = 'http://localhost:4555/photos/singlepost/';
- categoriesurl = 'http://localhost:4555/photos/allposts/category?category=';
- usersnapsharesurl = 'http://localhost:4555/photos/allposts/user?user=';
+POST_URL = environment.API+'photos/post';
+ fetchposturl = environment.API+'photos/allposts?pagination=';
+ fetchsingleposturl = environment.API+'photos/singlepost/';
+ categoriesurl = environment.API+'photos/allposts/category?category=';
+ usersnapsharesurl = environment.API+'photos/allposts/user?user=';
  profileid=''
- commenturl='http://localhost:4555/comments/post/'
- likeurl='http://localhost:4555/likes/post/'
- commentdeleteurl='http://localhost:4555/comments/delete/'
- fetchuserposturl='http://localhost:4555/photos/allposts/user/?user='
- fetchprofile='http://localhost:4555/user/singleuser/'
- fetchfollowersurl='http://localhost:4555/user/followers/'
- fetchfollowingurl='http://localhost:4555/user/following/'
- followurl='http://localhost:4555/user/follow/'
-updateprofileurl='http://localhost:4555/user/update'
- checkfollowingurl='http://localhost:4555/user/checkfollowing/'
+ commenturl=environment.API+'comments/post/'
+ likeurl=environment.API+'likes/post/'
+ commentdeleteurl=environment.API+'comments/delete/'
+ fetchuserposturl=environment.API+'photos/allposts/user/?user='
+ fetchprofile=environment.API+'user/singleuser/'
+ fetchfollowersurl=environment.API+'user/followers/'
+ fetchfollowingurl=environment.API+'user/following/'
+ followurl=environment.API+'user/follow/'
+updateprofileurl=environment.API+'user/update'
+ checkfollowingurl=environment.API+'user/checkfollowing/'
  postid=''
  userpostpagination=0
  category=''
@@ -217,6 +217,6 @@ updateuser(form:FormData){
 
 
    deletepost(postid){
-   return this.http.delete(`http://localhost:4555/photos/delete/${postid}`)
+   return this.http.delete(environment.API+`photos/delete/${postid}`)
    }
 }

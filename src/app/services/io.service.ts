@@ -4,6 +4,8 @@ import { BehaviorSubject } from 'rxjs';
 import { io } from 'socket.io-client';
 import { Message } from '../interface/messages.interface';
 import { UiService } from './ui.service';
+import{environment} from '../../environments/environment'
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,7 @@ import { UiService } from './ui.service';
 export class IOService {
 
 
-  snapsharebackend = 'http://localhost:4555';
+  snapsharebackend = environment.API;
   // socket=io(this.snapsharebackend,{query:{uid:''}})
   socket:any
   public message$: BehaviorSubject<Message> = new BehaviorSubject(undefined);

@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { PostService } from './Post.service';
 import { User } from './../interface/post.interface';
 // import { ApiService } from './notifications.service';
@@ -42,8 +43,8 @@ firebasetokenvalue = '';
    auth = getAuth();
    token = '';
    firebasetoken = '';
-   refreshurl='http://localhost:4555/user/refresh'
-loginurl = 'http://localhost:4555/user/authprovidersignin';
+   refreshurl=environment.API+'user/refresh'
+loginurl = environment.API+'user/authprovidersignin';
 
 
    homerouteactivation = false;
@@ -100,7 +101,7 @@ map((result: any) => {console.log('result from server login',result);
       password:'123456'
     }
 
-    return this.http.post('http://localhost:4555/user/signin',cred).pipe(map((result:any         )=>{
+    return this.http.post(environment.API+'user/signin',cred).pipe(map((result:any         )=>{
 
       console.log('result from server login',result);
       // this.logedinuser = result;

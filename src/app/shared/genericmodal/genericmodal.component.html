@@ -1,10 +1,14 @@
 <div class="container">
 
   <div class="modal">
-<div>delete chat with {{user}}</div>
-<div class="btnholder">
-  <button (click)="deletechat()">yes</button>
-  <button (click)="closemodal()"> no</button>
-</div>
+    <ng-container *ngIf="deletingmodalprompt==false" >
+
+      <div >delete chat with {{user}}</div>
+      <div class="btnholder">
+        <button (click)="deletechat()">yes</button>
+        <button (click)="closemodal()"> no</button>
+      </div>
+    </ng-container>
+<div class="pulsedefault" *ngIf="deletingmodalprompt==true" [ngClass]="{pulse: deleting==true}">{{deletingtext}}</div>
   </div>
 </div>

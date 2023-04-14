@@ -1,6 +1,7 @@
 import { BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import{environment} from '../../environments/environment'
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,8 @@ export class MessagesService {
   userchat$=new BehaviorSubject<any>([])
   indexdelete=0
 
-  ROOTMESSAGEURL='http://localhost:4555/messages/'
-  // http://localhost:4555/messages/deletemessage/
+  ROOTMESSAGEURL=environment.API+'messages/'
+
   constructor(private http:HttpClient) { }
 
 

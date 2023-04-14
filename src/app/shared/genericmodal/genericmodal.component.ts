@@ -14,9 +14,12 @@ export class GenericmodalComponent implements OnInit {
 
   @Input()user:string
   @Input()chatid:string
+
+  deletingtext='deleting...'
+  deleting=true
   Destroy$=new Subject<boolean>()
   constructor(private ui:UiService,private msg:MessagesService) { }
-
+deletingmodalprompt=false
   ngOnInit(): void {
   }
   ngOnDestroy(){
@@ -29,6 +32,7 @@ export class GenericmodalComponent implements OnInit {
   }
 
   deletechat(){
+    this.deletingmodalprompt=true
     this.msg.deletechat(this.chatid)
     .pipe(
      takeUntil(this.Destroy$),
@@ -41,8 +45,17 @@ export class GenericmodalComponent implements OnInit {
       // console.log('spliced array',tempchatlist);
 
       // this.msg.userchatlist$.next(tempchatlist)
+      this.deleting=false
+      this.deletingtext='deleted successfully'
+  // setTimeout(() => {
+  // }, 2000);
 
+
+     setTimeout(() => {
+      this.deleting=true
       this.closemodal()
+      this.deletingtext='deleting...'
+     }, 3000);
     }
       )
     //   catchError(err=>{console.log('error from chat deletion: ',err.message)})

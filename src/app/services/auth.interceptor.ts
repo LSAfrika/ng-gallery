@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { map, switchMap, catchError } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 import { Injectable } from '@angular/core';
@@ -16,11 +17,11 @@ import { RouteConfigLoadEnd } from '@angular/router';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  loginurl = 'http://localhost:4555/user/authprovidersignin';
-  refreshurl = 'http://localhost:4555/user/refresh';
-  posturl = 'http://localhost:4555/photos/post';
-  commenturl = 'http://localhost:4555/comments/post/';
-  likesurl = 'http://localhost:4555/likes/post/';
+  loginurl = environment.API+'user/authprovidersignin';
+  refreshurl = environment.API+'user/refresh';
+  posturl = environment.API+'photos/post';
+  commenturl = environment.API+'comments/post/';
+  likesurl = environment.API+'likes/post/';
   authrequest: HttpRequest<unknown>;
   postrequest: HttpRequest<unknown>;
   commentrequest: HttpRequest<unknown>;
