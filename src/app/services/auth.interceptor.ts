@@ -18,6 +18,8 @@ import { RouteConfigLoadEnd } from '@angular/router';
 export class AuthInterceptor implements HttpInterceptor {
 
   loginurl = environment.API+'user/authprovidersignin';
+  testloginurl= 'http://localhost:4555/user/signin'
+  externaltestloginurl= 'http://192.168.43.172:4555/user/signin'
   refreshurl = environment.API+'user/refresh';
   posturl = environment.API+'photos/post';
   commenturl = environment.API+'comments/post/';
@@ -30,11 +32,10 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-  //  const commenposturl=this.commenturl+this.post.postid
-  //  const likeposturl=this.likesurl+this.post.postid
-  // console.log('global scope interceptor',request.url)
+
 
   if (request.url === this.loginurl) {console.log(request.url); return this.logininterceptor(request, next); }
+  if (request.url === this.testloginurl || request.url ===this.externaltestloginurl) {console.log(request.url); return next.handle(request) }
 
 
      return this.refreshtokeninterceptor(request, next);
@@ -175,6 +176,10 @@ console.log(err);
 
 
   }
+
+  // testlogininterceptor(request:HttpRequest<unknown>,next:HttpHandler):Observable<HttpEvent<any>>{
+
+  // }
 
   commentinterceptor(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<any>> {
 

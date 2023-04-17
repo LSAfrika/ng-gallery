@@ -7,6 +7,7 @@ import { async } from '@angular/core/testing';
 import { initializeApp } from 'firebase/app';
 import { map, switchMap } from 'rxjs/operators';
 import jwtDecode from 'jwt-decode';
+import {Platform}from '@angular/cdk/platform';
 
 import {
   getAuth,
@@ -52,7 +53,9 @@ loginurl = environment.API+'user/authprovidersignin';
    loginresult: Observable<any>;
    guardactivation: Subject<boolean> = new Subject <boolean>();
    snapshare=Inject(PostService)
-  constructor(private http:HttpClient,private router:Router,private ui:UiService,private io:IOService) {
+  constructor(private http:HttpClient,private router:Router,private ui:UiService,private io:IOService,
+    private platform:Platform
+    ) {
     console.log('auth service initialized');
 
   }
@@ -100,22 +103,19 @@ map((result: any) => {console.log('result from server login',result);
       email:'test1@test.com',
       password:'123456'
     }
+console.log('link to login: ',environment.API+'user/signin');
+console.log(cred);
 
-    return this.http.post(environment.API+'user/signin',cred).pipe(map((result:any         )=>{
+if(this.platform.ANDROID){
+  alert(`${environment.EXTERNAL_API}user/signin`)
+    return this.http.post(environment.EXTERNAL_API+'user/signin',{...cred})
 
-      console.log('result from server login',result);
-      // this.logedinuser = result;
-      // this.storagetoken = result.token;
-      localStorage.setItem('auth', result.token);
-      localStorage.setItem('refresh', result.refreshtoken);
-
-      const loginvalue:any = jwtDecode(result.token)
-      this.ui.logedinuser=loginvalue
-      console.log('decoded token value', this.ui.logedinuser);
-      this.io.setsocketinstanceonlogin()
-      return result
-    }))
+}
+    return this.http.post(environment.API+'user/signin',{...cred})
   }
+
+
+
   gettoken(){
     return localStorage.getItem('auth')
   }

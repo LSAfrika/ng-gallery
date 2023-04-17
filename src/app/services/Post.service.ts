@@ -5,6 +5,8 @@ import { Injectable } from '@angular/core';
 import { Post, User } from '../interface/post.interface';
 import { catchError, delay, map, switchMap, tap } from 'rxjs/operators';
 import{environment} from '../../environments/environment'
+import {Platform}from '@angular/cdk/platform';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -14,8 +16,8 @@ export class PostService {
   paginationfollowers=-1
   paginationfollowing=-1
 POST_URL = environment.API+'photos/post';
- fetchposturl = environment.API+'photos/allposts?pagination=';
- fetchsingleposturl = environment.API+'photos/singlepost/';
+ fetchposturl = environment.EXTERNAL_API+'photos/allposts?pagination=';
+ fetchsingleposturl = environment.EXTERNAL_API+'photos/singlepost/';
  categoriesurl = environment.API+'photos/allposts/category?category=';
  usersnapsharesurl = environment.API+'photos/allposts/user?user=';
  profileid=''
@@ -48,7 +50,7 @@ initialload=false
   // snapshareview$=this.fetchnextsnapshares.pipe( switchMap((page)=>{console.log(page);
   //  return this.getpost(page)}),map((result:any)=>{ console.log(result);
   //   return this.allposts=[...this.allposts,...result.posts]}))
-  constructor(private http: HttpClient,private ui:UiService) {
+  constructor(private http: HttpClient,private ui:UiService,private platfrom:Platform) {
     // this.getpost()
 
       if(this.initialload===false) this.fetchsubscriptionlogic()

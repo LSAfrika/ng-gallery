@@ -7,7 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DirectmessageModule } from './pages/directmessage/directmessage.module';
-
+import {PlatformModule}from '@angular/cdk/platform';
 // import { UploadComponent } from './component/upload/upload.component';
 
 @NgModule({
@@ -17,7 +17,10 @@ import { DirectmessageModule } from './pages/directmessage/directmessage.module'
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,HttpClientModule, DirectmessageModule,
+    AppRoutingModule,
+    HttpClientModule,
+    PlatformModule,
+    DirectmessageModule
   ],
   providers: [
     {provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor,multi:true}

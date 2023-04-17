@@ -141,43 +141,5 @@ return unique;
 
 }
 
-// fetchuserfollowing(){
-//   this.snapshare.fetchfollowing(this.userid)
-
-//   .pipe(takeUntil(this.destroy$),
-//   map((res:any)=>{
-//     // console.log(res.splicedfollowers);
-//     console.log('fetched user following',res);
-
-
-//     if(res.splicedfollowing.length<10)this.ui.disablefetchfollowing=true
-//     this.snapshare.userfollowing.next([...this.snapshare.userfollowing.value,...res.splicedfollowing])})).subscribe()
-// }
-
-// fetchuserfollowers(){
-//   this.snapshare.fetchfollowers(this.userid).pipe(takeUntil(this.destroy$),
-//   map((res:any)=>{
-//      console.log('fetched user followers',res);
-
-//     if(res.splicedfollowers.length<10)this.ui.disablefetchfollowers=true
-
-//     this.snapshare.userfollowers.next([...this.snapshare.userfollowers.value,...res.splicedfollowers])})).subscribe()
-// }
-
-// fetchnextset(){
-//   this.snapshare.userpostpagination++
-
-//   console.log('next set of posts if',this.userid);
-
-//   this.snapshare.usersnapshares(this.userid).pipe(
-//     map((res:any)=>{
-//     if(res.posts<5) this.disablebutton=true
-
-//     this.snapshare.postownersnapshares.next([...this.snapshare.postownersnapshares.value,...res.posts])}),
-//     takeUntil(this.destroy$)
-//   ).subscribe()
-// }
-
-
 
 }

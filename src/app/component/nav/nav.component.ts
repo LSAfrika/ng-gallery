@@ -39,6 +39,11 @@ if(this.route==='directmessage') this.title='messages'
 
 }
 
+logout(){
+  localStorage.clear()
+  this.router.navigateByUrl('/login')
+}
+
   profile(){
     this.ui.user()
     this.router.navigate([`profile/${this.ui.logedinuser._id}`])

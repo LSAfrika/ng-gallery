@@ -20,15 +20,6 @@ export class ProfileComponent implements OnInit {
   disablebutton=false
   constructor(private activeroute:ActivatedRoute,public ui:UiService,private snapshare:PostService,private router:Router,private io:IOService) {
 
-    //  this.snapshare.userfollowers.next([])
-    //  this.snapshare.userfollowing.next([])
-    // this.snapshare. paginationfollowers=0
-    // this.snapshare.paginationfollowing=0
-    // if(this.ui.logedinuser!==undefined &&  this.io.socketsetup==false ) {
-    //   this.io.setuid()
-
-    // this.io.socketsetup=true
-    // }
 
     this. userid=this.activeroute.snapshot.params.id
     console.log(this.userid);
