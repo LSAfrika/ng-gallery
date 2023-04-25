@@ -49,7 +49,11 @@ constructor(public ui: UiService, private router: Router,
  this.io.getNewMessage().pipe(takeUntil(this.destroy$),
  tap(res=>{console.log('offline socket',res);
  if(res===undefined)return
+ if(res=== this.io.messageguard)return console.log('same message socket emission');
+
  this.messageservice.userchat$.next([...this.messageservice.userchat$.value,res])
+
+ this.io.messageguard=res
 
 }))
  .subscribe()
@@ -110,7 +114,7 @@ constructor(public ui: UiService, private router: Router,
       takeUntil(this.destroy$),
       map((res: any) => {console.log('chating with: ',res);this.ui.chatowner.next(res.user); return res.user._id;}),
       switchMap((userid: any) => this.messageservice.fetchchat(userid)),
-      tap((chat: any) => {this.messageservice.userchat$.next(chat.chat.reverse()); console.log('fetched user chat', this.messageservice.userchat$.value);
+      tap((chat: any) => {const correctchatflow=[...chat.chat]; this.messageservice.userchat$.next(chat.chat); console.log('fetched user chat', chat.chat);
       })).
       subscribe();
   }

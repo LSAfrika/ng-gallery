@@ -17,8 +17,10 @@ export class IOService {
   // socket=io(this.snapsharebackend,{query:{uid:''}})
   socket:any
   public message$: BehaviorSubject<Message> = new BehaviorSubject(undefined);
+  public messagenotifications$: BehaviorSubject<Message> = new BehaviorSubject(undefined);
   public offlinemessage$: BehaviorSubject<any> = new BehaviorSubject(undefined);
 socketsetup = false;
+messageguard:any
 
 
   // socket=io(this.snapsharebackend)
@@ -74,10 +76,23 @@ console.log('socket get new message: ',message);
 
       this.message$.next(message);
     });
-console.log('currentmessage online chat: ',this.message$.value);
+// console.log('currentmessage online chat: ',this.message$.value);
 
     return this.message$.asObservable();
   }
+
+NewMessageNotification () {
+
+    console.log('received online message being hit');
+  this.socket.once('new-message-notification', (message) =>{
+console.log('socket get new message: ',message);
+
+    this.messagenotifications$.next(message);
+  });
+console.log('currentmessage online chat: ',this.message$.value);
+
+  return this.messagenotifications$.asObservable();
+}
 offlinenewmessage(){
 
   this.socket.on('receive-offline-message', (message) =>{

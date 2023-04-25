@@ -1,3 +1,4 @@
+import { IOService } from 'src/app/services/io.service';
 import { AuthService } from './../../services/auth.service';
 import { PostService } from './../../services/Post.service';
 import { takeUntil, tap } from 'rxjs/operators';
@@ -6,6 +7,7 @@ import { MessagesService } from './../../services/messages.service';
 import { UiService } from 'src/app/services/ui.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-messages',
@@ -27,6 +29,7 @@ export class MessagesComponent implements OnInit {
     public msgservice:MessagesService,
     private router:Router,
     private snapshare:PostService,
+    public io:IOService,
     private auth:AuthService) {
 
 
@@ -34,28 +37,26 @@ export class MessagesComponent implements OnInit {
 console.log('user messaging list before', this.ui.userlist$.value);
 
 
-msgservice.fetchchatlist().pipe(takeUntil(this.Destroy$),
+this.msgservice.fetchchatlist().pipe(takeUntil(this.Destroy$),
 tap((res:any)=>{
 
   console.log('user chat list',res);
   if(res===null) return
    res.userchats.reverse()
-  // console.log('user conversations',res.userchats.reverse());
-
-  // console.log('timestamp on message',res.userchats[0].timestamp+this.fulldayinmilliseconds);
-  // console.log('current time',this.currentdate);
 
 
-  msgservice.userchatlist$.next(res)}
+
+  msgservice.userchatlist$.next(res)
+}
 
   )).subscribe()
 
 
    this.followers$=  this.snapshare.fetchfollowers(this.ui.logedinuser._id)
    this.following$=  this.snapshare.fetchfollowing(this.ui.logedinuser._id)
-console.log('user list to message',this.ui.userlist$.value);
+// console.log('user list to message',this.ui.userlist$.value);
 
-  //  if(this.ui.userlist$.value.length==0) return
+  //todo  CHANGE TO SWITCHMAP
    combineLatest([this.followers$,this.following$]).pipe(takeUntil(this.Destroy$),tap((users:any)=>{
 
     const singularobject={...users[0],...users[1]}
@@ -90,6 +91,15 @@ return unique;
 }
 
   ngOnInit(): void {
+    console.log('messages component');
+
+this.io.NewMessageNotification().pipe(takeUntil(this.Destroy$)).subscribe(Notification=>{
+  console.log('message notfication',Notification)
+  // this.msgservice.userchatlist$.next(undefined)
+  this.msgservice.userchatlist$.next(Notification)
+
+});
+
   }
 
   ngOnDestroy(){
