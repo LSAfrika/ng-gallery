@@ -8,6 +8,7 @@ import { UiService } from 'src/app/services/ui.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { Userchatlist } from 'src/app/interface/chatlist.interface';
 
 @Component({
   selector: 'app-messages',
@@ -93,10 +94,34 @@ return unique;
   ngOnInit(): void {
     console.log('messages component');
 
-this.io.NewMessageNotification().pipe(takeUntil(this.Destroy$)).subscribe(Notification=>{
-  console.log('message notfication',Notification)
+this.io.NewMessageNotification().pipe(takeUntil(this.Destroy$)).subscribe(  (Notification:any)=>{
+
+console.log('current new message: ',Notification)
+  if(Notification===undefined) return
+let reversearray=[]
+let currentlength=Notification.userchats.length
+   Notification.userchats.forEach(chat => {
+currentlength--
+
+reversearray[currentlength]=chat
+// console.log('current array length: ',reversearray);
+
+
+
+
+  });
+   const newnotificationchatlist={
+    _id:Notification._id,
+    userchats:[...reversearray]
+   }
+   console.log('new notfication object',newnotificationchatlist)
+  // console.log('original message notfication',Notification)
+
   // this.msgservice.userchatlist$.next(undefined)
-  this.msgservice.userchatlist$.next(Notification)
+  //  this.msgservice.userchatlist$.next(newnotificationuserchats)
+  this.msgservice.userchatlist$.next(newnotificationchatlist)
+  console.log('behaviour subject notification',this.msgservice.userchatlist$.value)
+
 
 });
 

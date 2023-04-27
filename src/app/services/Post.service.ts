@@ -16,8 +16,8 @@ export class PostService {
   paginationfollowers=-1
   paginationfollowing=-1
 POST_URL = environment.API+'photos/post';
- fetchposturl = environment.EXTERNAL_API+'photos/allposts?pagination=';
- fetchsingleposturl = environment.EXTERNAL_API+'photos/singlepost/';
+ fetchposturl = environment.API+'photos/allposts?pagination=';
+ fetchsingleposturl = environment.API+'photos/singlepost/';
  categoriesurl = environment.API+'photos/allposts/category?category=';
  usersnapsharesurl = environment.API+'photos/allposts/user?user=';
  profileid=''

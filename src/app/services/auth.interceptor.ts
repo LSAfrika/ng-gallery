@@ -35,7 +35,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
 
   if (request.url === this.loginurl) {console.log(request.url); return this.logininterceptor(request, next); }
-  if (request.url === this.testloginurl || request.url ===this.externaltestloginurl) {console.log(request.url); return next.handle(request) }
+  // if (request.url === this.testloginurl || request.url ===this.externaltestloginurl) {console.log(request.url); return next.handle(request) }
 
 
      return this.refreshtokeninterceptor(request, next);

@@ -106,11 +106,11 @@ map((result: any) => {console.log('result from server login',result);
 console.log('link to login: ',environment.API+'user/signin');
 console.log(cred);
 
-if(this.platform.ANDROID){
-  alert(`${environment.EXTERNAL_API}user/signin`)
-    return this.http.post(environment.EXTERNAL_API+'user/signin',{...cred})
+// if(this.platform.ANDROID){
+//   alert(`${environment.EXTERNAL_API}user/signin`)
+//     return this.http.post(environment.EXTERNAL_API+'user/signin',{...cred})
 
-}
+// }
     return this.http.post(environment.API+'user/signin',{...cred})
   }
 
