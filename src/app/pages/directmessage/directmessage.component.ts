@@ -51,6 +51,7 @@ constructor(public ui: UiService, private router: Router,
  tap(res=>{
   console.log('offline socket',res);
  if(res===undefined)return
+ if(res.from!==this.userid)return
  if(res=== this.io.messageguard)return console.log('same message socket emission');
 
  this.msgservice.userchat$.next([...this.msgservice.userchat$.value,res])
