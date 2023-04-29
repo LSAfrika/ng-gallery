@@ -10,9 +10,9 @@ export class MessagesService {
 
   messagepagination=-1
 
-
+chatid=''
   userchatlist$=new BehaviorSubject<any>([])
-
+unreadcounter=0
   userchat$=new BehaviorSubject<any>([])
   indexdelete=0
 
@@ -44,5 +44,8 @@ export class MessagesService {
 
   }
 
+  resetunreadcounter(chatid){
+ return this.http.patch(this.ROOTMESSAGEURL+'resetcounter/'+`${chatid}`,{})
+}
 
 }

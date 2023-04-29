@@ -26,6 +26,7 @@ items = [1, 1, 1, 1, 1];
 textareaheight = 2;
 userid = '';
 message = '';
+chatid=''
 destroy$ = new Subject<boolean>();
 @ViewChild('chatview') private myScrollContainer: ElementRef;
 
@@ -33,25 +34,26 @@ destroy$ = new Subject<boolean>();
 constructor(public ui: UiService, private router: Router,
             private io: IOService, private route: ActivatedRoute,
             private postservice: PostService,
-            public messageservice: MessagesService
+            public msgservice: MessagesService
     ) {
 
   this.userid = this.route.snapshot.params.userid;
-  console.log('current user', this.userid);
+  // console.log('unread messages: ',this.msgservice.unreadcounter);
 
-  console.log('chat owner ',this.ui.chatowner.value );
+  // console.log('chat owner ',this.ui.chatowner.value );
 
   if (this.ui.chatowner.value === undefined) { this.fetchchatmessagesinitial(); }
 
 
-  if (this.ui.chatowner.value != undefined && this.ui.chatowner.value._id !== this.userid) { this.chatownerchangefetchmessages(); }
+  if (this.ui.chatowner.value !== undefined && this.ui.chatowner.value._id !== this.userid) { this.chatownerchangefetchmessages(); }
 
  this.io.getNewMessage().pipe(takeUntil(this.destroy$),
- tap(res=>{console.log('offline socket',res);
+ tap(res=>{
+  console.log('offline socket',res);
  if(res===undefined)return
  if(res=== this.io.messageguard)return console.log('same message socket emission');
 
- this.messageservice.userchat$.next([...this.messageservice.userchat$.value,res])
+ this.msgservice.userchat$.next([...this.msgservice.userchat$.value,res])
 
  this.io.messageguard=res
 
@@ -64,21 +66,21 @@ constructor(public ui: UiService, private router: Router,
   this.io.offlinenewmessage().pipe(takeUntil(this.destroy$), tap((res: any) => {
     console.log('offline response:',res);
     if(res===undefined) return
-    console.log('offline vaue on reset',this.messageservice.userchat$.value);
+    // console.log('offline vaue on reset',this.msgservice.userchat$.value);
 
-    if (this.messageservice.userchat$.value[0]!==undefined&&this.messageservice.userchat$.value.length>0&&this.messageservice.userchat$.value[this.messageservice.userchat$.value.length - 1].message === res.message){ return}
-    const newmessagesareray: any = [...this.messageservice.userchat$.value, res];
-    console.log('messages array:', newmessagesareray);
+    if (this.msgservice.userchat$.value[0]!==undefined&&this.msgservice.userchat$.value.length>0&&this.msgservice.userchat$.value[this.msgservice.userchat$.value.length - 1].message === res.message){ return}
+    const newmessagesareray: any = [...this.msgservice.userchat$.value, res];
+    // console.log('messages array:', newmessagesareray);
 
-    this.messageservice.userchat$.next(newmessagesareray);
+    this.msgservice.userchat$.next(newmessagesareray);
   })).subscribe();
 
-  console.log('direct message component ');
+
 
 
 }
   ngOnInit(): void {
-
+  this.resetunreadcounter()
 
 
   }
@@ -96,13 +98,30 @@ constructor(public ui: UiService, private router: Router,
   ngAfterViewChecked() {
     this.scrollToBottom();
 }
+
+resetunreadcounter(){
+  if(this.msgservice.unreadcounter==0 || this.msgservice.chatid=='')return
+  console.log('unread messages: ',this.msgservice.unreadcounter);
+
+  this.msgservice.resetunreadcounter(this.msgservice.chatid).pipe(takeUntil(this.destroy$)).subscribe((res:any)=>{
+    if(res.message=='success'){
+console.log('reset all unread messages');
+
+    }
+  })
+
+
+}
   chatownerchangefetchmessages(){
-    this.messageservice.userchat$.next([])
+    this.msgservice.userchat$.next([])
     this.postservice.user(this.userid)
         .pipe(takeUntil(this.destroy$),
         map((res: any) => {this.ui.chatowner.next(res.user); return res.user._id;}),
-        switchMap((userid: any) => this.messageservice.fetchchat(userid)),
-        tap((chat: any) => {;this.messageservice.userchat$.next(chat.chat.reverse()); console.log('fetched user chat', this.messageservice.userchat$.value);})
+        switchMap((userid: any) => this.msgservice.fetchchat(userid)),
+        tap((chat: any) => {;this.msgservice.userchat$.next(chat.chat.reverse());
+          //  console.log('fetched user chat', this.msgservice.userchat$.value);
+
+          })
 
         ).subscribe();
 
@@ -112,9 +131,13 @@ constructor(public ui: UiService, private router: Router,
     this.postservice.user(this.userid)
     .pipe(
       takeUntil(this.destroy$),
-      map((res: any) => {console.log('chating with: ',res);this.ui.chatowner.next(res.user); return res.user._id;}),
-      switchMap((userid: any) => this.messageservice.fetchchat(userid)),
-      tap((chat: any) => {const correctchatflow=[...chat.chat]; this.messageservice.userchat$.next(chat.chat); console.log('fetched user chat', chat.chat);
+      map((res: any) => {
+        // console.log('chating with: ',res)
+        ;this.ui.chatowner.next(res.user); return res.user._id;}),
+      switchMap((userid: any) => this.msgservice.fetchchat(userid)),
+      tap((chat: any) => {const correctchatflow=[...chat.chat]; this.msgservice.userchat$.next(chat.chat);
+
+
       })).
       subscribe();
   }
@@ -134,7 +157,7 @@ constructor(public ui: UiService, private router: Router,
 
   sendmessage(){
 
-    console.log(this.messagetosend.nativeElement.innerHTML);
+    // console.log(this.messagetosend.nativeElement.innerHTML);
 
     this.message = this.messagetosend.nativeElement.innerHTML;
 

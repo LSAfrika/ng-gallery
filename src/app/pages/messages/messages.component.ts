@@ -7,8 +7,7 @@ import { MessagesService } from './../../services/messages.service';
 import { UiService } from 'src/app/services/ui.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { Userchatlist } from 'src/app/interface/chatlist.interface';
+
 
 @Component({
   selector: 'app-messages',
@@ -93,6 +92,8 @@ return unique;
 
   ngOnInit(): void {
     console.log('messages component');
+    this.msgservice.chatid=''
+    console.log('current chat id: ',this.msgservice.chatid);
 
 this.io.NewMessageNotification().pipe(takeUntil(this.Destroy$)).subscribe(  (Notification:any)=>{
 
@@ -165,13 +166,16 @@ reversearray[currentlength]=chat
 
 
 
-  textuser(id){
+  textuser(id,unreadcounter,chatid){
 
     if(this.donotnavigate==true)return
     // this.ui.directmessagepanel.next(3)
+this.msgservice.unreadcounter=unreadcounter
+this.msgservice.chatid=chatid
+console.log(this.ui.directmessagepanel.value)
+console.log('passed chat id: ',this.msgservice.chatid);
 
     this.router.navigate(['directmessage'+`/${id}`])
-    console.log(this.ui.directmessagepanel.value)
 
 
 }
