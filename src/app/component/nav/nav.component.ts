@@ -1,9 +1,12 @@
+import { takeUntil } from 'rxjs/operators';
+import { MessagesService } from './../../services/messages.service';
 import { NotificationsService } from './../../services/notifications.service';
 import {  User } from './../../interface/post.interface';
 import { Router } from '@angular/router';
 import { Component, Input, OnInit } from '@angular/core';
 import { UiService } from 'src/app/services/ui.service';
-
+import { of, Subject } from 'rxjs';
+import { Location } from '@angular/common'
 
 @Component({
   selector: 'app-nav',
@@ -12,36 +15,51 @@ import { UiService } from 'src/app/services/ui.service';
 })
 export class NavComponent implements OnInit {
 
-  constructor(public ui:UiService,private router:Router,private notfier:NotificationsService) { }
+  constructor(public ui:UiService,private router:Router,private notfier:NotificationsService,public msgservice:MessagesService,
+    private location: Location
+    ) { }
 
   @Input()postowner:User
   route=''
   routarray
   title=''
+  destroy=new Subject()
   fulldayinmilliseconds=86400000
   currentdate=Date.now()
+  messagecounter=0
+  notifictioncounter=0
 
   ngOnInit(): void {
 
     this.route=this.router.url.split('/')[1]
     //  console.log(this.router.url.split('/'));
     //  console.log('current route: ',this.route);
-if(this.route==='') this.title='snapshare'
+if(this.route==='') {this.title='snapshare'
+this.msgservice.fetchsunreadmessages().pipe(takeUntil(this.destroy)).subscribe((res:any)=>{console.log('unread counter,',res.count);
+this.messagecounter=res.count
+})
+
+}
 if(this.route==='profile') this.title='profile'
 if(this.route==='messages') this.title='messages'
 if(this.route==='directmessage') this.title='messages'
-// if(this.route==='snapshare'){
 
 
-//   }
+}
 
-  // console.log('current title',this.title);
-
+ngOnDestroy(){
+  this.destroy.next()
 }
 
 logout(){
   localStorage.clear()
   this.router.navigateByUrl('/login')
+}
+
+
+
+back() {
+  this.location.back()
 }
 
   profile(){

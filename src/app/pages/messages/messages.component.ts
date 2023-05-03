@@ -65,7 +65,7 @@ const filteredusers= this.getUnique(combinedarray,'_id')
 // console.log('combine latest array filtered: ',filteredusers)
 //todo  rember pagination logic it increaces pagination nuber
      this.ui.userlist$.next([...this.ui.userlist$.value,...filteredusers])
-console.log('user list to message after fetch',this.ui.userlist$.value);
+//console.log('user list to message after fetch',this.ui.userlist$.value);
 
    }
 

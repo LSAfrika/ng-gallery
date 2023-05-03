@@ -19,8 +19,8 @@ export class IOService {
   public message$: BehaviorSubject<Message> = new BehaviorSubject(undefined);
   public messagenotifications$: BehaviorSubject<Object> = new BehaviorSubject(undefined);
   public offlinemessage$: BehaviorSubject<any> = new BehaviorSubject(undefined);
-socketsetup = false;
-messageguard:any
+  socketsetup = false;
+  messageguard:any
 
 
   // socket=io(this.snapsharebackend)
@@ -100,6 +100,11 @@ offlinenewmessage(){
   });
 
   return this.offlinemessage$.asObservable();
+
+}
+
+
+homepagemessgenotification(){
 
 }
 

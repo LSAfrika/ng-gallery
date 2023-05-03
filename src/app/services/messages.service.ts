@@ -33,8 +33,8 @@ unreadcounter=0
     return this.http.get(this.ROOTMESSAGEURL+"getuserchats/")
   }
 
-  fetchspecificusermessagelist(){
-
+  fetchsunreadmessages(){
+return this.http.get(this.ROOTMESSAGEURL+'unreadmessagescounter/')
   }
 
   deletechat(chatid){

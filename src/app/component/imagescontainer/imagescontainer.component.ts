@@ -20,9 +20,9 @@ export class ImagescontainerComponent implements OnInit {
   ngOnInit(): void {
 
     // this.postservice.getpost()
-   this.postservice.snapshares.subscribe(console.log)
+  //  this.postservice.snapshares.subscribe(console.log)
 
-  console.log(this.postservice.fetchnextsnapshares.value);
+  // console.log(this.postservice.fetchnextsnapshares.value);
 
   }
 

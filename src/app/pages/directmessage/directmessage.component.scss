@@ -1,6 +1,7 @@
 .messagecontainer{
-  @apply w-full h-screen  bg-slate-200 pb-[70px] box-border flex flex-col justify-start items-center fixed pt-[70px] z-[40] overflow-scroll gap-3 px-2 top-0;
-  // height: calc(100vh - 75px);
+  @apply w-full md:ml-auto h-screen md:max-w-[500px] bg-slate-200 pb-[70px] box-border flex flex-col justify-start items-center fixed pt-[70px] z-[40] overflow-scroll gap-3 px-2 top-0
+
+
 }
 .messagecontainerclosed{
 // @apply right-[-100%]
@@ -34,7 +35,7 @@ margin-bottom:80px;
 }
 
 .sender{
-  @apply min-h-[70px] min-w-full bg-slate-200 p-1 flex justify-center items-center  fixed bottom-0 gap-1;
+  @apply min-h-[70px] min-w-full bg-slate-200 p-1 flex justify-center items-center  fixed bottom-0 gap-1 md:max-w-[500px];
   span{
     @apply min-w-[80%] max-h-[80px] overflow-y-scroll max-w-[300px] border-teal-400 border-2 px-1 outline-teal-500 bg-white text-slate-900 rounded-[5px] min-h-[30px] text-[16px] ;
     white-space: no-wrap;
