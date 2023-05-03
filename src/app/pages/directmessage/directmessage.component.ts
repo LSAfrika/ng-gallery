@@ -57,6 +57,7 @@ constructor(public ui: UiService, private router: Router,
  this.msgservice.userchat$.next([...this.msgservice.userchat$.value,res])
 
  this.io.messageguard=res
+ this.resetunreadcounter()
 
 }))
  .subscribe()
@@ -113,7 +114,7 @@ console.log('reset all unread messages');
 
 
 }
-  chatownerchangefetchmessages(){
+chatownerchangefetchmessages(){
     this.msgservice.userchat$.next([])
     this.postservice.user(this.userid)
         .pipe(takeUntil(this.destroy$),

@@ -10,10 +10,10 @@
   <div class="messagesection">
     <div class="name" >
       <div>{{userchat.chatingwith.username}}</div>
-      <div class="newmessages" *ngIf="userchat.unreadcounter>0">{{userchat.unreadcounter}} new</div>
+      <div class="newmessages" *ngIf="userchat.unreadcounter>0">{{userchat.unreadcounter}} </div>
       <svg (click)="deletemodal(userchat.chatingwith.username,userchat.chatid,i)" (mouseenter)="disablenavigation()"(mouseleave)="enablenavigation()" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgb(20 184 166)"><path d="M12 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path></svg>
     </div>
-    <div class="lastmessage">{{userchat.lastmessage}}</div>
+    <div class="lastmessage" [ngClass]="{bold: userchat.unreadcounter>0}">{{userchat.lastmessage}}</div>
     <div *ngIf="userchat.timestamp+fulldayinmilliseconds>currentdate" class="lastmessage time">{{userchat.timestamp| date:'shortTime'}} {{userchat.timestamp| date:'EEEE'}}</div>
     <div *ngIf=" currentdate>userchat.timestamp+fulldayinmilliseconds"  class="lastmessage time">{{userchat.timestamp| date:'shortTime'}}, {{userchat.timestamp | date: 'mediumDate' }}</div>
 

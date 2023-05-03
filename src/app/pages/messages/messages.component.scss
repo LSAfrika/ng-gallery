@@ -15,10 +15,13 @@
   @apply text-sm font-semibold text-teal-600  ; width:100%;display:flex;justify-content:space-between
 }
 .newmessages{
-  @apply w-fit  rounded-full text-white bg-teal-600 px-2 py-1 font-semibold text-xs h-fit ml-auto mt-1 mr-2
+  @apply w-fit h-fit  rounded-full text-white bg-teal-600 px-2 py-1 font-semibold text-xs  ml-auto mt-1 mr-2
 }
 .lastmessage{
   @apply w-3/4  truncate
+}
+.bold{
+  @apply font-semibold text-teal-700
 }
 
 .time{
