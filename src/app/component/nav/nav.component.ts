@@ -39,9 +39,7 @@ export class NavComponent implements OnInit {
     //  console.log(this.router.url.split('/'));
     //  console.log('current route: ',this.route);
 if(this.route==='') {this.title='snapshare'
-this.msgservice.fetchsunreadmessages().pipe(takeUntil(this.destroy)).subscribe((res:any)=>{console.log('unread counter,',res.count);
-this.messagecounter=res.count
-})
+this.msgservice.fetchsunreadmessages().pipe(takeUntil(this.destroy)).subscribe((res:any)=>{this.messagecounter=res.count})
 this.notificationservice.fetchnotificationcount().pipe(takeUntil(this.destroy)).subscribe((res:any)=>{this.notifictioncounter=res.count})
 
 }

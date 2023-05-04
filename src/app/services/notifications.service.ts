@@ -20,14 +20,14 @@ notifications$: BehaviorSubject<[]> = new BehaviorSubject([]);
 destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(private http: HttpClient) {
-this.fetchnext.pipe(switchMap(page => { this.pagination = page; return this.getnotfications(); } ),
-    map(notifications => {
-      // tslint:disable-next-line: curly
-      if (notifications.length < 5) this.disablenotificationbutton = true;
-      // console.log('disable value: ', this.disablenotificationbutton);
+// this.fetchnext.pipe(switchMap(page => { this.pagination = page; return this.getnotfications(); } ),
+//     map(notifications => {
+//       // tslint:disable-next-line: curly
+//       if (notifications.length < 5) this.disablenotificationbutton = true;
+//       // console.log('disable value: ', this.disablenotificationbutton);
 
-      return this.notifications$.next([...this.notifications$.value, ...notifications]);
-    })).subscribe();
+//       return this.notifications$.next([...this.notifications$.value, ...notifications]);
+//     })).subscribe();
 
    }
 
@@ -50,4 +50,7 @@ this.fetchnext.pipe(switchMap(page => { this.pagination = page; return this.getn
     console.log(this.pagination);
 
    }
+
+
+
 }

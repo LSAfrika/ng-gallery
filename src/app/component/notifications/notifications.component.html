@@ -1,4 +1,4 @@
-<div class="notifications" *ngIf="notifications.notifications$|async as notifier;">
+<div class="notifications" *ngIf="(notifications$|async) as notifier ;">
   <div (click)="navigatetopost(notice.post)"   class="notification" *ngFor="let notice of notifier;let i=index">
     <!-- {{notifications[i] | json}} -->
     <!-- {{notice |json}} -->

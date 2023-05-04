@@ -1,3 +1,4 @@
+import { NotificationsService } from './../../services/notifications.service';
 import { Component, OnInit } from '@angular/core';
 import { IOService } from 'src/app/services/io.service';
 // import { ApiService } from '../../services/notifications.service';
@@ -10,7 +11,7 @@ import { UiService } from '../../services/ui.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(public ui:UiService,private io:IOService){
+  constructor(public ui:UiService,private io:IOService,public notificationservice:NotificationsService){
 
     console.log('loggedin user ',this.ui.logedinuser);
 
