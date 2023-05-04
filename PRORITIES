@@ -5,7 +5,7 @@
 
 
 3. notfifcation system
-a)delete notfiation upon deltion of like comment
+a)delete notfiation upon deltion of like comment--> DONE
 b)add notifcation counter using viewed field true or false and add logic for changing viewed value
 c)add pagination to notfications and filters fro viewed and not viewed
 

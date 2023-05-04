@@ -15,9 +15,7 @@ import { Location } from '@angular/common'
 })
 export class NavComponent implements OnInit {
 
-  constructor(public ui:UiService,private router:Router,private notfier:NotificationsService,public msgservice:MessagesService,
-    private location: Location
-    ) { }
+
 
   @Input()postowner:User
   route=''
@@ -29,6 +27,12 @@ export class NavComponent implements OnInit {
   messagecounter=0
   notifictioncounter=0
 
+
+
+  constructor(public ui:UiService,private router:Router,private notfier:NotificationsService,public msgservice:MessagesService,
+    private location: Location,private notificationservice:NotificationsService
+    ) { }
+
   ngOnInit(): void {
 
     this.route=this.router.url.split('/')[1]
@@ -38,6 +42,7 @@ if(this.route==='') {this.title='snapshare'
 this.msgservice.fetchsunreadmessages().pipe(takeUntil(this.destroy)).subscribe((res:any)=>{console.log('unread counter,',res.count);
 this.messagecounter=res.count
 })
+this.notificationservice.fetchnotificationcount().pipe(takeUntil(this.destroy)).subscribe((res:any)=>{this.notifictioncounter=res.count})
 
 }
 if(this.route==='profile') this.title='profile'

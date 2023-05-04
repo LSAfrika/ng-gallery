@@ -15,6 +15,7 @@ pagination = 0;
 disablenotificationbutton = false;
 fetchnext = new BehaviorSubject(0);
 notificationsurl = environment.API+'usernotifications/notifications?pagination=';
+notificationscounturl = environment.API+'usernotifications/notificationscount';
 notifications$: BehaviorSubject<[]> = new BehaviorSubject([]);
 destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -36,6 +37,10 @@ this.fetchnext.pipe(switchMap(page => { this.pagination = page; return this.getn
 
    getnotfications(): Observable<[]>{
     return this.http.get<[]>(this.notificationsurl + this.pagination);
+   }
+
+   fetchnotificationcount(){
+    return this.http.get(this.notificationscounturl)
    }
 
    fetchnextsetofnotifications(){
