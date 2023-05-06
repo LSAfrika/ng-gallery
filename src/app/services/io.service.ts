@@ -29,7 +29,7 @@ export class IOService {
     if(this.ui.logedinuser !== undefined)
     {this.socket= io(this.snapsharebackend, {query: {uid: this.ui.logedinuser._id}});}
 
-    console.log('socket', this.socket);
+    // console.log('socket', this.socket);
 // this.setuid()
 
   }

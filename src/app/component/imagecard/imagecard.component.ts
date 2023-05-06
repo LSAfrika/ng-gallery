@@ -58,7 +58,7 @@ export class ImagecardComponent implements OnInit {
 
     this.ui.postowner.next(userid)
 
-    console.log('current user id',userid);
+    // console.log('current user id',userid);
 
     this.router.navigate([`profile/${userid._id}`])
 

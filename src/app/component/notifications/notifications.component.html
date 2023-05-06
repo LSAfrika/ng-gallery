@@ -9,7 +9,16 @@
 
     </div>
     <div class="message">
-      <div> {{notice.createdAt|date:'hh:mm dd/MM'}}</div>
+      <!-- {{notice.createdAt| date:'EEEE'}} -->
+      <div *ngIf="notice.createdAt+fulldayinmilliseconds>currentdate" >
+<!-- {{notice.createdAt}} -->
+        {{notice.createdAt| date:'shortTime'}}
+      </div>
+       <div *ngIf="currentdate>notice.createdAt+fulldayinmilliseconds">
+<!-- {{notice.createdAt}} -->
+
+        {{notice.createdAt| date:'shortTime'}} {{notice.createdAt|date | date: 'mediumDate' }}
+      </div>
       <div class="text" *ngIf="notice.notificationtype==1">{{notice.notificationowner.username}} commented "{{notice.commentid.comment}}" on your post from  you photo</div>
       <div class="text" *ngIf="notice.notificationtype==3">{{notice.notificationowner.username}} liked your post</div>
       <!-- <div class="text" *ngIf="i%3===0"><strong>joy mukami</strong> posted a resent picture</div> -->

@@ -48,19 +48,26 @@ this.snapid.next( this.active.snapshot.params.id);
   this.post = this.snapid.pipe(switchMap(id =>  this.snapshares.getsinglepost(id)), map((res: any) =>
   {
     if(res.errormessage=='missing document')return this.router.navigateByUrl('/')
-    console.log(res);return res.singlepost}),tap(
+   // console.log(res)
+    return res.singlepost}),tap(
     (result:any)=>{
-      console.log('fetched ad result',result);
+      // console.log('fetched ad result',result);
 
       this.ui.postowner.next(result.user),
       this.checkifliked(result),
       this.imagelength=result.imgurl.length,
       this.currentpost=result
-     console.log('current post:',this.currentpost)
+    //  console.log('current post:',this.currentpost)
+
+     if(this.ui.postowner.value._id == this.ui.logedinuser._id){
+
+      this.snapshares.updatenotifications(this.active.snapshot.params.id).pipe(takeUntil(this.destroy)).subscribe(res=>console.log('response from notifications endpoint',res))
+     }
+
     }
       ));
 
-    //  console.log('post owner:',this.ui.postowner);
+
 
 this.initializeform();
 
@@ -71,16 +78,17 @@ this.initializeform();
 
   ngOnInit(): void {
 
-// console.log('current user: ',this.ui.postowner.value);
+
 
   }
   ngOnDestroy(): void {
-    // Called once, before the instance is destroyed.
-    // Add 'implements OnDestroy' to the class.
+
     this.destroy.next(true);
     this.destroy.complete()
     this.destroy.unsubscribe()
   }
+
+
 
   togglemodalcomment(id?){
     console.log(id);

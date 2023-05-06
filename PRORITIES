@@ -6,7 +6,10 @@
 
 3. notfifcation system
 a)delete notfiation upon deltion of like comment--> DONE
-b)add notifcation counter using viewed field true or false and add logic for changing viewed value
-c)add pagination to notfications and filters fro viewed and not viewed
+b)add notifcation counter using viewed field true or false and add logic for changing viewed value -->DONE
+c)add pagination to notfications and filters fro viewed and not viewed (DONE JUST TESTING)
+
+------ LOOK INTO --------
+broadcast notfication to like and commenters in post of a post when post owner comments
 
 repair login user profile  following follower display not working

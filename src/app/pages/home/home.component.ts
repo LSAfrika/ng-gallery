@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
 
   constructor(public ui:UiService,private io:IOService,public notificationservice:NotificationsService){
 
-    console.log('loggedin user ',this.ui.logedinuser);
+    // console.log('loggedin user ',this.ui.logedinuser);
 
   }
 
