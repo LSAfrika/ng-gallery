@@ -21,8 +21,9 @@ background-color: white;
     width: 30px;
     height: 30px;
     margin-right: 16px;
-    // border-radius: 9999px;
-    // background-color: rgb(0, 128, 128);
+    overflow: hidden;
+    border-radius: 9999px;
+     background-color: rgb(0, 128, 128);
 }
 
 .title{
@@ -59,8 +60,8 @@ svg{
 }
 .messages{
 
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   color: teal;
   fill: teal;
   display: flex; justify-content: center;align-items: center;

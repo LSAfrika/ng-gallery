@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class UiService {
 
 
-  opennotificationspanel = 0;
+  opennotificationspanel = 1;
   disablefetchfollowers= false
   disablefetchfollowing= false
   fetchnextdisabled=false
