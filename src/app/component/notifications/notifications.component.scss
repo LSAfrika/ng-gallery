@@ -5,6 +5,9 @@
 .notification {
   @apply flex justify-start items-center gap-2 w-full min-h-[80px] rounded-sm shadow-black shadow-sm px-2 overflow-hidden bg-white
 }
+.unread{
+  @apply bg-teal-500/30
+}
 
 .avatar {
   @apply min-w-[40px] min-h-[40px] rounded-full  bg-cover overflow-hidden shadow-black/50 shadow-sm

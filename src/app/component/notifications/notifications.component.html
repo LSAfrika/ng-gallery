@@ -1,5 +1,5 @@
 <div class="notifications" *ngIf="(notifications$|async) as notifier ;">
-  <div (click)="navigatetopost(notice.post)"   class="notification" *ngFor="let notice of notifier;let i=index">
+<div (click)="navigatetopost(notice.post)" [ngClass]="{unread: notice.viewed==false}"   class="notification" *ngFor="let notice of notifier;let i=index">
     <!-- {{notifications[i] | json}} -->
     <!-- {{notice |json}} -->
 <!-- {{notice.notificationowner.imgurl}} -->
@@ -10,8 +10,8 @@
     </div>
     <div class="message">
       <div> {{notice.createdAt|date:'hh:mm dd/MM'}}</div>
-      <div class="text" *ngIf="notice.notificationtype==1"><strong>{{notice.notificationowner.username}}</strong> commented "{{notice.commentid.comment}}" on your post from  you photo</div>
-      <div class="text" *ngIf="notice.notificationtype==3"><strong>{{notice.notificationowner.username}}</strong> liked your post</div>
+      <div class="text" *ngIf="notice.notificationtype==1">{{notice.notificationowner.username}} commented "{{notice.commentid.comment}}" on your post from  you photo</div>
+      <div class="text" *ngIf="notice.notificationtype==3">{{notice.notificationowner.username}} liked your post</div>
       <!-- <div class="text" *ngIf="i%3===0"><strong>joy mukami</strong> posted a resent picture</div> -->
     </div>
 
@@ -19,5 +19,5 @@
   <!-- *ngIf="notifications.disablenotificationbutton===false" -->
 
   <button *ngIf="notifications.disablenotificationbutton===false" (click)="fetchnextnotifications()" class="loadmore">load more </button>
-  <div *ngIf="notifications.disablenotificationbutton===true" class="nonotification" >no new  notifications</div>
+  <!-- <div *ngIf="notifications.disablenotificationbutton===true" class="nonotification" >no new  notifications</div> -->
 </div>
