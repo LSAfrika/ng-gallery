@@ -1,17 +1,17 @@
 .upload {
-  @apply w-full h-fit bg-gradient-to-b overflow-y-scroll from-slate-200 to-slate-100 py-4 pb-[100px] box-border px-4 justify-start items-center flex flex-col gap-3 border-b-2 border-slate-400 overflow-scroll left-0
+  @apply w-full h-screen overflow-hidden bg-gradient-to-b  from-slate-200 to-slate-100 py-4 pb-[100px] box-border px-4 justify-start items-center flex flex-col gap-3 border-b-2 border-slate-400  left-0
 }
 
 .container {
-  @apply w-full bg-slate-300 rounded-md mb-2 relative flex flex-col justify-start pt-3 items-center overflow-scroll box-border max-h-[100vh];
-  min-height: 100vh;
+  @apply w-full bg-slate-300 rounded-md mb-2  max-w-[550px] relative flex flex-col justify-start pt-3 items-center overflow-y-hidden box-border min-h-[95vh] ;
+
 }
 
 .closecontainer {
   @apply w-full h-[50px] absolute top-0 left-0 flex items-center
 }
 .scrollrect{
-  @apply  min-w-[75%] overflow-y-scroll flex justify-start flex-col items-center mb-10
+  @apply  min-w-[75%] min-h-fit max-h-[100vh] flex justify-start flex-col items-center mb-10 overflow-y-scroll   scrollbar-thin scrollbar-thumb-teal-600 scrollbar-track-slate-300
 }
 
 .imagechooser {
@@ -49,7 +49,7 @@
   @apply rounded-md bg-teal-500 text-white font-normal text-lg mt-5 px-4 py-1 min-w-[240px] mb-4
 }
 textarea{
-  @apply max-h-[50px];
+  @apply min-h-[50px];
 
 }
 
@@ -73,3 +73,34 @@ select{
     opacity: 1;
   }
 }
+
+
+
+@media screen and (min-width:375px) {
+
+}
+
+
+@media screen and (min-width: 425px) {
+
+  }
+
+  @media screen and (min-width: 648px) {
+
+  }
+
+  @media screen and (min-width: 768px) {
+
+
+
+  }
+
+  @media screen and (min-width: 900px) {
+
+    .upload{
+      @apply bg-gradient-to-b  from-black/40 to-black/40
+    }
+
+
+
+  }

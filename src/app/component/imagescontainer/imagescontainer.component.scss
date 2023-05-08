@@ -1,9 +1,15 @@
 .container{
-  @apply w-full  min-h-screen h-fit pb-[100px] relative bg-slate-100 rounded-t-md flex items-start justify-center gap-4 flex-wrap  mx-auto
+  @apply w-full   min-h-screen h-fit pb-[100px] relative bg-slate-100 rounded-t-md flex items-start justify-center gap-4 flex-wrap  mx-auto
 
 
 }
+.nextholder{
+  @apply w-full min-h-[50px]  flex justify-center
+}
 
+.next{
+  @apply px-4  bg-teal-500 rounded-full text-white font-semibold
+}
 
 
 @media screen and (min-width:375px) {
@@ -16,16 +22,24 @@
   }
 
   @media screen and (min-width: 648px) {
+    .container{
+      @apply min-w-[600px]
+    }
 
   }
 
   @media screen and (min-width: 768px) {
 
     .container{
-
+@apply pt-4
     }
 
 
   }
 
-  @media screen and (min-width: 900px) {}
+  @media screen and (min-width: 900px) {
+
+    .container{
+@apply max-w-[1300px]
+    }
+  }
