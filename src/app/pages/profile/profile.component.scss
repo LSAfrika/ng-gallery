@@ -61,3 +61,22 @@
 .viewcontacts{
   @apply flex flex-col justify-start items-center
 }
+.userlist{
+  @apply bg-slate-100;
+  margin-top: 10px;
+  display:flex;
+  justify-content: flex-start;
+  align-items: center;
+width: 100%;
+max-width: 400px;
+// background-color: pink;
+gap: 8px;
+}
+.userlistcontainer{
+  @apply text-teal-500 font-semibold;
+  display:flex;
+  justify-content: flex-start;
+  align-items: center;gap:16px;
+  // background-color: teal;
+  flex-grow: 1;
+}

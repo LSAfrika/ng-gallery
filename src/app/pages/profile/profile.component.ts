@@ -106,7 +106,7 @@ this.checkfollowinguser()
       console.log('res after fetching new user',res)
      this.ui.postowner.next(res.user)
      this.ui.postcounter.next(res.postcount);
-
+this.ui.profileview=1
 
      console.log('values of following and folowers: ',this.snapshare.userfollowers.value,this.snapshare.userfollowing.value);
 
