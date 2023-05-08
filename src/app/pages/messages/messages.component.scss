@@ -1,12 +1,11 @@
-
-
-.friendlist{
-
-  display: none
+.holder{
+  @apply bg-slate-200 min-w-full min-h-screen
 }
 
+
+
 .container{
-  @apply w-full min-h-screen  pt-[70px] px-1  mx-auto max-w-[700px] relative
+  @apply w-full min-h-screen  pt-[70px] px-1  mx-auto max-w-[900px] relative bg-slate-100
 }
 
 .chatlist{
@@ -65,7 +64,7 @@
 
   @media screen and (min-width: 900px) {
     .container{
-      @apply  max-w-[600px]
+      @apply  max-w-[900px]
     }
 .friendlist{
   @apply min-w-[300px] max-h-[90vh] bg-orange-500 mt-[60px] mr-2 ml-auto  ;
