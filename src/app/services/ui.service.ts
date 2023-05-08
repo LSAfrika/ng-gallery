@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class UiService {
 
 
-  opennotificationspanel = 0;
+  opennotificationspanel = 1;
   disablefetchfollowers= false
   disablefetchfollowing= false
   fetchnextdisabled=false
@@ -29,7 +29,7 @@ directmessagepanel=new BehaviorSubject(0)
 
   profileview=1
 
-openmessagelist=0
+openmessagelist=1
 
 
 

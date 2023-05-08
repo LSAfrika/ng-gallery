@@ -1,9 +1,16 @@
+
+
+.friendlist{
+
+  display: none
+}
+
 .container{
-  @apply w-full min-h-screen  pt-[70px] px-1 bg-slate-200 mx-auto max-w-[1000px]
+  @apply w-full min-h-screen  pt-[70px] px-1  mx-auto max-w-[700px] relative
 }
 
 .chatlist{
-  @apply w-full flex justify-start items-center px-1 box-border  min-h-[60px] rounded-md shadow-black/40 shadow-md bg-white gap-3 mt-2
+  @apply w-full flex justify-start items-center px-1 box-border  min-h-[60px] rounded-md shadow-black/40 shadow-md  gap-3 mt-2
 }
 .avatar{
   @apply w-[50px] h-[50px] rounded-full bg-cover overflow-hidden bg-white
@@ -15,7 +22,7 @@
   @apply text-sm font-semibold text-teal-600  ; width:100%;display:flex;justify-content:space-between
 }
 .newmessages{
-  @apply w-fit h-fit  rounded-full text-white bg-teal-600 px-2 py-1 font-semibold text-xs  ml-auto mt-1 mr-2
+  @apply w-fit h-fit   rounded-full text-white bg-teal-600 px-2 py-1 font-semibold text-xs  ml-auto mt-1 mr-2
 }
 .lastmessage{
   @apply w-3/4  truncate
@@ -28,8 +35,40 @@
   @apply text-sm ml-auto w-full text-right pr-2 mb-1
 }
 .newmessage{
-  @apply fixed bottom-5 right-5 w-[40px] h-[40px] bg-teal-500 rounded-full flex justify-center items-center
+  @apply absolute bottom-5 right-5 w-[40px] h-[40px] bg-teal-500 rounded-full flex justify-center items-center
 }
-app-friendlist{
+
+
+
+@media screen and (min-width:375px) {
 
 }
+
+
+@media screen and (min-width: 425px) {
+
+  }
+
+  @media screen and (min-width: 648px) {
+.container{
+  @apply max-w-[500px]
+}
+  }
+
+  @media screen and (min-width: 768px) {
+
+.container{
+  @apply  max-w-[600px]
+}
+
+  }
+
+  @media screen and (min-width: 900px) {
+    .container{
+      @apply  max-w-[600px]
+    }
+.friendlist{
+  @apply min-w-[300px] max-h-[90vh] bg-orange-500 mt-[60px] mr-2 ml-auto  ;
+   display:flex ;
+}
+  }

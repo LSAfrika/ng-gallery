@@ -1,9 +1,9 @@
 .notifications {
-  @apply w-full h-screen bg-gradient-to-b from-slate-200 to-slate-100 py-4 pb-[100px] box-border px-2 justify-start items-center flex flex-col gap-3 border-b-2 border-slate-400 overflow-scroll
+  @apply w-full h-screen pt-5 bg-black/80 backdrop-blur-md scrollbar-thin  pb-[100px] box-border px-2 justify-start items-center flex flex-col gap-3 border-b-2 border-slate-400 overflow-scroll
 }
 
 .notification {
-  @apply flex justify-start items-center gap-2 w-full min-h-[80px] rounded-sm shadow-black shadow-sm px-2 overflow-hidden bg-white
+  @apply flex justify-start items-center gap-2 cursor-pointer max-w-[600px] w-full min-h-[80px] rounded-sm shadow-black shadow-sm px-2 overflow-hidden bg-white
 }
 .unread{
   @apply bg-teal-500/30
@@ -34,3 +34,31 @@
 .nonotification{
   @apply text-teal-500 mt-5 text-2xl font-normal
 }
+
+
+
+@media screen and (min-width:375px) {
+
+}
+
+
+@media screen and (min-width: 425px) {
+
+  }
+
+  @media screen and (min-width: 648px) {
+
+  }
+
+  @media screen and (min-width: 768px) {
+
+
+
+  }
+
+  @media screen and (min-width: 900px) {
+    .notification {
+      @apply  max-w-[800px]}
+
+
+  }

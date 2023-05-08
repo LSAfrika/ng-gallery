@@ -1,12 +1,15 @@
 .firendlistcontainer{
-  @apply w-full h-screen fixed pt-[60px] z-[100] bg-slate-200 top-[100vh] overflow-y-scroll
+  @apply w-full h-screen fixed pt-[60px] z-[100] bg-black/50 top-[100vh] overflow-y-scroll backdrop-blur-sm
 }
 .closecontainer {
   @apply w-full h-[50px] absolute top-0 left-0 flex items-center
 }
+.listholder{
+  @apply max-w-[550px] min-h-[90%] bg-slate-200 mx-auto pt-4 rounded-md
+}
 
 .list{
-  @apply max-w-[500px] w-[80%] justify-start items-center gap-2 border-b-2 border-teal-500/40 flex mx-auto my-2
+  @apply max-w-[500px] w-[80%] justify-start items-center gap-2 text-teal-500 font-semibold flex mx-auto my-2
 }
 
 

@@ -10,12 +10,15 @@
   </div>
 <!-- <ng-container *ngIf="ui.userlist$|async as friends" > -->
   <!-- {{ui.userlist$.value|json}} -->
-  <div class="list" *ngFor="let friend of ui.userlist$.value" (click)="directmessage(friend._id)">
-    <div style="width: 50px;height:50px;background-color:white;border-radius: 999px;overflow: hidden;object-fit: cover;">
-      <img [src]="friend.imgurl" alt="" srcset="">
+  <div class="listholder">
+    <div class="list" *ngFor="let friend of ui.userlist$.value" (click)="directmessage(friend._id)">
+      <div style="width: 50px;height:50px;background-color:white;border-radius: 999px;overflow: hidden;object-fit: cover;">
+        <img [src]="friend.imgurl" alt="" srcset="">
 
+      </div>
+      <div>{{friend.username}}</div>
     </div>
-    <div>{{friend.username}}</div>
+
   </div>
 
 <!-- </ng-container> -->
