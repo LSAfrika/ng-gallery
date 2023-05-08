@@ -2,7 +2,7 @@ import { takeUntil } from 'rxjs/operators';
 import { MessagesService } from './../../services/messages.service';
 import { NotificationsService } from './../../services/notifications.service';
 import {  User } from './../../interface/post.interface';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Component, Input, OnInit } from '@angular/core';
 import { UiService } from 'src/app/services/ui.service';
 import { of, Subject } from 'rxjs';
@@ -26,11 +26,12 @@ export class NavComponent implements OnInit {
   currentdate=Date.now()
   messagecounter=0
   notifictioncounter=0
+  currentuserprofile=''
 
 
 
   constructor(public ui:UiService,private router:Router,private notfier:NotificationsService,public msgservice:MessagesService,
-    private location: Location,private notificationservice:NotificationsService
+    private location: Location,private notificationservice:NotificationsService,private activeroute:ActivatedRoute
     ) { }
 
   ngOnInit(): void {
@@ -43,7 +44,13 @@ this.msgservice.fetchsunreadmessages().pipe(takeUntil(this.destroy)).subscribe((
 this.notificationservice.fetchnotificationcount().pipe(takeUntil(this.destroy)).subscribe((res:any)=>{this.notifictioncounter=res.count})
 
 }
-if(this.route==='profile') this.title='profile'
+if(this.route==='profile') {
+
+  this.currentuserprofile=this.activeroute.snapshot.params.id
+  console.log('current profile id: ',this.currentuserprofile);
+
+  this.title='profile'
+}
 if(this.route==='messages') this.title='messages'
 if(this.route==='directmessage') this.title='messages'
 
