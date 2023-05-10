@@ -12,7 +12,9 @@ c)add pagination to notfications and filters fro viewed and not viewed (DONE JUS
 ------ LOOK INTO --------
 broadcast notfication to like and commenters in post of a post when post owner comments
 
-repair login user profile  following follower display not working
+repair login user profile  following follower display not working --> DONE
+
+mark broadcast notfication as viewed
 
 
 @media screen and (min-width:375px) {
