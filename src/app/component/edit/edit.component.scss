@@ -5,13 +5,13 @@
 
 .holdercontainer{
 
-    @apply relative max-w-[600px] w-[90%] rounded-lg min-h-[400px] flex flex-col justify-start items-center gap-4 bg-white mx-auto p-2;
+    @apply relative w-[90%] rounded-lg min-h-[450px]  max-w-[400px] flex flex-col justify-start items-center gap-4 bg-white mx-auto p-2;
     svg{
         @apply fill-teal-500 w-[40px] h-[40px] absolute top-0 right-2
     }
 }
 .editprofile{
-    @apply bg-teal-600 pr-5 rounded-l-3xl mr-auto ml-1 rounded-r-full text-white font-semibold text-lg py-1 pl-3 
+    @apply bg-teal-600 pr-5 rounded-l-3xl mr-auto ml-1 rounded-r-full text-white font-semibold text-lg py-1 pl-3
 }
 .usernameinput{
     @apply max-w-[400px] w-[60%] border-2 border-teal-500 rounded-md px-2 py-[2px] mt-10 outline-2 outline-teal-300
