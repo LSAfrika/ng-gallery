@@ -6,7 +6,7 @@
   @apply flex justify-start items-center gap-2 cursor-pointer max-w-[600px] w-full min-h-[80px] rounded-sm shadow-black shadow-sm px-2 overflow-hidden bg-white
 }
 .unread{
-  @apply bg-teal-500/30
+  @apply bg-teal-500 text-white font-semibold
 }
 
 .avatar {

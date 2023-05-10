@@ -1,5 +1,5 @@
 <div class="notifications" *ngIf="(notifications$|async) as notifier ;">
-<div (click)="navigatetopost(notice.post)" [ngClass]="{unread: notice.viewed==false}"   class="notification" *ngFor="let notice of notifier;let i=index">
+<div (click)="navigatetopost(notice.post)" class="notification" [ngClass]="{unread: notice.viewed==false}"    *ngFor="let notice of notifier;let i=index">
     <!-- {{notifications[i] | json}} -->
     <!-- {{notice |json}} -->
 <!-- {{notice.notificationowner.imgurl}} -->
@@ -20,6 +20,7 @@
         {{notice.createdAt| date:'shortTime'}} {{notice.createdAt|date | date: 'mediumDate' }}
       </div>
       <div class="text" *ngIf="notice.notificationtype==1">{{notice.notificationowner.username}} commented "{{notice.commentid.comment}}" on your post from  you photo</div>
+      <div class="text" *ngIf="notice.notificationtype==2">{{notice.notificationowner.username}} commented "{{notice.commentid.comment}}" on their post</div>
       <div class="text" *ngIf="notice.notificationtype==3">{{notice.notificationowner.username}} liked your post</div>
       <!-- <div class="text" *ngIf="i%3===0"><strong>joy mukami</strong> posted a resent picture</div> -->
     </div>

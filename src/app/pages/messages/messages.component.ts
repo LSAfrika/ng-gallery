@@ -166,10 +166,14 @@ reversearray[currentlength]=chat
 
 
 
-  textuser(id,unreadcounter,chatid){
+  textuser(id,unreadcounter,chatid,index){
 
     if(this.donotnavigate==true)return
     // this.ui.directmessagepanel.next(3)
+    this.msgservice.userchatlist$.value.userchats[index].unreadcounter=0
+    // console.log('user chat unread counter reset',this.msgservice.userchatlist$.value.userchats);
+
+
 this.msgservice.unreadcounter=unreadcounter
 this.msgservice.chatid=chatid
 console.log(this.ui.directmessagepanel.value)

@@ -7,7 +7,7 @@
 
   <div  class="container" *ngIf="msgservice.userchatlist$|async as userchatlist" >
       <!-- [routerLink]="['directmessage',userchat.chatingwith._id]"  -->
-      <div (click)="textuser(userchat.chatingwith._id,userchat.unreadcounter,userchat.chatid)"  class="chatlist" *ngFor="let userchat of userchatlist.userchats;let i =index ">
+      <div (click)="textuser(userchat.chatingwith._id,userchat.unreadcounter,userchat.chatid,i)"  class="chatlist" *ngFor="let userchat of userchatlist.userchats;let i =index ">
       <div class="avatar">
         <img [src]="userchat.chatingwith.imgurl" alt="" srcset="">
       </div>
