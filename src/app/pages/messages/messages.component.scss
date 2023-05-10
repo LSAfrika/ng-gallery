@@ -9,7 +9,7 @@
 }
 
 .chatlist{
-  @apply w-full flex justify-start items-center px-1 box-border  min-h-[60px] rounded-md shadow-black/40 shadow-md  gap-3 mt-2
+  @apply w-full flex justify-start items-center px-1 box-border  min-h-[60px] rounded-md shadow-black/40 shadow-md  gap-3 mt-2 cursor-pointer
 }
 .avatar{
   @apply w-[50px] h-[50px] rounded-full bg-cover overflow-hidden bg-white
@@ -34,7 +34,7 @@
   @apply text-sm ml-auto w-full text-right pr-2 mb-1
 }
 .newmessage{
-  @apply absolute bottom-5 right-5 w-[40px] h-[40px] bg-teal-500 rounded-full flex justify-center items-center
+  @apply absolute bottom-5 right-5 w-[40px] h-[40px] bg-teal-500 rounded-full flex justify-center items-center cursor-pointer
 }
 
 

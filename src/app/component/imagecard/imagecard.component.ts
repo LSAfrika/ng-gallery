@@ -66,12 +66,12 @@ export class ImagecardComponent implements OnInit {
 
   disableanchortag(){
     this.disableanchor=true
-    console.log('tag value',this.disableanchor);
+    // console.log('tag value',this.disableanchor);
 
   }
   enableanchortag(){
     this.disableanchor=false
-    console.log('tag value',this.disableanchor);
+    // console.log('tag value',this.disableanchor);
 
   }
 

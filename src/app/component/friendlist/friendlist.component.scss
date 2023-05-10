@@ -9,7 +9,8 @@
 }
 
 .list{
-  @apply max-w-[500px] w-[80%] justify-start items-center gap-2 text-teal-500 font-semibold flex mx-auto my-2
+  @apply max-w-[500px] w-[80%] justify-start items-center gap-2 text-teal-500 font-semibold flex mx-auto my-4 cursor-pointer border-b-[4px]
+  border-white
 }
 
 

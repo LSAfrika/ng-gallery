@@ -48,7 +48,7 @@ this.snapid.next( this.active.snapshot.params.id);
   this.post = this.snapid.pipe(switchMap(id =>  this.snapshares.getsinglepost(id)), map((res: any) =>
   {
     if(res.errormessage=='missing document')return this.router.navigateByUrl('/')
-   // console.log(res)
+    console.log(res)
     return res.singlepost}),tap(
     (result:any)=>{
       // console.log('fetched ad result',result);
