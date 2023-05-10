@@ -29,7 +29,7 @@ directmessagepanel=new BehaviorSubject(0)
 
   profileview=1
 
-openmessagelist=1
+openmessagelist=0
 
 
 
