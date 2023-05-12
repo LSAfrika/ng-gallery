@@ -48,11 +48,20 @@ this.snapid.next( this.active.snapshot.params.id);
   this.post = this.snapid.pipe(switchMap(id =>  this.snapshares.getsinglepost(id)), map((res: any) =>
   {
     if(res.errormessage=='missing document')return this.router.navigateByUrl('/')
-    console.log(res)
+    // console.log(res)
     return res.singlepost}),tap(
     (result:any)=>{
-      // console.log('fetched ad result',result);
+       console.log('fetched snapshare',result);
+      //  const currentcommentersuserids=result.comments.map((comment:any)=>{return comment.ownerid._id})
+      //  console.log('all commenter on post: \n',currentcommentersuserids);
 
+      //  console.log('uid included:',);
+
+
+      // if(currentcommentersuserids.inculdes(this.ui.logedinuser._id))){
+      //   console.log('currentn user has commented on snap share');
+
+      // }
       this.ui.postowner.next(result.user),
       this.checkifliked(result),
       this.imagelength=result.imgurl.length,
@@ -62,7 +71,14 @@ this.snapid.next( this.active.snapshot.params.id);
      if(this.ui.postowner.value._id == this.ui.logedinuser._id){
 
       this.snapshares.updatenotifications(this.active.snapshot.params.id).pipe(takeUntil(this.destroy)).subscribe(res=>console.log('response from notifications endpoint',res))
-     }
+    }
+
+    if(result.comments.map((comment:any)=>{return comment.ownerid._id}).includes(`${this.ui.logedinuser._id}`)==true){
+
+      this.snapshares.updatebroadcastnotifications(this.active.snapshot.params.id).pipe(takeUntil(this.destroy)).subscribe(res=>console.log('response from notifications endpoint',res))
+    }
+
+
 
     }
       ));
@@ -146,7 +162,7 @@ deletepost(){
 
   this.deleting=true
 
-this.snapshares.deletepost(this.snapid.value).pipe(takeUntil(this.destroy),switchMap((res:any)=>{
+ this.snapshares.deletepost(this.snapid.value).pipe(takeUntil(this.destroy),switchMap((res:any)=>{
   // if(res.message=='post deleted') alert('post succesfully deleted')\\\\\\\/
  return this.snapshares.usersnapshares(this.ui.logedinuser._id)
 

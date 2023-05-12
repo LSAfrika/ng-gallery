@@ -18,6 +18,7 @@ export class PostService {
 POST_URL = environment.API+'photos/post';
  fetchposturl = environment.API+'photos/allposts?pagination=';
  fetchsingleposturl = environment.API+'photos/singlepost/';
+ updatebroadcastnotificatrionurl=environment.API+'photos/viewedpost/'
  updatenotificatrionurl=environment.API+'photos/singlepersonalpost/'
  categoriesurl = environment.API+'photos/allposts/category?category=';
  usersnapsharesurl = environment.API+'photos/allposts/user?user=';
@@ -63,7 +64,10 @@ updatenotifications(id){
   return this.http.post(this.updatenotificatrionurl+`${id}`,{})
 }
 
+updatebroadcastnotifications(id){
 
+  return this.http.post(this.updatebroadcastnotificatrionurl+`${id}`,{})
+}
 
 
 

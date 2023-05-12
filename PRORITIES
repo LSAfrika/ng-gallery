@@ -14,7 +14,10 @@ broadcast notfication to like and commenters in post of a post when post owner c
 
 repair login user profile  following follower display not working --> DONE
 
+=======================================
 mark broadcast notfication as viewed
+
+reset unread counter while in chat
 
 
 @media screen and (min-width:375px) {
