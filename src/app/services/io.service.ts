@@ -18,6 +18,7 @@ export class IOService {
   socket:any
   public message$: BehaviorSubject<Message> = new BehaviorSubject(undefined);
   public messagenotifications$: BehaviorSubject<Object> = new BehaviorSubject(undefined);
+  public notifications$: BehaviorSubject<any> = new BehaviorSubject(undefined);
   public offlinemessage$: BehaviorSubject<any> = new BehaviorSubject(undefined);
   socketsetup = false;
   messageguard:any
@@ -68,6 +69,17 @@ export class IOService {
     });
    }
 
+   commentnotifcation(postid,userid,actiontype){
+
+   const Notificationpayload={
+      postid,
+      userid,
+      action:actiontype
+
+    }
+    this.socket.emit('emitnotification',Notificationpayload)
+   }
+
     getNewMessage () {
 
       console.log('received online message being hit');
@@ -83,13 +95,13 @@ console.log('socket get new message: ',message);
 
 NewMessageNotification () {
 
-    console.log('received online message being hit');
+    // console.log('received online message being hit');
   this.socket.on('new-message-notification', (message) =>{
 // console.log('socket get new message: ',message);
 
     this.messagenotifications$.next(message);
   });
-console.log('currentmessage online chat: ',this.message$.value);
+// console.log('currentmessage online chat: ',this.message$.value);
 
   return this.messagenotifications$.asObservable();
 }
@@ -104,7 +116,14 @@ offlinenewmessage(){
 }
 
 
-homepagemessgenotification(){
+homepagenotifications(){
+ // console.log('notifications being hit');
+  this.socket.on('comment_notification',notification=>{
+   // console.log('new comment notification ',notification)
+      this.notifications$.next(notification)
+  })
+
+  return this.notifications$.asObservable()
 
 }
 

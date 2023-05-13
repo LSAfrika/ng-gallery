@@ -1,11 +1,12 @@
-import { takeUntil } from 'rxjs/operators';
+import { IOService } from 'src/app/services/io.service';
+import { takeUntil, switchMap,tap ,map} from 'rxjs/operators';
 import { MessagesService } from './../../services/messages.service';
 import { NotificationsService } from './../../services/notifications.service';
 import {  User } from './../../interface/post.interface';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, Input, OnInit } from '@angular/core';
 import { UiService } from 'src/app/services/ui.service';
-import { of, Subject } from 'rxjs';
+import { of, Subject,BehaviorSubject } from 'rxjs';
 import { Location } from '@angular/common'
 
 @Component({
@@ -31,7 +32,7 @@ export class NavComponent implements OnInit {
 
 
   constructor(public ui:UiService,private router:Router,private notfier:NotificationsService,public msgservice:MessagesService,
-    private location: Location,private notificationservice:NotificationsService,private activeroute:ActivatedRoute
+    private location: Location,private notificationservice:NotificationsService,private activeroute:ActivatedRoute,private IO:IOService
     ) { }
 
   ngOnInit(): void {
@@ -40,9 +41,11 @@ export class NavComponent implements OnInit {
     //  console.log(this.router.url.split('/'));
     //  console.log('current route: ',this.route);
 if(this.route==='') {this.title='snapshare'
-this.msgservice.fetchsunreadmessages().pipe(takeUntil(this.destroy)).subscribe((res:any)=>{this.messagecounter=res.count})
-this.notificationservice.fetchnotificationcount().pipe(takeUntil(this.destroy)).subscribe((res:any)=>{this.notifictioncounter=res.count})
+console.log('home page reached');
 
+this.msgservice.fetchsunreadmessages().pipe(takeUntil(this.destroy)).subscribe((res:any)=>{this.messagecounter=res.count})
+// this.notificationservice.fetchnotificationcount().pipe(takeUntil(this.destroy)).subscribe((res:any)=>{this.notifictioncounter=res.count})
+this.livenotifications()
 }
 if(this.route==='profile') {
 
@@ -54,6 +57,23 @@ if(this.route==='profile') {
 if(this.route==='messages') this.title='messages'
 if(this.route==='directmessage') this.title='messages'
 
+
+}
+
+
+livenotifications(){
+
+  this.IO.homepagenotifications().pipe(
+    takeUntil(this.destroy),
+    switchMap( (res:any)=> {
+      console.log('notification socket ',res);
+
+     return this.notificationservice.fetchnotificationcount()}),
+  map((res:any)=>{
+    console.log('fetched notification counter: ',res);
+
+    this.notifictioncounter=res.count}))
+  .subscribe()
 
 }
 

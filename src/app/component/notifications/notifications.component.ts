@@ -46,7 +46,11 @@ return {
   constructor(public ui: UiService,public notifications: NotificationsService,private router:Router) {
 
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('notifications panel number',this.ui.opennotificationspanel);
+
+  }
+
 
   ngOnDestroy(){
     this.Destroy$.next()
@@ -60,7 +64,12 @@ return {
     // console.log(url);
 
     this.ui.togglenotifications()
-    this.router.navigateByUrl(url)
+    // console.log('notifications panel number',this.ui.opennotificationspanel);
+
+
+
+      this.router.navigateByUrl(url)
+
   }
 
   fetchnextnotifications(){

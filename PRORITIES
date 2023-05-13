@@ -15,9 +15,12 @@ broadcast notfication to like and commenters in post of a post when post owner c
 repair login user profile  following follower display not working --> DONE
 
 =======================================
-mark broadcast notfication as viewed
+mark broadcast notfication as viewed -->DONE
 
-reset unread counter while in chat
+reset unread counter while in chat -->DONE
+
+
+pagination of comments on post begin work
 
 
 @media screen and (min-width:375px) {

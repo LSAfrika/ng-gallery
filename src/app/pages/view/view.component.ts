@@ -1,3 +1,4 @@
+import { IOService } from './../../services/io.service';
 import { UiService } from './../../services/ui.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -36,10 +37,13 @@ currentpost:Post
     private active: ActivatedRoute,
      private snapshares: PostService,
      private formbuilder: FormBuilder,public ui:UiService,
-     private location: Location
+     private location: Location,
+     private IO:IOService,
+
      ) {
 this.snapid.next( this.active.snapshot.params.id);
 
+this.ui.opennotificationspanel=0;
 
 
 
@@ -52,16 +56,7 @@ this.snapid.next( this.active.snapshot.params.id);
     return res.singlepost}),tap(
     (result:any)=>{
        console.log('fetched snapshare',result);
-      //  const currentcommentersuserids=result.comments.map((comment:any)=>{return comment.ownerid._id})
-      //  console.log('all commenter on post: \n',currentcommentersuserids);
 
-      //  console.log('uid included:',);
-
-
-      // if(currentcommentersuserids.inculdes(this.ui.logedinuser._id))){
-      //   console.log('currentn user has commented on snap share');
-
-      // }
       this.ui.postowner.next(result.user),
       this.checkifliked(result),
       this.imagelength=result.imgurl.length,
@@ -241,6 +236,7 @@ this.commentorpost='post'
     this.snapshares.postcomment(id, this.commentform.value).pipe(takeUntil(this.destroy)).subscribe(res => {
       console.log(res);
       this.initializeform();
+      this.IO.commentnotifcation(id,this.ui.logedinuser._id,'comment')
       this.snapid.next(this.active.snapshot.params.id);
 
     }, err => {

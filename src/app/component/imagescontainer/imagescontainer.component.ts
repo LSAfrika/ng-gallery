@@ -12,6 +12,8 @@ import { PostService } from 'src/app/services/Post.service';
 })
 export class ImagescontainerComponent implements OnInit {
 
+  visible=false
+
   constructor(public postservice: PostService,public ui:UiService) {
 
     // if(this.postservice.allposts.length>0)this.postservice.allposts=[];this.postservice.fetchnextsnapshares.next(0)
@@ -23,6 +25,9 @@ export class ImagescontainerComponent implements OnInit {
   //  this.postservice.snapshares.subscribe(console.log)
 
   // console.log(this.postservice.fetchnextsnapshares.value);
+  setTimeout(() => {
+    this.visible=true
+  }, 1000);
 
   }
 
