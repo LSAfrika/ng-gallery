@@ -25,6 +25,8 @@ add first image of post to notification view list
 pagination of comments on post begin work
 
 
+RWEFACTOR FOLLOWING FOLLOWER LOGIC
+
 
 13/5 fetch notifications afresh upon live notification we go back to behaviour subject
 @media screen and (min-width:375px) {
