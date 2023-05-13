@@ -20,9 +20,13 @@ mark broadcast notfication as viewed -->DONE
 reset unread counter while in chat -->DONE
 
 
+add first image of post to notification view list
+
 pagination of comments on post begin work
 
 
+
+13/5 fetch notifications afresh upon live notification we go back to behaviour subject
 @media screen and (min-width:375px) {
 
 }

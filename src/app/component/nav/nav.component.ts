@@ -72,7 +72,11 @@ livenotifications(){
   map((res:any)=>{
     console.log('fetched notification counter: ',res);
 
-    this.notifictioncounter=res.count}))
+    this.notifictioncounter=res.count}),switchMap((res:any)=>{
+      console.log('switching to fetching notifications',res);
+
+     return this.notificationservice.getnotfications()
+    }))
   .subscribe()
 
 }
