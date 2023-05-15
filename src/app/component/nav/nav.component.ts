@@ -98,6 +98,7 @@ back() {
 
   profile(){
     this.ui.user()
+    this.ui.profileview=1
     this.router.navigate([`profile/${this.ui.logedinuser._id}`])
   }
 
@@ -105,14 +106,18 @@ back() {
     // console.log('post owner: ',this.ui.postowner.value);
 
     this.ui.resetnotificationpanel()
+this.ui.profileview=1
+console.log('reset profile view',this.ui.profileview);
 
     // remember to add logic for login user profile navigation
-    this.router.navigate(['profile',this.ui.postowner.value._id])
+    // this.router.navigate(['profile',this.ui.postowner.value._id])
 
   }
 
   viewprofilefromdm(){
     this.ui.resetnotificationpanel()
+this.ui.profileview=1
+
     this.router.navigate(['profile',this.ui.chatowner.value._id])
 
 

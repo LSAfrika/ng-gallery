@@ -20,19 +20,20 @@ export class ProfileComponent implements OnInit {
   disablebutton=false
   constructor(private activeroute:ActivatedRoute,public ui:UiService,private snapshare:PostService,private router:Router,private io:IOService) {
 
-
+    this.snapshare.paginationfollowers=-1
+    this.snapshare.paginationfollowing=-1
     this. userid=this.activeroute.snapshot.params.id
     console.log(this.userid);
 
-    console.log('profile user',this.ui.postowner.value);
+    console.log('profile user',this.ui.logedinuser);
 
 // if(this.ui.postowner.value!==undefined) return
 
-     if(this.snapshare.postownersnapshares.value==undefined) {
+    //  if(this.snapshare.postownersnapshares.value==undefined) {
       this.snapshare.user(this.userid).
       pipe(
       map((response:any)=>{
-        // console.log('profile:\n',response.user);
+         console.log('profile:\n',response.user);
 
         this.ui.postowner.next(response.user);
         // console.log(this.ui.postowner.value);
@@ -40,13 +41,15 @@ export class ProfileComponent implements OnInit {
         this.ui.postcounter.next(response.postcount);
         return this.userid
       }),
-      switchMap(id=> {console.log(id);
+      switchMap(
+        (id)=> {console.log('current logged in user',id);
        return this.snapshare.usersnapshares(id)}),
       map((res:any)=>{console.log(res.posts),
         this.snapshare.postownersnapshares.next(res.posts)}),
       takeUntil(this.destroy$)).subscribe()
-      console.log('profile user after fetch',this.ui.postowner.value);
-      }
+
+      // console.log('profile user after fetch',this.ui.postowner.value);
+      // }
 
 this.fetchuserfollowers()
 this.fetchuserfollowing()
@@ -75,13 +78,32 @@ this.checkfollowinguser()
   }
 
   fetchuserfollowers(){
+
+
     this.snapshare.fetchfollowers(this.userid).pipe(takeUntil(this.destroy$),
     map((res:any)=>{
-       console.log('fetched user followers',res);
+       console.log(' user followers',res);
+    console.log('fetching user followers id: ',this.userid);
+
 
       if(res.splicedfollowers.length<10)this.ui.disablefetchfollowers=true
+      this.snapshare.userfollowers= new BehaviorSubject([])
 
       this.snapshare.userfollowers.next([...this.snapshare.userfollowers.value,...res.splicedfollowers])})).subscribe()
+  }
+  fetchuserfollowing(){
+
+    this.snapshare.fetchfollowing(this.userid).pipe(takeUntil(this.destroy$),
+    map((res:any)=>{
+      // console.log(res.splicedfollowers);
+
+      console.log(' user following',res);
+      console.log('fetching user following id: ',this.userid);
+      this.snapshare.userfollowing= new BehaviorSubject([])
+
+
+      if(res.splicedfollowing.length<10)this.ui.disablefetchfollowing=true
+      this.snapshare.userfollowing.next([...this.snapshare.userfollowing.value,...res.splicedfollowing])})).subscribe()
   }
 
 
@@ -101,6 +123,8 @@ this.checkfollowinguser()
     this.disablebutton=false
     console.log('post of user: ',this.snapshare.postownersnapshares.value);
     this.userid=id
+
+    this.checkfollowinguser()
 
     this.snapshare.user(id).pipe(tap((res:any)=>{
       console.log('res after fetching new user',res)
@@ -123,16 +147,7 @@ this.ui.profileview=1
 
 
   }
-  fetchuserfollowing(){
-    this.snapshare.fetchfollowing(this.userid).pipe(takeUntil(this.destroy$),
-    map((res:any)=>{
-      // console.log(res.splicedfollowers);
-      console.log('fetched user following',res);
 
-
-      if(res.splicedfollowing.length<10)this.ui.disablefetchfollowing=true
-      this.snapshare.userfollowing.next([...this.snapshare.userfollowing.value,...res.splicedfollowing])})).subscribe()
-  }
 
   fetchnextset(){
     this.snapshare.userpostpagination++

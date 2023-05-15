@@ -88,6 +88,8 @@ const storedtoken=token.split('.')[1]
 
 profileviewselector(view){
   this.profileview=view
+  console.log('current view',this.profileview);
+
 }
 
 
