@@ -70,15 +70,23 @@ livenotifications(){
 
      return this.notificationservice.fetchnotificationcount()}),
   map((res:any)=>{
-    console.log('fetched notification counter: ',res);
 
-    this.notifictioncounter=res.count}),switchMap((res:any)=>{
+    this.notifictioncounter=res.count
+    console.log('fetched notification counter: ', this.notifictioncounter);
+
+
+
+  }),switchMap((res:any)=>{
       console.log('switching to fetching notifications',res);
       this.notificationservice.notifications$= new BehaviorSubject([]);
  this.notificationservice.notificationpagination$.next(0)
  return of(EMPTY)
     //  return this.notificationservice.getnotfications()
-    }))
+    }),tap(res=>{
+
+        if(this.notifictioncounter>0)  this.notificationservice.notificationsound()
+      }
+    ))
   .subscribe()
 
 }
@@ -104,6 +112,10 @@ back() {
     this.router.navigate([`profile/${this.ui.logedinuser._id}`])
   }
 
+  togglenotfication(){
+    this.ui.togglenotifications()
+
+  }
   viewprofile(){
     // console.log('post owner: ',this.ui.postowner.value);
 

@@ -52,6 +52,22 @@ destroy$: Subject<boolean> = new Subject<boolean>();
 
    }
 
+   notificationsound(){
 
+try {
+  const notice=new Audio()
+  notice.src='../../assets/soft-notice-146623.mp3'
+  notice.load()
+ notice.play()
+ }
+
+ catch (error) {
+  console.log('audio error',error.message);
+
+}
+
+
+
+}
 
 }
