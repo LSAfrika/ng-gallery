@@ -16,7 +16,8 @@ disablenotificationbutton = false;
 fetchnext = new BehaviorSubject(0);
 notificationsurl = environment.API+'usernotifications/notifications?pagination=';
 notificationscounturl = environment.API+'usernotifications/notificationscount';
-notifications$: BehaviorSubject<[]> = new BehaviorSubject([]);
+notifications$= new BehaviorSubject([]);
+notificationpagination$ = new BehaviorSubject(0);
 destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(private http: HttpClient) {
@@ -36,7 +37,7 @@ destroy$: Subject<boolean> = new Subject<boolean>();
 
 
    getnotfications(): Observable<[]>{
-    return this.http.get<[]>(this.notificationsurl + this.pagination);
+    return this.http.get<[]>(this.notificationsurl + this.notificationpagination$.value );
    }
 
    fetchnotificationcount(){
@@ -47,7 +48,7 @@ destroy$: Subject<boolean> = new Subject<boolean>();
     const page = this.pagination++;
     this.fetchnext.next(this.fetchnext.value + 1);
     console.log(this.fetchnext.value);
-    console.log(this.pagination);
+    // console.log(this.pagination);
 
    }
 

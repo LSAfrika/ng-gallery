@@ -7,28 +7,43 @@
 3. notfifcation system
 a)delete notfiation upon deltion of like comment--> DONE
 b)add notifcation counter using viewed field true or false and add logic for changing viewed value -->DONE
-c)add pagination to notfications and filters fro viewed and not viewed (DONE JUST TESTING)
 
 ------ LOOK INTO --------
-broadcast notfication to like and commenters in post of a post when post owner comments
+broadcast notfication to like and commenters in post of a post when post owner comments -->DONE
 
 repair login user profile  following follower display not working --> DONE
 
-=======================================
 mark broadcast notfication as viewed -->DONE
 
 reset unread counter while in chat -->DONE
 
+RWEFACTOR FOLLOWING FOLLOWER LOGIC -->DONE
+
+13/5 fetch notifications afresh upon live notification we go back to behaviour subject -->DONE
+
+======================================= WORK IN PROGRESS =====================================
 
 add first image of post to notification view list
 
-pagination of comments on post begin work
+c)add pagination to notfications and filters fro viewed and not viewed (DONE JUST TESTING)-->COMPLETED
+
+pagination of comments on post begin work and invert order newest on top
 
 
-RWEFACTOR FOLLOWING FOLLOWER LOGIC
 
 
-13/5 fetch notifications afresh upon live notification we go back to behaviour subject
+
+
+
+
+
+
+
+
+
+
+
+
 @media screen and (min-width:375px) {
 
 }

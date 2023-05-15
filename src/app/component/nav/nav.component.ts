@@ -6,7 +6,7 @@ import {  User } from './../../interface/post.interface';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, Input, OnInit } from '@angular/core';
 import { UiService } from 'src/app/services/ui.service';
-import { of, Subject,BehaviorSubject } from 'rxjs';
+import { of, Subject, BehaviorSubject, EMPTY } from 'rxjs';
 import { Location } from '@angular/common'
 
 @Component({
@@ -74,8 +74,10 @@ livenotifications(){
 
     this.notifictioncounter=res.count}),switchMap((res:any)=>{
       console.log('switching to fetching notifications',res);
-
-     return this.notificationservice.getnotfications()
+      this.notificationservice.notifications$= new BehaviorSubject([]);
+ this.notificationservice.notificationpagination$.next(0)
+ return of(EMPTY)
+    //  return this.notificationservice.getnotfications()
     }))
   .subscribe()
 
