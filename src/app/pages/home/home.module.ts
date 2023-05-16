@@ -12,15 +12,13 @@ import { FabComponent } from '../../component/fab/fab.component';
 import { ImageuploadComponent } from '../../component/imageupload/imageupload.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // import { NotificationsComponent } from '../../component/notifications/notifications.component';
+// import { NotifierModule } from 'angular-notifier';
 
 
 @NgModule({
   declarations: [
-    HomeComponent,
-
-
+     HomeComponent,
     ImagescontainerComponent,
-
     // ImagecardComponent,
     HighlightsComponent,
     FabComponent,
@@ -31,7 +29,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     HomeRoutingModule,
     SharedModule,
-    FormsModule,ReactiveFormsModule
+    FormsModule,ReactiveFormsModule,
+    // NotifierModule
   ]
 })
 export class HomeModule { }

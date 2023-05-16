@@ -1,3 +1,4 @@
+import { NotificationsService } from './../../services/notifications.service';
 import { IOService } from 'src/app/services/io.service';
 import { AuthService } from './../../services/auth.service';
 import { PostService } from './../../services/Post.service';
@@ -30,6 +31,7 @@ export class MessagesComponent implements OnInit {
     private router:Router,
     private snapshare:PostService,
     public io:IOService,
+    private notification:NotificationsService,
     private auth:AuthService) {
 
 
@@ -121,6 +123,9 @@ reversearray[currentlength]=chat
   // this.msgservice.userchatlist$.next(undefined)
   //  this.msgservice.userchatlist$.next(newnotificationuserchats)
   this.msgservice.userchatlist$.next(newnotificationchatlist)
+
+// this.notification.notificationsound()
+
   console.log('behaviour subject notification',this.msgservice.userchatlist$.value)
 
 

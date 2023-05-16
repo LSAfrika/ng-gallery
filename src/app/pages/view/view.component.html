@@ -45,7 +45,7 @@
             <div class="commentbubble">
                 <div class="username">
                     <div class="avatar"><img style="width:100%;height:100%;background-size: cover;" [src]="comment.ownerid.imgurl" alt="" srcset=""></div>
-                    <div>{{comment.ownerid.username}}</div>
+                    <div [routerLink]="['/profile',comment.ownerid._id]" routerLinkActive="router-link-active" >{{comment.ownerid.username}}</div>
 
                     <div class="createdat">{{comment.updatedAt| date:shortDate }}</div>
 

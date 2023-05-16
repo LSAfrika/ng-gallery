@@ -43,9 +43,10 @@ export class NavComponent implements OnInit {
 if(this.route==='') {this.title='snapshare'
 console.log('home page reached');
 
-this.msgservice.fetchsunreadmessages().pipe(takeUntil(this.destroy)).subscribe((res:any)=>{this.messagecounter=res.count})
+//this.msgservice.fetchsunreadmessages().pipe(takeUntil(this.destroy)).subscribe((res:any)=>{this.messagecounter=res.count})
 // this.notificationservice.fetchnotificationcount().pipe(takeUntil(this.destroy)).subscribe((res:any)=>{this.notifictioncounter=res.count})
-this.livenotifications()
+this.livenotificationscount()
+this.livemessagescount()
 }
 if(this.route==='profile') {
 
@@ -61,7 +62,7 @@ if(this.route==='directmessage') this.title='messages'
 }
 
 
-livenotifications(){
+livenotificationscount(){
 
   this.IO.homepagenotifications().pipe(
     takeUntil(this.destroy),
@@ -84,11 +85,20 @@ livenotifications(){
     //  return this.notificationservice.getnotfications()
     }),tap(res=>{
 
-        if(this.notifictioncounter>0)  this.notificationservice.notificationsound()
+      //  if(this.notifictioncounter>0)  this.notificationservice.notificationsound()
       }
     ))
   .subscribe()
 
+}
+
+livemessagescount(){
+this.IO.NewMessageNotificationcounter().pipe(
+takeUntil(this.destroy),
+switchMap( (res:any)=> {console.log('socket message counter emmiter: ',res);return this.msgservice.fetchsunreadmessages()}),
+// map(  (res:any)=>{ console.log('message counter: ',res.count) ;return this.messagecounter=res.count }),
+tap((res:any)=>{console.log('value after message completed:',res);this.messagecounter=res.count})).
+subscribe()
 }
 
 ngOnDestroy(){
@@ -124,7 +134,7 @@ this.ui.profileview=1
 console.log('reset profile view',this.ui.profileview);
 
     // remember to add logic for login user profile navigation
-    // this.router.navigate(['profile',this.ui.postowner.value._id])
+     this.router.navigate(['profile',this.ui.postowner.value._id])
 
   }
 
