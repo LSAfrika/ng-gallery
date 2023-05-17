@@ -35,7 +35,7 @@ export class MessagesComponent implements OnInit {
     private auth:AuthService) {
 
 
-// console.log('current logged in user ', this.ui.logedinuser);
+
 console.log('user messaging list before', this.ui.userlist$.value);
 
 
@@ -54,25 +54,7 @@ tap((res:any)=>{
   )).subscribe()
 
 
-   this.followers$=  this.snapshare.fetchfollowers(this.ui.logedinuser._id)
-   this.following$=  this.snapshare.fetchfollowing(this.ui.logedinuser._id)
-// console.log('user list to message',this.ui.userlist$.value);
 
-  //todo  CHANGE TO SWITCHMAP
-   combineLatest([this.followers$,this.following$]).pipe(takeUntil(this.Destroy$),tap((users:any)=>{
-
-    const singularobject={...users[0],...users[1]}
-const combinedarray=[...singularobject.splicedfollowers,...singularobject.splicedfollowing]
-const filteredusers= this.getUnique(combinedarray,'_id')
-// console.log('combine latest array filtered: ',filteredusers)
-//todo  rember pagination logic it increaces pagination nuber
-     this.ui.userlist$.next([...this.ui.userlist$.value,...filteredusers])
-//console.log('user list to message after fetch',this.ui.userlist$.value);
-
-   }
-
-
-   )).subscribe();
 
 
   }

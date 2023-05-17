@@ -6,13 +6,13 @@
 
 .logo{
 
-    @apply w-[90%] min-w-[100px] max-w-[500px] min-h-[100px]  flex gap-2 justify-center items-center;
+    @apply w-[90%] min-w-[100px] max-w-[1000px] min-h-[100px]  flex gap-2 justify-center items-center;
     svg{
-      @apply w-[50px] h-[50px]  fill-white rotate-[-15deg]
+      @apply w-[50px] h-[50px]  fill-white rotate-[-15deg] lg:w-[100px] lg:h-[100px]
     }
 
     .title{
-      @apply text-2xl font-normal text-white min-w-[50px] border-2 border-white px-2
+      @apply text-2xl font-normal text-white min-w-[50px] border-2 border-white px-2 lg:text-4xl lg:font-semibold
     }
     .snap{
       @apply border-r-0
@@ -36,7 +36,7 @@
 
 .loginbtn{
 
-    @apply bg-white px-2 pr-0 cursor-pointer border-white border-2
+    @apply bg-white px-2 pr-0 cursor-pointer border-white border-2 lg:text-3xl lg:mt-5 lg:font-light
      text-teal-500 font-medium text-lg
      min-w-fit rounded-md
       shadow-black/50 shadow-sm flex

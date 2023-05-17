@@ -13,6 +13,7 @@ export class UiService {
   disablefetchfollowers= false
   disablefetchfollowing= false
   fetchnextdisabled=false
+  disablefriendlistfetch=false
   openimageuploader = 0;
   uploading=false
   openmodal=new BehaviorSubject(false)

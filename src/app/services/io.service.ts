@@ -32,11 +32,13 @@ export class IOService {
   constructor(private ui: UiService,private messageservice:MessagesService,private notification:NotificationsService) {
 
     if(this.ui.logedinuser !== undefined)
-    {this.socket= io(this.snapsharebackend, {query: {uid: this.ui.logedinuser._id}});}
+    {this.socket= io(this.snapsharebackend, {query: {uid: this.ui.logedinuser._id}});
+this.gloabalnotificationsound().subscribe(()=>this.notification.notificationsound())
+
+  }
 
     // console.log('socket', this.socket);
 // this.setuid()
-this.gloabalnotificationsound().subscribe(()=>this.notification.notificationsound())
 
   }
 
