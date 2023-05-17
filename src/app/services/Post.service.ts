@@ -20,6 +20,7 @@ POST_URL = environment.API+'photos/post';
  fetchsingleposturl = environment.API+'photos/singlepost/';
  updatebroadcastnotificatrionurl=environment.API+'photos/viewedpost/'
  updatenotificatrionurl=environment.API+'photos/singlepersonalpost/'
+ profilenotificatrionurl=environment.API+'user/viewnotification/'
  categoriesurl = environment.API+'photos/allposts/category?category=';
  usersnapsharesurl = environment.API+'photos/allposts/user?user=';
  profileid=''
@@ -69,6 +70,11 @@ updatebroadcastnotifications(id){
   return this.http.post(this.updatebroadcastnotificatrionurl+`${id}`,{})
 }
 
+
+updateprofilenotificationtoviewed(id){
+
+  return this.http.get(this.profilenotificatrionurl+`${id}`)
+}
 
 
   Poststatus(post: FormData): Observable<any> {

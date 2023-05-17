@@ -1,5 +1,6 @@
+import { PostService } from 'src/app/services/Post.service';
 import { takeUntil, tap, map, switchMap } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { NotificationsService } from './../../services/notifications.service';
 import { UiService } from 'src/app/services/ui.service';
 import { Component, OnInit } from '@angular/core';
@@ -17,6 +18,7 @@ export class NotificationsComponent implements OnInit {
   Destroy$ = new Subject()
   fulldayinmilliseconds = 86400000
   currentdate = Date.now()
+  viewnotificationsubscription:Subscription
 
   notifications$ =this.notifications.notificationpagination$.pipe(
     switchMap((notifier:number)=> {
@@ -27,7 +29,7 @@ export class NotificationsComponent implements OnInit {
 
         // const mapednotifications=
         if (res.length < 10) this.notifications.disablenotificationbutton = true;
-          console.log('fetched notification size',res.length);
+          console.log('fetched notification size',res);
 
         res.map(notice => {
           let dateparse = Date.parse(notice.createdAt)
@@ -52,7 +54,7 @@ return this.notifications.notifications$.value
 
 
 
-constructor(public ui: UiService, public notifications: NotificationsService, private router: Router) {
+constructor(public ui: UiService, public notifications: NotificationsService, private router: Router,private snapshareservice:PostService) {
   console.log('notification componentn is working');
 
 
@@ -89,6 +91,27 @@ navigatetopost(id){
 
 }
 
+navigatetouserprofile(id,viewed){
+
+  const url = `/profile/${id}`
+   console.log('notification view status: ',viewed);
+
+  this.ui.togglenotifications()
+  // console.log('notifications panel number',this.ui.opennotificationspanel);
+
+
+
+  this.router.navigateByUrl(url)
+
+  if(viewed==true) return
+
+ this. viewnotificationsubscription= this.snapshareservice.updateprofilenotificationtoviewed(id).subscribe(res=>{
+  console.log(res);
+  this.viewnotificationsubscription.unsubscribe()
+
+ })
+
+}
 
 }
 
